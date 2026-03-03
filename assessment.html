@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Start Your Assessment — ASRX.health</title>
+  <meta name="description" content="Complete a quick assessment to get connected with a licensed provider through ASRX.health.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container">
+    <a href="/" class="nav-logo">AS<span>RX</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html#how-it-works">How It Works</a></li>
+      <li><a href="programs.html">Programs</a></li>
+      <li><a href="index.html#pricing">Pricing</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="assessment-page">
+  <div class="assessment-container">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:20%"></div></div>
+
+    <form id="assessmentForm" novalidate>
+
+      <!-- STEP 1 -->
+      <div class="form-step" data-step="1">
+        <div class="form-card">
+          <h2>Let's Get Started</h2>
+          <p class="form-sub">Tell us a bit about yourself so we can connect you with the right provider.</p>
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" required placeholder="First name">
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" required placeholder="Last name">
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" required placeholder="you@example.com">
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" required placeholder="(555) 123-4567">
+          </div>
+          <div class="form-group">
+            <label for="dob">Date of Birth</label>
+            <input type="date" id="dob" required>
+          </div>
+          <div class="form-group">
+            <label for="state">State</label>
+            <select id="state" required>
+              <option value="">Select your state</option>
+              <option>Alabama</option><option>Alaska</option><option>Arizona</option><option>Arkansas</option><option>California</option><option>Colorado</option><option>Connecticut</option><option>Delaware</option><option>Florida</option><option>Georgia</option><option>Hawaii</option><option>Idaho</option><option>Illinois</option><option>Indiana</option><option>Iowa</option><option>Kansas</option><option>Kentucky</option><option>Louisiana</option><option>Maine</option><option>Maryland</option><option>Massachusetts</option><option>Michigan</option><option>Minnesota</option><option>Mississippi</option><option>Missouri</option><option>Montana</option><option>Nebraska</option><option>Nevada</option><option>New Hampshire</option><option>New Jersey</option><option>New Mexico</option><option>New York</option><option>North Carolina</option><option>North Dakota</option><option>Ohio</option><option>Oklahoma</option><option>Oregon</option><option>Pennsylvania</option><option>Rhode Island</option><option>South Carolina</option><option>South Dakota</option><option>Tennessee</option><option>Texas</option><option>Utah</option><option>Vermont</option><option>Virginia</option><option>Washington</option><option>West Virginia</option><option>Wisconsin</option><option>Wyoming</option><option>District of Columbia</option>
+            </select>
+          </div>
+          <div class="form-actions">
+            <div></div>
+            <button type="button" class="btn-primary" onclick="nextStep()">Continue →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 2 -->
+      <div class="form-step" data-step="2" style="display:none">
+        <div class="form-card">
+          <h2>What Are You Interested In?</h2>
+          <p class="form-sub">Select the program you'd like to learn more about. Your provider will discuss all options with you.</p>
+          <div class="form-group">
+            <div class="radio-group">
+              <label class="radio-option">
+                <input type="radio" name="program" value="weight-management" required>
+                <span><strong>Weight Management</strong><br><small style="color:var(--slate)">GLP-1 programs — Semaglutide, Tirzepatide</small></span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="program" value="peptide-therapy">
+                <span><strong>Peptide Therapy</strong><br><small style="color:var(--slate)">BPC-157, PT-141, CJC-1295 & more</small></span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="program" value="longevity">
+                <span><strong>Longevity & Wellness</strong><br><small style="color:var(--slate)">NAD+, Selank, Semax & more</small></span>
+              </label>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="button" class="btn-back" onclick="prevStep()">← Back</button>
+            <button type="button" class="btn-primary" onclick="nextStep()">Continue →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 3 -->
+      <div class="form-step" data-step="3" style="display:none">
+        <div class="form-card">
+          <h2>Background Information</h2>
+          <p class="form-sub">These questions help us coordinate your connection with the most suitable provider. This is not a clinical evaluation.</p>
+
+          <div class="form-group">
+            <label>Have you consulted with a healthcare provider about your health goals before?</label>
+            <div class="radio-group">
+              <label class="radio-option"><input type="radio" name="priorConsult" value="yes"><span>Yes</span></label>
+              <label class="radio-option"><input type="radio" name="priorConsult" value="no"><span>No</span></label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Are you currently under the care of a physician?</label>
+            <div class="radio-group">
+              <label class="radio-option"><input type="radio" name="currentPhysician" value="yes"><span>Yes</span></label>
+              <label class="radio-option"><input type="radio" name="currentPhysician" value="no"><span>No</span></label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>BMI Calculator (optional)</label>
+            <div class="bmi-calc">
+              <input type="number" id="heightFt" placeholder="Height (ft)" min="3" max="8">
+              <input type="number" id="heightIn" placeholder="Inches" min="0" max="11">
+              <input type="number" id="weightLbs" placeholder="Weight (lbs)" min="50" max="800">
+              <button type="button" class="btn-back" onclick="calcBMI()" style="text-align:center;">Calculate</button>
+            </div>
+            <div class="bmi-result" id="bmiResult"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="goals">What are your primary goals? (optional)</label>
+            <textarea id="goals" rows="3" placeholder="Tell us what you're hoping to achieve..."></textarea>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn-back" onclick="prevStep()">← Back</button>
+            <button type="button" class="btn-primary" onclick="nextStep()">Continue →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 4 -->
+      <div class="form-step" data-step="4" style="display:none">
+        <div class="form-card">
+          <h2>Consent & Agreement</h2>
+          <p class="form-sub">Please review and acknowledge the following before we connect you with a provider.</p>
+
+          <div class="form-group">
+            <div class="checkbox-group">
+              <label class="checkbox-option">
+                <input type="checkbox" id="consentTelehealth" required>
+                <span>I understand that ASRX is a healthcare access platform that connects me with independently licensed providers. ASRX does not provide medical advice, diagnoses, or prescriptions.</span>
+              </label>
+              <label class="checkbox-option">
+                <input type="checkbox" id="consentTerms" required>
+                <span>I agree to the <a href="#" target="_blank">Terms of Service</a> and <a href="#" target="_blank">Privacy Policy</a>.</span>
+              </label>
+              <label class="checkbox-option">
+                <input type="checkbox" id="consentComms" required>
+                <span>I consent to receive communications from ASRX and its provider partners regarding my program status.</span>
+              </label>
+              <label class="checkbox-option">
+                <input type="checkbox" id="consentAge">
+                <span>I confirm that I am at least 18 years of age.</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn-back" onclick="prevStep()">← Back</button>
+            <button type="button" class="btn-primary" onclick="submitForm()">Submit Assessment →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 5 -->
+      <div class="form-step" data-step="5" style="display:none">
+        <div class="form-card">
+          <div class="confirmation-icon">✅</div>
+          <div class="confirmation-text">
+            <h2>You're In!</h2>
+            <p>Thank you for completing your assessment. A licensed provider will review your information within <strong>24 hours</strong>.</p>
+            <p style="margin-top:16px;">We'll reach out via email with next steps. In the meantime, feel free to explore our programs.</p>
+            <div style="margin-top:32px;">
+              <a href="programs.html" class="btn-primary">Explore Programs</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-bottom">
+      <p class="footer-disclaimer">ASRX.health is a healthcare access platform. Clinical services are provided by independently licensed healthcare providers. ASRX does not diagnose, treat, or prescribe.</p>
+      <p>© 2026 ASRX. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('navToggle').addEventListener('click', () => {
+  document.getElementById('navLinks').classList.toggle('open');
+});
+
+let currentStep = 1;
+const totalSteps = 5;
+
+function showStep(n) {
+  document.querySelectorAll('.form-step').forEach(s => s.style.display = 'none');
+  document.querySelector(`[data-step="${n}"]`).style.display = 'block';
+  document.getElementById('progressFill').style.width = (n / totalSteps * 100) + '%';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function nextStep() {
+  // basic validation
+  const step = document.querySelector(`[data-step="${currentStep}"]`);
+  const required = step.querySelectorAll('[required]');
+  let valid = true;
+  required.forEach(el => {
+    if (el.type === 'radio') {
+      const name = el.name;
+      if (!step.querySelector(`input[name="${name}"]:checked`)) valid = false;
+    } else if (!el.value) {
+      valid = false;
+      el.style.borderColor = '#ef4444';
+      el.addEventListener('input', () => el.style.borderColor = '#e2e8f0', { once: true });
+    }
+  });
+  if (!valid) return;
+  currentStep++;
+  showStep(currentStep);
+}
+
+function prevStep() { currentStep--; showStep(currentStep); }
+
+function calcBMI() {
+  const ft = +document.getElementById('heightFt').value;
+  const inches = +document.getElementById('heightIn').value;
+  const lbs = +document.getElementById('weightLbs').value;
+  if (!ft || !lbs) return;
+  const totalIn = ft * 12 + (inches || 0);
+  const bmi = ((lbs / (totalIn * totalIn)) * 703).toFixed(1);
+  const el = document.getElementById('bmiResult');
+  el.style.display = 'block';
+  el.textContent = `Your BMI: ${bmi}`;
+}
+
+function submitForm() {
+  const step = document.querySelector('[data-step="4"]');
+  const checks = step.querySelectorAll('input[required]');
+  let valid = true;
+  checks.forEach(c => { if (!c.checked) valid = false; });
+  if (!valid) { alert('Please review and accept all required agreements.'); return; }
+
+  // save to localStorage
+  const data = {
+    firstName: document.getElementById('firstName').value,
+    lastName: document.getElementById('lastName').value,
+    email: document.getElementById('email').value,
+    phone: document.getElementById('phone').value,
+    dob: document.getElementById('dob').value,
+    state: document.getElementById('state').value,
+    program: document.querySelector('input[name="program"]:checked')?.value,
+    priorConsult: document.querySelector('input[name="priorConsult"]:checked')?.value,
+    currentPhysician: document.querySelector('input[name="currentPhysician"]:checked')?.value,
+    goals: document.getElementById('goals').value,
+    submittedAt: new Date().toISOString()
+  };
+  const submissions = JSON.parse(localStorage.getItem('asrx_submissions') || '[]');
+  submissions.push(data);
+  localStorage.setItem('asrx_submissions', JSON.stringify(submissions));
+
+  currentStep = 5;
+  showStep(5);
+}
+</script>
+</body>
+</html>

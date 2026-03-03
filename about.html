@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — ASRX.health</title>
+  <meta name="description" content="Learn about ASRX.health — a healthcare access platform connecting people with licensed providers for pharmaceutical-grade peptide programs.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container">
+    <a href="/" class="nav-logo">AS<span>RX</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html#how-it-works">How It Works</a></li>
+      <li><a href="programs.html">Programs</a></li>
+      <li><a href="index.html#pricing">Pricing</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="assessment.html" class="nav-cta">Start Assessment →</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="about-hero">
+  <div class="container">
+    <h1 class="section-title">The Source Matters</h1>
+    <p>ASRX is a healthcare access platform built on one principle: you deserve to know exactly what you're putting in your body and who's behind it.</p>
+  </div>
+</div>
+
+<!-- MISSION -->
+<section>
+  <div class="container">
+    <h2 class="section-title">Our Mission</h2>
+    <p class="section-sub">We exist to simplify access to pharmaceutical-grade peptide programs by connecting people with licensed providers and trusted pharmacy partners — all coordinated through a single, transparent platform.</p>
+    <div class="why-grid">
+      <div class="why-card fade-up">
+        <div class="why-icon">🎯</div>
+        <h3>Access, Not Advice</h3>
+        <p>ASRX is a coordination platform. We connect you with independently licensed healthcare providers who make all clinical decisions. We never diagnose, treat, or prescribe.</p>
+      </div>
+      <div class="why-card fade-up">
+        <div class="why-icon">🔗</div>
+        <h3>Vertically Integrated</h3>
+        <p>We partner directly with FDA-registered domestic manufacturing facilities. This gives us visibility into every step of the supply chain — from formulation to your front door.</p>
+      </div>
+      <div class="why-card fade-up">
+        <div class="why-icon">🔍</div>
+        <h3>Radical Transparency</h3>
+        <p>We believe you should know where your peptides come from. Every batch through our pharmacy partners undergoes independent third-party testing for purity and potency.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW WE'RE DIFFERENT -->
+<section class="section-light">
+  <div class="container">
+    <h2 class="section-title">How ASRX Is Different</h2>
+    <p class="section-sub">Most telehealth platforms are middlemen connecting you to unknown compounders. We take a different approach.</p>
+    <div class="values-grid">
+      <div class="value-card fade-up">
+        <div style="font-size:2rem">🏭</div>
+        <h3>Trusted Manufacturing Partners</h3>
+        <p>Our pharmacy partners operate FDA-registered domestic facilities following strict GMP protocols. We know exactly where every product comes from.</p>
+      </div>
+      <div class="value-card fade-up">
+        <div style="font-size:2rem">👨‍⚕️</div>
+        <h3>Real Providers, Real Care</h3>
+        <p>Licensed clinicians in your state review every case. No rubber-stamping. No algorithms making clinical decisions.</p>
+      </div>
+      <div class="value-card fade-up">
+        <div style="font-size:2rem">💰</div>
+        <h3>Fair, Transparent Pricing</h3>
+        <p>Our integrated supply chain means we can offer pharmaceutical-grade quality at fair prices — no hidden fees, no surprise bills, cancel anytime.</p>
+      </div>
+      <div class="value-card fade-up">
+        <div style="font-size:2rem">📋</div>
+        <h3>Compliance First</h3>
+        <p>We maintain strict separation between our coordination platform and clinical decision-making. HIPAA-compliant systems protect your data at every step.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section>
+  <div class="container">
+    <h2 class="section-title">Leadership</h2>
+    <p class="section-sub">The team behind ASRX is committed to building a better model for healthcare access.</p>
+    <div class="team-grid">
+      <div class="team-card fade-up">
+        <div class="team-avatar">👤</div>
+        <h4>Coming Soon</h4>
+        <p>Leadership team details will be announced shortly.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <h2 class="section-title">Ready to Experience the Difference?</h2>
+    <p>Start your free assessment and get connected with a licensed provider today.</p>
+    <a href="assessment.html" class="btn-primary">Start Your Free Assessment →</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-bottom">
+      <p class="footer-disclaimer">ASRX.health is a healthcare access platform. Clinical services are provided by independently licensed healthcare providers. ASRX does not diagnose, treat, or prescribe.</p>
+      <p>© 2026 ASRX. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('navToggle').addEventListener('click', () => {
+  document.getElementById('navLinks').classList.toggle('open');
+});
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.15 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
