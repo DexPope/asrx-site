@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog — ASRX.health | Peptide Therapy & Weight Management Resources</title>
+  <meta name="description" content="Expert resources on GLP-1 medications, peptide therapy, weight management, and longevity. Evidence-based articles from the ASRX team.">
+  <meta property="og:title" content="ASRX Blog — Peptide Therapy & Weight Management Resources">
+  <meta property="og:description" content="Expert resources on GLP-1 medications, peptide therapy, weight management, and longevity.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://asrx.health/blog">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://asrx.health/blog.html">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💊</text></svg>">
+</head>
+<body>
+
+<nav class="nav" id="mainNav">
+  <div class="container">
+    <a href="/" class="nav-logo">AS<span>RX</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html#how-it-works">How It Works</a></li>
+      <li><a href="programs.html">Programs</a></li>
+      <li><a href="index.html#pricing">Pricing</a></li>
+      <li><a href="comparison.html">Compare</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="assessment.html" class="nav-cta">Start Assessment →</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div class="container">
+    <h1 class="section-title">ASRX Blog & Resources</h1>
+    <p>Evidence-based articles on peptide therapy, GLP-1 medications, weight management, and longevity. Written for real people, backed by science.</p>
+  </div>
+</div>
+
+<section>
+  <div class="container">
+    <div class="blog-grid">
+
+      <a href="blog/how-much-do-glp1-medications-cost.html" class="blog-card fade-up" style="color:inherit;">
+        <div class="blog-card-img">💊</div>
+        <div class="blog-card-body">
+          <div class="blog-card-meta">
+            <span>📅 March 1, 2026</span>
+            <span>⏱ 8 min read</span>
+          </div>
+          <h3>GLP-1 Medications Cost in 2026: Complete Pricing Guide</h3>
+          <p>How much do GLP-1 medications like semaglutide and tirzepatide actually cost? We break down brand-name vs. compounded pricing, insurance coverage, and how to find affordable access.</p>
+          <span class="read-more">Read Article →</span>
+        </div>
+      </a>
+
+      <a href="blog/semaglutide-vs-tirzepatide.html" class="blog-card fade-up" style="color:inherit;">
+        <div class="blog-card-img">⚖️</div>
+        <div class="blog-card-body">
+          <div class="blog-card-meta">
+            <span>📅 February 25, 2026</span>
+            <span>⏱ 9 min read</span>
+          </div>
+          <h3>Semaglutide vs Tirzepatide: Which Is Right for You?</h3>
+          <p>Two of the most popular GLP-1 medications compared head-to-head. Mechanism of action, effectiveness, side effects, cost, and how to choose the right one for your goals.</p>
+          <span class="read-more">Read Article →</span>
+        </div>
+      </a>
+
+      <a href="blog/what-is-peptide-therapy.html" class="blog-card fade-up" style="color:inherit;">
+        <div class="blog-card-img">🧬</div>
+        <div class="blog-card-body">
+          <div class="blog-card-meta">
+            <span>📅 February 20, 2026</span>
+            <span>⏱ 10 min read</span>
+          </div>
+          <h3>What Is Peptide Therapy? A Complete Guide</h3>
+          <p>Everything you need to know about peptide therapy — what peptides are, how they work, popular peptides like BPC-157 and NAD+, who they're for, and how to access them safely.</p>
+          <span class="read-more">Read Article →</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="container">
+    <h2 class="section-title">Ready to Take the Next Step?</h2>
+    <p>Complete a free 5-minute assessment and get connected with a licensed provider who can help you find the right program.</p>
+    <a href="assessment.html" class="btn-primary">Start Your Free Assessment →</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-bottom">
+      <p class="footer-disclaimer">ASRX.health is a healthcare access and coordination platform. Clinical services are provided by independently licensed healthcare providers through our partner network. ASRX does not diagnose, treat, or prescribe. Blog content is for informational purposes only and does not constitute medical advice.</p>
+      <p>© 2026 ASRX. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('navToggle').addEventListener('click', () => document.getElementById('navLinks').classList.toggle('open'));
+const observer = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.1 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

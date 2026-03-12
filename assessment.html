@@ -3,13 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Start Your Assessment — ASRX.health</title>
-  <meta name="description" content="Complete a quick assessment to get connected with a licensed provider through ASRX.health.">
+  <title>Start Your Free Assessment — ASRX.health</title>
+  <meta name="description" content="Complete a quick 5-minute assessment to get connected with a licensed provider through ASRX.health. No commitment required.">
+  <meta property="og:title" content="Start Your Free Assessment — ASRX.health">
+  <meta property="og:description" content="Complete a 5-minute assessment and get matched with a licensed provider for pharmaceutical-grade peptide therapy.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://asrx.health/assessment">
+  <meta name="twitter:card" content="summary">
+  <link rel="canonical" href="https://asrx.health/assessment.html">
   <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💊</text></svg>">
 </head>
 <body>
 
-<nav class="nav">
+<nav class="nav" id="mainNav">
   <div class="container">
     <a href="/" class="nav-logo">AS<span>RX</span></a>
     <ul class="nav-links" id="navLinks">
@@ -24,37 +31,48 @@
 
 <div class="assessment-page">
   <div class="assessment-container">
-    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:20%"></div></div>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:14%"></div></div>
+      <div class="progress-label" id="progressLabel">Step 1 of 7</div>
+    </div>
 
     <form id="assessmentForm" novalidate>
 
-      <!-- STEP 1 -->
+      <!-- STEP 1: Personal Info -->
       <div class="form-step" data-step="1">
         <div class="form-card">
           <h2>Let's Get Started</h2>
-          <p class="form-sub">Tell us a bit about yourself so we can connect you with the right provider.</p>
+          <p class="form-sub">Tell us about yourself so we can connect you with the right provider. This takes about 5 minutes.</p>
           <div class="form-group">
-            <label for="firstName">First Name</label>
+            <label for="firstName">First Name *</label>
             <input type="text" id="firstName" required placeholder="First name">
           </div>
           <div class="form-group">
-            <label for="lastName">Last Name</label>
+            <label for="lastName">Last Name *</label>
             <input type="text" id="lastName" required placeholder="Last name">
           </div>
           <div class="form-group">
-            <label for="email">Email</label>
+            <label for="email">Email *</label>
             <input type="email" id="email" required placeholder="you@example.com">
           </div>
           <div class="form-group">
-            <label for="phone">Phone Number</label>
+            <label for="phone">Phone Number *</label>
             <input type="tel" id="phone" required placeholder="(555) 123-4567">
           </div>
           <div class="form-group">
-            <label for="dob">Date of Birth</label>
+            <label for="dob">Date of Birth *</label>
             <input type="date" id="dob" required>
           </div>
           <div class="form-group">
-            <label for="state">State</label>
+            <label for="sex">Biological Sex *</label>
+            <select id="sex" required>
+              <option value="">Select</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="state">State *</label>
             <select id="state" required>
               <option value="">Select your state</option>
               <option>Alabama</option><option>Alaska</option><option>Arizona</option><option>Arkansas</option><option>California</option><option>Colorado</option><option>Connecticut</option><option>Delaware</option><option>Florida</option><option>Georgia</option><option>Hawaii</option><option>Idaho</option><option>Illinois</option><option>Indiana</option><option>Iowa</option><option>Kansas</option><option>Kentucky</option><option>Louisiana</option><option>Maine</option><option>Maryland</option><option>Massachusetts</option><option>Michigan</option><option>Minnesota</option><option>Mississippi</option><option>Missouri</option><option>Montana</option><option>Nebraska</option><option>Nevada</option><option>New Hampshire</option><option>New Jersey</option><option>New Mexico</option><option>New York</option><option>North Carolina</option><option>North Dakota</option><option>Ohio</option><option>Oklahoma</option><option>Oregon</option><option>Pennsylvania</option><option>Rhode Island</option><option>South Carolina</option><option>South Dakota</option><option>Tennessee</option><option>Texas</option><option>Utah</option><option>Vermont</option><option>Virginia</option><option>Washington</option><option>West Virginia</option><option>Wisconsin</option><option>Wyoming</option><option>District of Columbia</option>
@@ -67,26 +85,95 @@
         </div>
       </div>
 
-      <!-- STEP 2 -->
+      <!-- STEP 2: BMI Check -->
       <div class="form-step" data-step="2" style="display:none">
         <div class="form-card">
+          <h2>Body Measurements</h2>
+          <p class="form-sub">This helps us determine which programs you may be eligible for. Your provider will confirm eligibility.</p>
+          <div class="form-group">
+            <label>Height *</label>
+            <div class="bmi-calc">
+              <input type="number" id="heightFt" placeholder="Feet" min="3" max="8" required>
+              <input type="number" id="heightIn" placeholder="Inches" min="0" max="11" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="weightLbs">Current Weight (lbs) *</label>
+            <input type="number" id="weightLbs" placeholder="Weight in pounds" min="50" max="800" required>
+          </div>
+          <div class="bmi-result" id="bmiResult"></div>
+          <div id="bmiMessage" style="display:none; margin-top: 16px;"></div>
+          <div class="form-actions">
+            <button type="button" class="btn-back" onclick="prevStep()">← Back</button>
+            <button type="button" class="btn-primary" onclick="nextStep()">Continue →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 3: Health Conditions -->
+      <div class="form-step" data-step="3" style="display:none">
+        <div class="form-card">
+          <h2>Health Background</h2>
+          <p class="form-sub">Select any conditions that apply. This helps your provider make informed decisions about your care.</p>
+          <div class="form-group">
+            <label>Do you have any of the following conditions? (Select all that apply)</label>
+            <div class="checkbox-group">
+              <label class="checkbox-option"><input type="checkbox" name="conditions" value="hypertension"><span>High blood pressure (hypertension)</span></label>
+              <label class="checkbox-option"><input type="checkbox" name="conditions" value="diabetes"><span>Type 2 diabetes or pre-diabetes</span></label>
+              <label class="checkbox-option"><input type="checkbox" name="conditions" value="high-cholesterol"><span>High cholesterol</span></label>
+              <label class="checkbox-option"><input type="checkbox" name="conditions" value="sleep-apnea"><span>Sleep apnea</span></label>
+              <label class="checkbox-option"><input type="checkbox" name="conditions" value="joint-pain"><span>Joint pain or arthritis</span></label>
+              <label class="checkbox-option"><input type="checkbox" name="conditions" value="pcos"><span>PCOS</span></label>
+              <label class="checkbox-option"><input type="checkbox" name="conditions" value="none"><span>None of the above</span></label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Are you currently taking any medications?</label>
+            <div class="radio-group">
+              <label class="radio-option"><input type="radio" name="medications" value="yes"><span>Yes</span></label>
+              <label class="radio-option"><input type="radio" name="medications" value="no"><span>No</span></label>
+            </div>
+          </div>
+          <div class="form-group" id="medicationDetails" style="display:none">
+            <label for="medicationList">Please list your current medications</label>
+            <textarea id="medicationList" rows="3" placeholder="List medications and dosages..."></textarea>
+          </div>
+          <div class="form-actions">
+            <button type="button" class="btn-back" onclick="prevStep()">← Back</button>
+            <button type="button" class="btn-primary" onclick="nextStep()">Continue →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 4: Program Interest -->
+      <div class="form-step" data-step="4" style="display:none">
+        <div class="form-card">
           <h2>What Are You Interested In?</h2>
-          <p class="form-sub">Select the program you'd like to learn more about. Your provider will discuss all options with you.</p>
+          <p class="form-sub">Select the program you'd like to explore. Your provider will discuss all options with you.</p>
           <div class="form-group">
             <div class="radio-group">
               <label class="radio-option">
                 <input type="radio" name="program" value="weight-management" required>
-                <span><strong>Weight Management</strong><br><small style="color:var(--slate)">GLP-1 programs — Semaglutide, Tirzepatide</small></span>
+                <span><strong>Weight Management</strong><br><small style="color:var(--slate)">GLP-1 programs — Semaglutide, Tirzepatide · From $249/mo</small></span>
               </label>
               <label class="radio-option">
                 <input type="radio" name="program" value="peptide-therapy">
-                <span><strong>Peptide Therapy</strong><br><small style="color:var(--slate)">BPC-157, PT-141, CJC-1295 & more</small></span>
+                <span><strong>Peptide Therapy</strong><br><small style="color:var(--slate)">BPC-157, PT-141, CJC-1295 & more · From $349/mo</small></span>
               </label>
               <label class="radio-option">
                 <input type="radio" name="program" value="longevity">
-                <span><strong>Longevity & Wellness</strong><br><small style="color:var(--slate)">NAD+, Selank, Semax & more</small></span>
+                <span><strong>Longevity & Wellness</strong><br><small style="color:var(--slate)">NAD+, Selank, Semax & more · From $399/mo</small></span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="program" value="not-sure">
+                <span><strong>Not Sure Yet</strong><br><small style="color:var(--slate)">I'd like a provider to help me decide</small></span>
               </label>
             </div>
+          </div>
+          <div id="programRecommendation" class="recommendation-card" style="display:none">
+            <h4>💡 Based on your profile, we recommend:</h4>
+            <p id="recText"></p>
+            <span class="rec-plan" id="recPlan"></span>
           </div>
           <div class="form-actions">
             <button type="button" class="btn-back" onclick="prevStep()">← Back</button>
@@ -95,44 +182,29 @@
         </div>
       </div>
 
-      <!-- STEP 3 -->
-      <div class="form-step" data-step="3" style="display:none">
+      <!-- STEP 5: Goals -->
+      <div class="form-step" data-step="5" style="display:none">
         <div class="form-card">
-          <h2>Background Information</h2>
-          <p class="form-sub">These questions help us coordinate your connection with the most suitable provider. This is not a clinical evaluation.</p>
-
+          <h2>Your Goals</h2>
+          <p class="form-sub">Help us understand what you're hoping to achieve so your provider can tailor your program.</p>
           <div class="form-group">
-            <label>Have you consulted with a healthcare provider about your health goals before?</label>
+            <label>Have you consulted with a healthcare provider about these goals before?</label>
             <div class="radio-group">
               <label class="radio-option"><input type="radio" name="priorConsult" value="yes"><span>Yes</span></label>
-              <label class="radio-option"><input type="radio" name="priorConsult" value="no"><span>No</span></label>
+              <label class="radio-option"><input type="radio" name="priorConsult" value="no"><span>No, this is my first time</span></label>
             </div>
           </div>
-
           <div class="form-group">
-            <label>Are you currently under the care of a physician?</label>
+            <label>Have you tried peptide therapy or GLP-1 medications before?</label>
             <div class="radio-group">
-              <label class="radio-option"><input type="radio" name="currentPhysician" value="yes"><span>Yes</span></label>
-              <label class="radio-option"><input type="radio" name="currentPhysician" value="no"><span>No</span></label>
+              <label class="radio-option"><input type="radio" name="priorPeptides" value="yes"><span>Yes</span></label>
+              <label class="radio-option"><input type="radio" name="priorPeptides" value="no"><span>No</span></label>
             </div>
           </div>
-
-          <div class="form-group">
-            <label>BMI Calculator (optional)</label>
-            <div class="bmi-calc">
-              <input type="number" id="heightFt" placeholder="Height (ft)" min="3" max="8">
-              <input type="number" id="heightIn" placeholder="Inches" min="0" max="11">
-              <input type="number" id="weightLbs" placeholder="Weight (lbs)" min="50" max="800">
-              <button type="button" class="btn-back" onclick="calcBMI()" style="text-align:center;">Calculate</button>
-            </div>
-            <div class="bmi-result" id="bmiResult"></div>
-          </div>
-
           <div class="form-group">
             <label for="goals">What are your primary goals? (optional)</label>
             <textarea id="goals" rows="3" placeholder="Tell us what you're hoping to achieve..."></textarea>
           </div>
-
           <div class="form-actions">
             <button type="button" class="btn-back" onclick="prevStep()">← Back</button>
             <button type="button" class="btn-primary" onclick="nextStep()">Continue →</button>
@@ -140,12 +212,11 @@
         </div>
       </div>
 
-      <!-- STEP 4 -->
-      <div class="form-step" data-step="4" style="display:none">
+      <!-- STEP 6: Consent -->
+      <div class="form-step" data-step="6" style="display:none">
         <div class="form-card">
           <h2>Consent & Agreement</h2>
           <p class="form-sub">Please review and acknowledge the following before we connect you with a provider.</p>
-
           <div class="form-group">
             <div class="checkbox-group">
               <label class="checkbox-option">
@@ -161,12 +232,11 @@
                 <span>I consent to receive communications from ASRX and its provider partners regarding my program status.</span>
               </label>
               <label class="checkbox-option">
-                <input type="checkbox" id="consentAge">
-                <span>I confirm that I am at least 18 years of age.</span>
+                <input type="checkbox" id="consentAge" required>
+                <span>I confirm that I am at least 18 years of age and that the information I have provided is accurate.</span>
               </label>
             </div>
           </div>
-
           <div class="form-actions">
             <button type="button" class="btn-back" onclick="prevStep()">← Back</button>
             <button type="button" class="btn-primary" onclick="submitForm()">Submit Assessment →</button>
@@ -174,17 +244,47 @@
         </div>
       </div>
 
-      <!-- STEP 5 -->
-      <div class="form-step" data-step="5" style="display:none">
+      <!-- STEP 7: Confirmation -->
+      <div class="form-step" data-step="7" style="display:none">
         <div class="form-card">
           <div class="confirmation-icon">✅</div>
           <div class="confirmation-text">
-            <h2>You're In!</h2>
-            <p>Thank you for completing your assessment. A licensed provider will review your information within <strong>24 hours</strong>.</p>
-            <p style="margin-top:16px;">We'll reach out via email with next steps. In the meantime, feel free to explore our programs.</p>
-            <div style="margin-top:32px;">
-              <a href="programs.html" class="btn-primary">Explore Programs</a>
+            <h2>You're All Set!</h2>
+            <p>Thank you for completing your assessment. Here's what happens next:</p>
+          </div>
+          <div class="timeline" style="margin-top:32px">
+            <div class="timeline-step">
+              <div class="timeline-dot">1</div>
+              <div class="timeline-content">
+                <h5>Provider Review (Within 24 hours)</h5>
+                <p>A licensed provider in your state will review your assessment and determine eligibility.</p>
+              </div>
             </div>
+            <div class="timeline-step">
+              <div class="timeline-dot">2</div>
+              <div class="timeline-content">
+                <h5>Consultation (1–2 days)</h5>
+                <p>Your provider will reach out to discuss your program and answer any questions.</p>
+              </div>
+            </div>
+            <div class="timeline-step">
+              <div class="timeline-dot">3</div>
+              <div class="timeline-content">
+                <h5>Program Ships (3–5 business days)</h5>
+                <p>Once approved, your pharmaceutical-grade program ships directly to your door with free tracking.</p>
+              </div>
+            </div>
+            <div class="timeline-step">
+              <div class="timeline-dot">4</div>
+              <div class="timeline-content">
+                <h5>Ongoing Support</h5>
+                <p>Regular check-ins with your provider and 24/7 messaging support throughout your program.</p>
+              </div>
+            </div>
+          </div>
+          <div style="text-align:center;margin-top:32px;">
+            <a href="programs.html" class="btn-primary">Explore Programs</a>
+            <a href="blog.html" class="btn-outline" style="margin-left:12px;">Read Our Blog</a>
           </div>
         </div>
       </div>
@@ -196,7 +296,7 @@
 <footer class="footer">
   <div class="container">
     <div class="footer-bottom">
-      <p class="footer-disclaimer">ASRX.health is a healthcare access platform. Clinical services are provided by independently licensed healthcare providers. ASRX does not diagnose, treat, or prescribe.</p>
+      <p class="footer-disclaimer">ASRX.health is a healthcare access and coordination platform. Clinical services are provided by independently licensed healthcare providers through our partner network. ASRX does not diagnose, treat, or prescribe.</p>
       <p>© 2026 ASRX. All rights reserved.</p>
     </div>
   </div>
@@ -208,17 +308,44 @@ document.getElementById('navToggle').addEventListener('click', () => {
 });
 
 let currentStep = 1;
-const totalSteps = 5;
+const totalSteps = 7;
+let userBMI = 0;
+let hasCondition = false;
+
+// Pre-select program from URL params
+const urlParams = new URLSearchParams(window.location.search);
+const preselectedPlan = urlParams.get('plan');
+
+// Show/hide medication details
+document.querySelectorAll('input[name="medications"]').forEach(r => {
+  r.addEventListener('change', () => {
+    document.getElementById('medicationDetails').style.display = r.value === 'yes' ? 'block' : 'none';
+  });
+});
 
 function showStep(n) {
-  document.querySelectorAll('.form-step').forEach(s => s.style.display = 'none');
-  document.querySelector(`[data-step="${n}"]`).style.display = 'block';
+  document.querySelectorAll('.form-step').forEach(s => {
+    s.style.display = 'none';
+    s.style.opacity = '0';
+  });
+  const step = document.querySelector(`[data-step="${n}"]`);
+  step.style.display = 'block';
+  requestAnimationFrame(() => { step.style.opacity = '1'; step.style.transition = 'opacity .4s ease'; });
   document.getElementById('progressFill').style.width = (n / totalSteps * 100) + '%';
+  document.getElementById('progressLabel').textContent = `Step ${n} of ${totalSteps}`;
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+function calcBMI() {
+  const ft = +document.getElementById('heightFt').value;
+  const inches = +document.getElementById('heightIn').value;
+  const lbs = +document.getElementById('weightLbs').value;
+  if (!ft || !lbs) return 0;
+  const totalIn = ft * 12 + (inches || 0);
+  return ((lbs / (totalIn * totalIn)) * 703);
+}
+
 function nextStep() {
-  // basic validation
   const step = document.querySelector(`[data-step="${currentStep}"]`);
   const required = step.querySelectorAll('[required]');
   let valid = true;
@@ -233,42 +360,102 @@ function nextStep() {
     }
   });
   if (!valid) return;
+
+  // BMI calculation on step 2
+  if (currentStep === 2) {
+    userBMI = calcBMI();
+    const el = document.getElementById('bmiResult');
+    const msg = document.getElementById('bmiMessage');
+    if (userBMI > 0) {
+      el.style.display = 'block';
+      el.textContent = `Your BMI: ${userBMI.toFixed(1)}`;
+      if (userBMI >= 30) {
+        el.className = 'bmi-result qualified';
+        msg.style.display = 'block';
+        msg.innerHTML = '<p style="color:var(--green);font-size:.88rem;">✓ You likely qualify for GLP-1 weight management programs.</p>';
+      } else if (userBMI >= 27) {
+        el.className = 'bmi-result qualified';
+        msg.style.display = 'block';
+        msg.innerHTML = '<p style="color:var(--amber);font-size:.88rem;">You may qualify for GLP-1 programs with a qualifying health condition. We\'ll ask about that next.</p>';
+      } else {
+        el.className = 'bmi-result not-qualified';
+        msg.style.display = 'block';
+        msg.innerHTML = '<p style="font-size:.88rem;color:var(--slate);">GLP-1 weight management programs typically require a BMI of 27+. You may still qualify for peptide therapy or longevity programs.</p>';
+      }
+    }
+  }
+
+  // Check conditions on step 3
+  if (currentStep === 3) {
+    const checked = step.querySelectorAll('input[name="conditions"]:checked');
+    hasCondition = Array.from(checked).some(c => c.value !== 'none');
+  }
+
+  // Show recommendation on step 4
+  if (currentStep === 3) {
+    setTimeout(() => showRecommendation(), 100);
+  }
+
   currentStep++;
   showStep(currentStep);
+
+  // Pre-select plan if from URL
+  if (currentStep === 4 && preselectedPlan) {
+    const map = { essential: 'weight-management', performance: 'peptide-therapy', elite: 'longevity' };
+    const val = map[preselectedPlan];
+    if (val) {
+      const radio = document.querySelector(`input[name="program"][value="${val}"]`);
+      if (radio) radio.checked = true;
+    }
+  }
+}
+
+function showRecommendation() {
+  const rec = document.getElementById('programRecommendation');
+  const recText = document.getElementById('recText');
+  const recPlan = document.getElementById('recPlan');
+
+  if (userBMI >= 27) {
+    rec.style.display = 'block';
+    if (userBMI >= 30) {
+      recText.textContent = 'Based on your BMI and health profile, our Weight Management program with GLP-1 access would be a great starting point.';
+      recPlan.textContent = 'Essential Plan — $249/mo';
+    } else if (hasCondition) {
+      recText.textContent = 'With your BMI and health conditions, you may be eligible for our GLP-1 weight management program.';
+      recPlan.textContent = 'Essential Plan — $249/mo';
+    } else {
+      recText.textContent = 'Based on your profile, our Peptide Therapy program may be a great fit for your goals.';
+      recPlan.textContent = 'Performance Plan — $349/mo';
+    }
+  } else {
+    rec.style.display = 'block';
+    recText.textContent = 'Based on your profile, our Peptide Therapy or Longevity programs may be the best fit.';
+    recPlan.textContent = 'Performance or Elite Plan';
+  }
 }
 
 function prevStep() { currentStep--; showStep(currentStep); }
 
-function calcBMI() {
-  const ft = +document.getElementById('heightFt').value;
-  const inches = +document.getElementById('heightIn').value;
-  const lbs = +document.getElementById('weightLbs').value;
-  if (!ft || !lbs) return;
-  const totalIn = ft * 12 + (inches || 0);
-  const bmi = ((lbs / (totalIn * totalIn)) * 703).toFixed(1);
-  const el = document.getElementById('bmiResult');
-  el.style.display = 'block';
-  el.textContent = `Your BMI: ${bmi}`;
-}
-
 function submitForm() {
-  const step = document.querySelector('[data-step="4"]');
+  const step = document.querySelector('[data-step="6"]');
   const checks = step.querySelectorAll('input[required]');
   let valid = true;
   checks.forEach(c => { if (!c.checked) valid = false; });
   if (!valid) { alert('Please review and accept all required agreements.'); return; }
 
-  // save to localStorage
   const data = {
     firstName: document.getElementById('firstName').value,
     lastName: document.getElementById('lastName').value,
     email: document.getElementById('email').value,
     phone: document.getElementById('phone').value,
     dob: document.getElementById('dob').value,
+    sex: document.getElementById('sex').value,
     state: document.getElementById('state').value,
+    bmi: userBMI.toFixed(1),
+    conditions: Array.from(document.querySelectorAll('input[name="conditions"]:checked')).map(c => c.value),
     program: document.querySelector('input[name="program"]:checked')?.value,
     priorConsult: document.querySelector('input[name="priorConsult"]:checked')?.value,
-    currentPhysician: document.querySelector('input[name="currentPhysician"]:checked')?.value,
+    priorPeptides: document.querySelector('input[name="priorPeptides"]:checked')?.value,
     goals: document.getElementById('goals').value,
     submittedAt: new Date().toISOString()
   };
@@ -276,8 +463,8 @@ function submitForm() {
   submissions.push(data);
   localStorage.setItem('asrx_submissions', JSON.stringify(submissions));
 
-  currentStep = 5;
-  showStep(5);
+  currentStep = 7;
+  showStep(7);
 }
 </script>
 </body>
