@@ -1,335 +1,1130 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ASRX.health — Access Peptide Therapy Through Licensed Providers</title>
-  <meta name="description" content="ASRX connects you with licensed providers for pharmaceutical-grade peptide therapy. GLP-1 weight management, peptide access, and longevity programs. Start your assessment today.">
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💊</text></svg>">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ASRX | Healthcare Access. Simplified.</title>
+  <meta name="description" content="ASRX connects you with licensed telehealth providers and pharmaceutical-grade peptide therapy and GLP-1 treatments — no insurance required, no waiting rooms, no hassle." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg-primary: #0a0f1e;
+      --bg-secondary: #0e1529;
+      --bg-card: #111827;
+      --bg-card-hover: #151e30;
+      --accent: #00d4aa;
+      --accent-dim: #00b892;
+      --accent-glow: rgba(0, 212, 170, 0.15);
+      --accent-glow-strong: rgba(0, 212, 170, 0.3);
+      --text-primary: #ffffff;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --border: rgba(255, 255, 255, 0.06);
+      --border-accent: rgba(0, 212, 170, 0.25);
+      --radius: 12px;
+      --radius-lg: 20px;
+      --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.4);
+      --shadow-glow: 0 0 40px rgba(0, 212, 170, 0.12);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 0 5%;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(10, 15, 30, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-logo-mark {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, var(--accent), #0099ff);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 14px;
+      color: #0a0f1e;
+      letter-spacing: -0.5px;
+      flex-shrink: 0;
+    }
+
+    .nav-logo-text {
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--text-primary);
+      letter-spacing: 0.5px;
+    }
+
+    .nav-logo-text span {
+      color: var(--accent);
+    }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: #0a0f1e;
+      font-weight: 600;
+      font-size: 14px;
+      padding: 9px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .nav-cta:hover {
+      background: var(--accent-dim);
+      transform: translateY(-1px);
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      padding: 120px 5% 80px;
+    }
+
+    /* Abstract gradient art background */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 70% 40%, rgba(0, 212, 170, 0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 50% at 20% 80%, rgba(0, 153, 255, 0.06) 0%, transparent 55%),
+        radial-gradient(ellipse 80% 40% at 50% 110%, rgba(0, 212, 170, 0.05) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    /* Decorative orb */
+    .hero-orb {
+      position: absolute;
+      right: -80px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 560px;
+      height: 560px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 212, 170, 0.07) 0%, rgba(0, 153, 255, 0.04) 40%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* Floating grid lines */
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0, 212, 170, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 212, 170, 0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      max-width: 760px;
+      z-index: 2;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0, 212, 170, 0.1);
+      border: 1px solid var(--border-accent);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--accent);
+      margin-bottom: 28px;
+      letter-spacing: 0.3px;
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 6px var(--accent);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .hero h1 {
+      font-size: clamp(42px, 7vw, 80px);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -2px;
+      margin-bottom: 24px;
+      color: var(--text-primary);
+    }
+
+    .hero h1 .accent {
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      font-size: clamp(16px, 2vw, 19px);
+      color: var(--text-secondary);
+      line-height: 1.7;
+      max-width: 600px;
+      margin-bottom: 44px;
+      font-weight: 400;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: #0a0f1e;
+      font-weight: 700;
+      font-size: 16px;
+      padding: 16px 32px;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(0, 212, 170, 0.35);
+      letter-spacing: -0.2px;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-dim);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(0, 212, 170, 0.45);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--text-primary);
+      font-weight: 600;
+      font-size: 16px;
+      padding: 15px 32px;
+      border-radius: 10px;
+      text-decoration: none;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      transition: border-color 0.2s, background 0.2s, transform 0.15s;
+      letter-spacing: -0.2px;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      background: rgba(0, 212, 170, 0.05);
+      transform: translateY(-2px);
+    }
+
+    .btn-arrow {
+      font-size: 18px;
+      transition: transform 0.2s;
+    }
+
+    .btn-primary:hover .btn-arrow,
+    .btn-secondary:hover .btn-arrow {
+      transform: translateX(3px);
+    }
+
+    /* ─── SECTION BASE ─── */
+    section {
+      padding: 96px 5%;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+
+    .section-sub {
+      font-size: 17px;
+      color: var(--text-secondary);
+      max-width: 560px;
+      line-height: 1.7;
+    }
+
+    .section-header {
+      margin-bottom: 60px;
+    }
+
+    /* ─── HOW IT WORKS ─── */
+    #how-it-works {
+      background: var(--bg-secondary);
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      position: relative;
+    }
+
+    .steps-grid::before {
+      content: '';
+      position: absolute;
+      top: 36px;
+      left: calc(16.66% + 20px);
+      right: calc(16.66% + 20px);
+      height: 1px;
+      background: linear-gradient(90deg, var(--accent) 0%, rgba(0, 212, 170, 0.2) 50%, var(--accent) 100%);
+      opacity: 0.4;
+    }
+
+    .step-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 36px 28px;
+      position: relative;
+      transition: border-color 0.3s, box-shadow 0.3s, transform 0.2s;
+    }
+
+    .step-card:hover {
+      border-color: var(--border-accent);
+      box-shadow: var(--shadow-glow);
+      transform: translateY(-4px);
+    }
+
+    .step-number {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), #0099ff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 18px;
+      color: #0a0f1e;
+      margin-bottom: 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .step-card h3 {
+      font-size: 19px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      letter-spacing: -0.3px;
+    }
+
+    .step-card p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+
+    .step-time {
+      display: inline-block;
+      margin-top: 14px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent);
+      background: rgba(0, 212, 170, 0.08);
+      border: 1px solid var(--border-accent);
+      padding: 4px 10px;
+      border-radius: 100px;
+    }
+
+    /* ─── WHAT WE OFFER ─── */
+    #offerings {
+      background: var(--bg-primary);
+    }
+
+    .offerings-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .offering-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 36px 28px;
+      transition: border-color 0.3s, box-shadow 0.3s, transform 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .offering-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .offering-card:hover {
+      border-color: var(--border-accent);
+      box-shadow: var(--shadow-glow);
+      transform: translateY(-4px);
+    }
+
+    .offering-card:hover::before {
+      opacity: 1;
+    }
+
+    .offering-card.coming-soon {
+      opacity: 0.7;
+    }
+
+    .offering-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      background: rgba(0, 212, 170, 0.1);
+      border: 1px solid var(--border-accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin-bottom: 22px;
+    }
+
+    .offering-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 100px;
+      margin-bottom: 14px;
+    }
+
+    .badge-active {
+      background: rgba(0, 212, 170, 0.1);
+      color: var(--accent);
+      border: 1px solid var(--border-accent);
+    }
+
+    .badge-soon {
+      background: rgba(148, 163, 184, 0.1);
+      color: var(--text-muted);
+      border: 1px solid rgba(148, 163, 184, 0.15);
+    }
+
+    .offering-card h3 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      letter-spacing: -0.3px;
+    }
+
+    .offering-card p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+
+    .offering-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .tag {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+
+    /* ─── WHY ASRX ─── */
+    #why-asrx {
+      background: var(--bg-secondary);
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .why-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px 28px;
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      transition: border-color 0.3s, transform 0.2s;
+    }
+
+    .why-card:hover {
+      border-color: var(--border-accent);
+      transform: translateY(-2px);
+    }
+
+    .why-icon {
+      width: 44px;
+      height: 44px;
+      flex-shrink: 0;
+      border-radius: 10px;
+      background: rgba(0, 212, 170, 0.1);
+      border: 1px solid var(--border-accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+
+    .why-content h3 {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      letter-spacing: -0.2px;
+    }
+
+    .why-content p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ─── TRUST BAR ─── */
+    #trust {
+      padding: 40px 5%;
+      background: var(--bg-primary);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .trust-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0;
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 32px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      position: relative;
+    }
+
+    .trust-item:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 1px;
+      height: 20px;
+      background: var(--border);
+    }
+
+    .trust-icon {
+      color: var(--accent);
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    /* ─── CTA SECTION ─── */
+    #cta {
+      background: var(--bg-secondary);
+      text-align: center;
+    }
+
+    .cta-inner {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 80px 40px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-accent);
+      border-radius: 24px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-glow);
+    }
+
+    .cta-inner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 60% at 50% 0%, rgba(0, 212, 170, 0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .cta-inner h2 {
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+      position: relative;
+    }
+
+    .cta-inner p {
+      font-size: 17px;
+      color: var(--text-secondary);
+      margin-bottom: 40px;
+      line-height: 1.65;
+      position: relative;
+    }
+
+    .cta-inner .btn-primary {
+      font-size: 17px;
+      padding: 18px 40px;
+      position: relative;
+    }
+
+    .cta-disclaimer {
+      margin-top: 20px;
+      font-size: 13px;
+      color: var(--text-muted);
+      position: relative;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--bg-primary);
+      border-top: 1px solid var(--border);
+      padding: 56px 5% 40px;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 40px;
+      margin-bottom: 48px;
+      flex-wrap: wrap;
+    }
+
+    .footer-brand {
+      max-width: 340px;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+      text-decoration: none;
+    }
+
+    .footer-logo-mark {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, var(--accent), #0099ff);
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 12px;
+      color: #0a0f1e;
+    }
+
+    .footer-logo-text {
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--text-primary);
+    }
+
+    .footer-brand-sub {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .footer-brand p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .footer-links-group {
+      display: flex;
+      gap: 60px;
+      flex-wrap: wrap;
+    }
+
+    .footer-col h4 {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-col ul li a {
+      font-size: 14px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-col ul li a:hover {
+      color: var(--accent);
+    }
+
+    .footer-divider {
+      height: 1px;
+      background: var(--border);
+      margin-bottom: 28px;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-disclaimer {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.65;
+      max-width: 600px;
+    }
+
+    .footer-copyright {
+      font-size: 12px;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 960px) {
+      .steps-grid,
+      .offerings-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .steps-grid::before {
+        display: none;
+      }
+
+      .why-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .trust-bar {
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .trust-item::after {
+        display: none;
+      }
+
+      .footer-top {
+        flex-direction: column;
+      }
+
+      .footer-brand {
+        max-width: 100%;
+      }
+    }
+
+    @media (max-width: 640px) {
+      section {
+        padding: 72px 5%;
+      }
+
+      .hero {
+        padding: 100px 5% 60px;
+        text-align: center;
+      }
+
+      .hero-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .hero-sub {
+        text-align: center;
+      }
+
+      .hero-cta-group {
+        justify-content: center;
+      }
+
+      .hero-orb {
+        display: none;
+      }
+
+      .nav-logo-text {
+        font-size: 16px;
+      }
+
+      .cta-inner {
+        padding: 48px 24px;
+      }
+
+      .footer-links-group {
+        gap: 40px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+      }
+    }
+
+    /* ─── INTAKE ANCHOR ─── */
+    #intake {
+      display: block;
+      position: relative;
+      visibility: hidden;
+      height: 0;
+    }
+  </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav class="nav">
-  <div class="container">
-    <a href="/" class="nav-logo">AS<span>RX</span></a>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="#how-it-works">How It Works</a></li>
-      <li><a href="programs.html">Programs</a></li>
-      <li><a href="#pricing">Pricing</a></li>
-      <li><a href="#faq">FAQ</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="assessment.html" class="nav-cta">Start Assessment →</a></li>
-    </ul>
-    <button class="nav-toggle" id="navToggle" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</nav>
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">
+      <div class="nav-logo-mark">Rx</div>
+      <span class="nav-logo-text">AS<span>RX</span></span>
+    </a>
+    <a href="#intake" class="nav-cta">
+      Start Free Assessment <span class="btn-arrow">→</span>
+    </a>
+  </nav>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="container">
-    <h1>Access <em>Peptide Therapy</em> Through Licensed Providers</h1>
-    <p class="sub">Connect with qualified clinicians for pharmaceutical-grade peptide programs. We coordinate every step — from your assessment to your front door.</p>
-    <div class="hero-btns">
-      <a href="assessment.html" class="btn-primary">Start Your Free Assessment →</a>
-      <a href="#pricing" class="btn-secondary">See Pricing</a>
-    </div>
-    <div class="hero-badges">
-      <span>Licensed providers in 50 states</span>
-      <span>FDA-registered pharmacy partners</span>
-      <span>Free shipping</span>
-    </div>
-  </div>
-</section>
-
-<!-- SOCIAL PROOF BAR -->
-<div class="proof-bar">
-  <div class="container">
-    <div class="proof-stat"><strong>50</strong><span>States Covered</span></div>
-    <div class="proof-stat"><strong>100%</strong><span>Pharmaceutical Grade</span></div>
-    <div class="proof-stat"><strong>3–5 Days</strong><span>Avg. Delivery</span></div>
-    <div class="proof-stat"><strong>24/7</strong><span>Provider Access</span></div>
-  </div>
-</div>
-
-<!-- HOW IT WORKS -->
-<section class="section-dark" id="how-it-works">
-  <div class="container">
-    <h2 class="section-title">How ASRX Works</h2>
-    <p class="section-sub">Three simple steps to connect with a licensed provider and access your program.</p>
-    <div class="steps">
-      <div class="step fade-up">
-        <div class="step-num">01</div>
-        <h3>Complete Your Assessment</h3>
-        <p>Answer a quick online questionnaire so we can understand your goals and connect you with the right provider. Takes about 5 minutes.</p>
-      </div>
-      <div class="step fade-up">
-        <div class="step-num">02</div>
-        <h3>Get Matched With a Provider</h3>
-        <p>A licensed clinician in your state reviews your information and determines the best program for your needs.</p>
-      </div>
-      <div class="step fade-up">
-        <div class="step-num">03</div>
-        <h3>Begin Your Program</h3>
-        <p>Pharmaceutical-grade peptides are shipped directly to your door. Ongoing support and check-ins keep you on track.</p>
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-orb"></div>
+    <div class="hero-content">
+      <div class="hero-badge">Healthcare Access. Simplified.</div>
+      <h1>Your Health.<br /><span class="accent">Your Terms.</span></h1>
+      <p class="hero-sub">
+        ASRX connects you with licensed telehealth providers and pharmaceutical-grade peptide therapy and GLP-1 treatments — no insurance required, no waiting rooms, no hassle.
+      </p>
+      <div class="hero-cta-group">
+        <a href="#intake" class="btn-primary">
+          Start Your Assessment <span class="btn-arrow">→</span>
+        </a>
+        <a href="#how-it-works" class="btn-secondary">
+          Learn More <span class="btn-arrow">↓</span>
+        </a>
       </div>
     </div>
-    <div style="text-align:center;margin-top:48px;">
-      <a href="assessment.html" class="btn-primary">Start Your Free Assessment →</a>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- WHY ASRX -->
-<section id="why-asrx">
-  <div class="container">
-    <h2 class="section-title">Why ASRX Is Different</h2>
-    <p class="section-sub">We coordinate the entire experience — from formulation to fulfillment — so you get access to quality you can trust.</p>
-    <div class="why-grid">
-      <div class="why-card fade-up">
-        <div class="why-icon">🔬</div>
-        <h3>Vertically Integrated Supply Chain</h3>
-        <p>Unlike most platforms that rely on unknown third-party compounders, ASRX partners with FDA-registered domestic manufacturing facilities we know and trust.</p>
+  <!-- HOW IT WORKS -->
+  <section id="how-it-works">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Simple Process</p>
+        <h2 class="section-title">How It Works</h2>
+        <p class="section-sub">From intake to treatment in three straightforward steps. No referrals, no insurance paperwork, no runaround.</p>
       </div>
-      <div class="why-card fade-up">
-        <div class="why-icon">👨‍⚕️</div>
-        <h3>Licensed Clinicians, Real Oversight</h3>
-        <p>Every program is supervised by a licensed provider in your state. Not an algorithm. Not a chatbot. A real clinician who reviews your case.</p>
-      </div>
-      <div class="why-card fade-up">
-        <div class="why-icon">📦</div>
-        <h3>Direct to Your Door</h3>
-        <p>No pharmacy trips. No insurance hassle. Discreet packaging, free shipping, and ongoing coordination from our team.</p>
-      </div>
-      <div class="why-card fade-up">
-        <div class="why-icon">🧪</div>
-        <h3>Third-Party Tested</h3>
-        <p>Every batch is independently tested for purity and potency through our pharmacy partners. Quality and transparency are non-negotiable.</p>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h3>Complete Your Health Intake</h3>
+          <p>Answer a brief set of questions about your health history, goals, and current medications. Secure, private, and tailored to match you with the right provider.</p>
+          <span class="step-time">⏱ Under 2 minutes</span>
+        </div>
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h3>Match With a Licensed Provider</h3>
+          <p>Based on your intake, you'll be connected with a licensed telehealth provider in your state who specializes in your area of care. No guesswork.</p>
+          <span class="step-time">⚡ Same-day matching</span>
+        </div>
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h3>Receive Your Treatment Plan</h3>
+          <p>Your provider reviews your case, creates a personalized plan, and coordinates pharmaceutical-grade medications shipped discreetly to your door.</p>
+          <span class="step-time">📦 Fast, discreet delivery</span>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- PRICING -->
-<section class="section-light" id="pricing">
-  <div class="container">
-    <h2 class="section-title">Simple, Transparent Pricing</h2>
-    <p class="section-sub">Everything included. No hidden fees. Cancel anytime.</p>
-    <div class="pricing-grid">
-      <div class="price-card fade-up">
-        <h3>Essential</h3>
-        <div class="price-amount">$249<span>/mo</span></div>
-        <ul>
-          <li>Compounded Semaglutide access</li>
-          <li>Async provider consultation</li>
-          <li>Monthly check-ins</li>
-          <li>Messaging support</li>
-          <li>Free shipping</li>
-        </ul>
-        <a href="assessment.html" class="btn-primary">Get Started</a>
+  <!-- WHAT WE OFFER -->
+  <section id="offerings">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Treatment Options</p>
+        <h2 class="section-title">What We Offer</h2>
+        <p class="section-sub">Evidence-based treatments coordinated through licensed providers — pharmaceutical-grade quality, sourced domestically.</p>
       </div>
-      <div class="price-card featured fade-up">
-        <div class="price-badge">Most Popular</div>
-        <h3>Performance</h3>
-        <div class="price-amount">$349<span>/mo</span></div>
-        <ul>
-          <li>Compounded Tirzepatide access</li>
-          <li>Video provider consultation</li>
-          <li>Bi-weekly check-ins</li>
-          <li>Priority support</li>
-          <li>Free shipping</li>
-        </ul>
-        <a href="assessment.html" class="btn-primary">Get Started</a>
-      </div>
-      <div class="price-card fade-up">
-        <h3>Elite</h3>
-        <div class="price-amount">$399<span>/mo</span></div>
-        <ul>
-          <li>Tirzepatide + adjunct peptides</li>
-          <li>Video provider consultation</li>
-          <li>Weekly check-ins</li>
-          <li>Dedicated provider</li>
-          <li>Nutrition guidance</li>
-          <li>Free shipping</li>
-        </ul>
-        <a href="assessment.html" class="btn-primary">Get Started</a>
+      <div class="offerings-grid">
+        <div class="offering-card">
+          <div class="offering-icon">💉</div>
+          <span class="offering-badge badge-active">Available Now</span>
+          <h3>GLP-1 / Semaglutide</h3>
+          <p>Clinically proven weight loss and metabolic health support. Get matched with a licensed provider to evaluate your eligibility for GLP-1 therapy and receive a personalized dosing protocol.</p>
+          <div class="offering-tags">
+            <span class="tag">Weight Loss</span>
+            <span class="tag">Metabolic Health</span>
+            <span class="tag">Semaglutide</span>
+          </div>
+        </div>
+        <div class="offering-card">
+          <div class="offering-icon">⚗️</div>
+          <span class="offering-badge badge-active">Available Now</span>
+          <h3>Peptide Therapy</h3>
+          <p>Targeted peptide protocols using compounds like BPC-157 and TB-500 to support recovery, reduce inflammation, and optimize physical performance — coordinated by licensed providers.</p>
+          <div class="offering-tags">
+            <span class="tag">BPC-157</span>
+            <span class="tag">TB-500</span>
+            <span class="tag">Recovery</span>
+            <span class="tag">Performance</span>
+          </div>
+        </div>
+        <div class="offering-card coming-soon">
+          <div class="offering-icon">⚖️</div>
+          <span class="offering-badge badge-soon">Coming Soon</span>
+          <h3>Hormone Optimization</h3>
+          <p>Comprehensive hormone evaluation and optimization protocols for men and women. Testosterone, thyroid, adrenal support, and more — managed through our licensed provider network.</p>
+          <div class="offering-tags">
+            <span class="tag">TRT</span>
+            <span class="tag">Thyroid</span>
+            <span class="tag">Hormones</span>
+          </div>
+        </div>
       </div>
     </div>
-    <p class="pricing-note">All plans include: Licensed provider · Pharmaceutical-grade peptides · Cancel anytime · No insurance required</p>
-  </div>
-</section>
+  </section>
 
-<!-- TRUST SIGNALS -->
-<section class="section-dark" id="trust">
-  <div class="container">
-    <h2 class="section-title">Built on Trust</h2>
-    <p class="section-sub">Your safety and privacy are our foundation.</p>
-    <div class="trust-grid">
-      <div class="trust-item fade-up">
-        <div class="trust-icon">👨‍⚕️</div>
-        <h4>Licensed Providers in 50 States</h4>
-        <p>Every program supervised by state-licensed clinicians</p>
+  <!-- WHY ASRX -->
+  <section id="why-asrx">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Why Choose ASRX</p>
+        <h2 class="section-title">Built Different</h2>
+        <p class="section-sub">We stripped out the friction of traditional healthcare and rebuilt it around you. Here's what that looks like in practice.</p>
       </div>
-      <div class="trust-item fade-up">
-        <div class="trust-icon">🏭</div>
-        <h4>FDA-Registered Pharmacy Partners</h4>
-        <p>Domestic facilities following strict GMP protocols</p>
-      </div>
-      <div class="trust-item fade-up">
-        <div class="trust-icon">🧪</div>
-        <h4>Third-Party Tested Peptides</h4>
-        <p>Independent testing for purity, potency, and sterility</p>
-      </div>
-      <div class="trust-item fade-up">
-        <div class="trust-icon">🔒</div>
-        <h4>HIPAA-Compliant Platform</h4>
-        <p>Your data is encrypted and secured at every step</p>
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="why-icon">🚫</div>
+          <div class="why-content">
+            <h3>No Insurance Required</h3>
+            <p>Pay directly, know exactly what you're paying. No claim denials, no prior authorizations, no coverage surprises. Transparent pricing, full stop.</p>
+          </div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">🗺️</div>
+          <div class="why-content">
+            <h3>Licensed Providers in All 50 States</h3>
+            <p>Our telehealth provider network covers every state, so wherever you are, you're matched with a licensed professional who can legally treat you.</p>
+          </div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">🏭</div>
+          <div class="why-content">
+            <h3>Domestic Pharmaceutical-Grade Sourcing</h3>
+            <p>All medications are sourced from licensed U.S. compounding pharmacies. No grey-market imports. No unknowns. Pharmaceutical-grade quality, every time.</p>
+          </div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">🔒</div>
+          <div class="why-content">
+            <h3>HIPAA-Compliant Platform</h3>
+            <p>Your health data is private and protected by design. Our platform is built to HIPAA standards — your information is never sold, shared, or compromised.</p>
+          </div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">🙋</div>
+          <div class="why-content">
+            <h3>Real Human Support</h3>
+            <p>Not a chatbot. Not a ticket queue. When you need help, a real person is available to guide you through the process, answer questions, and support your care journey.</p>
+          </div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">⚡</div>
+          <div class="why-content">
+            <h3>Fast, Streamlined Access</h3>
+            <p>Traditional healthcare moves slow. ASRX doesn't. From intake to treatment plan, our process is built for speed — because your health shouldn't wait on a calendar.</p>
+          </div>
+        </div>
       </div>
     </div>
-    <p class="trust-bottom">HIPAA Compliant · Secure Payments · Made in the USA</p>
-  </div>
-</section>
+  </section>
 
-<!-- TESTIMONIALS -->
-<section>
-  <div class="container">
-    <h2 class="section-title">What People Are Saying</h2>
-    <p class="section-sub">Real experiences from real members. More stories coming soon.</p>
-    <div class="why-grid">
-      <div class="why-card fade-up" style="text-align:center;">
-        <p style="font-size:1.1rem;color:var(--navy);margin-bottom:16px;">"The process was seamless. I was connected with a provider within 24 hours and had my program shipped in days."</p>
-        <p style="font-size:.85rem;color:var(--slate);">— Verified Member, TX</p>
+  <!-- TRUST BAR -->
+  <div id="trust">
+    <div class="trust-bar">
+      <div class="trust-item">
+        <span class="trust-icon">🤝</span>
+        Partnered with licensed telehealth providers
       </div>
-      <div class="why-card fade-up" style="text-align:center;">
-        <p style="font-size:1.1rem;color:var(--navy);margin-bottom:16px;">"I appreciate knowing exactly where my peptides come from. The transparency sets ASRX apart."</p>
-        <p style="font-size:.85rem;color:var(--slate);">— Verified Member, CA</p>
+      <div class="trust-item">
+        <span class="trust-icon">🏭</span>
+        Domestic pharmaceutical sourcing
       </div>
-      <div class="why-card fade-up" style="text-align:center;">
-        <p style="font-size:1.1rem;color:var(--navy);margin-bottom:16px;">"Finally a platform that feels professional and science-backed. The provider check-ins are a huge plus."</p>
-        <p style="font-size:.85rem;color:var(--slate);">— Verified Member, FL</p>
+      <div class="trust-item">
+        <span class="trust-icon">🔒</span>
+        HIPAA compliant
+      </div>
+      <div class="trust-item">
+        <span class="trust-icon">📦</span>
+        Discreet shipping
       </div>
     </div>
   </div>
-</section>
 
-<!-- FAQ -->
-<section class="section-light" id="faq">
-  <div class="container">
-    <h2 class="section-title">Frequently Asked Questions</h2>
-    <p class="section-sub">Everything you need to know before getting started.</p>
-    <div class="faq-list">
-      <div class="faq-item">
-        <button class="faq-q">How does ASRX work?</button>
-        <div class="faq-a"><p>ASRX is a healthcare access platform that connects you with licensed providers who can evaluate your needs and coordinate peptide therapy programs. You complete a brief assessment, get matched with a provider in your state, and — if eligible — receive your program shipped to your door.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">Is ASRX legitimate?</button>
-        <div class="faq-a"><p>Yes. ASRX coordinates with independently licensed healthcare providers and FDA-registered pharmacy partners. All clinical decisions are made by qualified, state-licensed clinicians. We are a healthcare access and coordination platform — not a pharmacy or clinic.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">What programs are available?</button>
-        <div class="faq-a"><p>ASRX currently offers access to Weight Management programs (GLP-1 peptides like semaglutide and tirzepatide), Peptide Therapy programs (BPC-157, PT-141, CJC-1295, and more), and Longevity & Wellness programs (NAD+, Selank, Semax). Your provider will determine which options are appropriate for you.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">How fast is shipping?</button>
-        <div class="faq-a"><p>Most members receive their first shipment within 3–5 business days of provider approval. All orders ship via discreet packaging with tracking included at no additional cost.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">Can I cancel anytime?</button>
-        <div class="faq-a"><p>Absolutely. All ASRX plans are month-to-month with no long-term commitment. You can cancel online anytime before your next billing cycle — no questions asked.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">Is my information secure?</button>
-        <div class="faq-a"><p>Yes. ASRX uses HIPAA-compliant systems to protect your data. All information is encrypted in transit and at rest. We never sell your personal data to third parties.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">Do I need insurance?</button>
-        <div class="faq-a"><p>No. ASRX is a direct-pay platform. Our pricing includes everything — provider consultation, program coordination, and shipping. No insurance paperwork and no surprise bills.</p></div>
+  <!-- CTA -->
+  <section id="cta">
+    <div class="container">
+      <div class="cta-inner">
+        <span id="intake"></span>
+        <h2>Ready to take control<br />of your health?</h2>
+        <p>Start with a free, private health assessment. No commitment, no insurance, no waiting room. Just answers — and a path forward.</p>
+        <a href="#intake" class="btn-primary">
+          Start Free Assessment <span class="btn-arrow">→</span>
+        </a>
+        <p class="cta-disclaimer">Free to start. No credit card required. All data is HIPAA-protected.</p>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- FINAL CTA -->
-<section class="cta-section">
-  <div class="container">
-    <h2 class="section-title">Ready to Get Started?</h2>
-    <p>Complete a 5-minute assessment and get connected with a licensed provider. No commitment. No insurance required.</p>
-    <a href="assessment.html" class="btn-primary">Start Your Free Assessment →</a>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <a href="/" class="nav-logo">AS<span style="color:var(--teal)">RX</span></a>
-        <p>A healthcare access platform connecting you with licensed providers for pharmaceutical-grade peptide programs.</p>
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="#" class="footer-logo">
+            <div class="footer-logo-mark">Rx</div>
+            <span class="footer-logo-text">ASRX</span>
+          </a>
+          <p class="footer-brand-sub">A subsidiary of August Aisles LLC</p>
+          <p>Connecting individuals with licensed telehealth providers and pharmaceutical-grade treatments nationwide.</p>
+        </div>
+        <div class="footer-links-group">
+          <div class="footer-col">
+            <h4>Platform</h4>
+            <ul>
+              <li><a href="#how-it-works">How It Works</a></li>
+              <li><a href="#offerings">Treatments</a></li>
+              <li><a href="#why-asrx">Why ASRX</a></li>
+              <li><a href="#intake">Start Assessment</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Legal</h4>
+            <ul>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Terms of Service</a></li>
+              <li><a href="#">Contact Us</a></li>
+            </ul>
+          </div>
+        </div>
       </div>
-      <div>
-        <h4>Company</h4>
-        <ul>
-          <li><a href="about.html">About</a></li>
-          <li><a href="#how-it-works">How It Works</a></li>
-          <li><a href="#pricing">Pricing</a></li>
-          <li><a href="programs.html">Programs</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Legal</h4>
-        <ul>
-          <li><a href="#">Privacy Policy</a></li>
-          <li><a href="#">Terms of Service</a></li>
-          <li><a href="#">HIPAA Notice</a></li>
-          <li><a href="#">Telehealth Consent</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Support</h4>
-        <ul>
-          <li><a href="#faq">FAQ</a></li>
-          <li><a href="mailto:hello@asrx.health">Contact</a></li>
-        </ul>
+      <div class="footer-divider"></div>
+      <div class="footer-bottom">
+        <p class="footer-disclaimer">
+          ASRX is a healthcare access and coordination platform. We are not a clinical provider. All medical decisions are made by licensed healthcare professionals. Nothing on this site constitutes medical advice. Individual results may vary.
+        </p>
+        <p class="footer-copyright">© 2026 August Aisles LLC. All rights reserved.</p>
       </div>
     </div>
-    <div class="footer-bottom">
-      <p class="footer-disclaimer">ASRX.health is a healthcare access platform. Clinical services are provided by independently licensed healthcare providers. ASRX does not diagnose, treat, or prescribe. If you are experiencing a medical emergency, call 911. Individual results vary.</p>
-      <p>© 2026 ASRX. All rights reserved.</p>
-    </div>
-  </div>
-</footer>
+  </footer>
 
-<script>
-// Mobile nav
-document.getElementById('navToggle').addEventListener('click', () => {
-  document.getElementById('navLinks').classList.toggle('open');
-});
-
-// FAQ accordion
-document.querySelectorAll('.faq-q').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const item = btn.parentElement;
-    const isOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item').forEach(i => {
-      i.classList.remove('open');
-      i.querySelector('.faq-a').style.maxHeight = null;
-    });
-    if (!isOpen) {
-      item.classList.add('open');
-      item.querySelector('.faq-a').style.maxHeight = item.querySelector('.faq-a').scrollHeight + 'px';
-    }
-  });
-});
-
-// Fade-up on scroll
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
-}, { threshold: 0.15 });
-document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-</script>
 </body>
 </html>
