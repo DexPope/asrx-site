@@ -1,1359 +1,562 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AccessRx — Healthcare Access. Simplified.</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
-  <style>
-    /* ===================== RESET & BASE ===================== */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --teal:       #00b89c;
-      --teal-dark:  #009880;
-      --teal-light: #e6f9f6;
-      --navy:       #0a1628;
-      --navy-mid:   #1a2e4a;
-      --gray-dark:  #4a5568;
-      --gray-mid:   #718096;
-      --gray-light: #e2e8f0;
-      --bg:         #ffffff;
-      --bg-soft:    #f8f9fa;
-      --shadow-sm:  0 2px 8px rgba(0,0,0,0.06);
-      --shadow-md:  0 4px 20px rgba(0,0,0,0.10);
-      --shadow-lg:  0 8px 40px rgba(0,0,0,0.14);
-      --radius:     12px;
-      --radius-lg:  20px;
-    }
-
-    html { scroll-behavior: smooth; font-size: 16px; }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      color: var(--navy);
-      background: var(--bg);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    a { text-decoration: none; color: inherit; }
-
-    img { max-width: 100%; display: block; }
-
-    .container {
-      max-width: 1160px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    /* ===================== BUTTONS ===================== */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      padding: 13px 28px;
-      border-radius: 8px;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.95rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      border: none;
-      white-space: nowrap;
-    }
-
-    .btn-primary {
-      background: var(--teal);
-      color: #fff;
-      box-shadow: 0 4px 14px rgba(0,184,156,0.3);
-    }
-    .btn-primary:hover {
-      background: var(--teal-dark);
-      box-shadow: 0 6px 20px rgba(0,184,156,0.4);
-      transform: translateY(-1px);
-    }
-
-    .btn-outline {
-      background: transparent;
-      color: var(--teal);
-      border: 2px solid var(--teal);
-    }
-    .btn-outline:hover {
-      background: var(--teal-light);
-      transform: translateY(-1px);
-    }
-
-    .btn-sm {
-      padding: 9px 20px;
-      font-size: 0.875rem;
-    }
-
-    /* ===================== NAV ===================== */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background: rgba(255,255,255,0.97);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--gray-light);
-      box-shadow: var(--shadow-sm);
-    }
-
-    .nav-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 68px;
-    }
-
-    .nav-logo {
-      font-size: 1.5rem;
-      font-weight: 800;
-      color: var(--navy);
-      letter-spacing: -0.5px;
-    }
-    .nav-logo span {
-      color: var(--teal);
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      list-style: none;
-    }
-    .nav-links a {
-      font-size: 0.9rem;
-      font-weight: 500;
-      color: var(--gray-dark);
-      padding: 6px 12px;
-      border-radius: 6px;
-      transition: color 0.2s, background 0.2s;
-    }
-    .nav-links a:hover {
-      color: var(--teal);
-      background: var(--teal-light);
-    }
-
-    .nav-cta {
-      margin-left: 8px;
-    }
-
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      padding: 4px;
-    }
-    .hamburger span {
-      display: block;
-      width: 24px;
-      height: 2px;
-      background: var(--navy);
-      border-radius: 2px;
-      transition: all 0.3s;
-    }
-
-    .mobile-menu {
-      display: none;
-      flex-direction: column;
-      padding: 16px 24px 20px;
-      background: #fff;
-      border-top: 1px solid var(--gray-light);
-      gap: 4px;
-    }
-    .mobile-menu.open { display: flex; }
-    .mobile-menu a {
-      font-size: 0.95rem;
-      font-weight: 500;
-      color: var(--gray-dark);
-      padding: 10px 12px;
-      border-radius: 8px;
-      transition: background 0.2s, color 0.2s;
-    }
-    .mobile-menu a:hover { background: var(--teal-light); color: var(--teal); }
-    .mobile-menu .btn { width: 100%; margin-top: 8px; }
-
-    /* ===================== HERO ===================== */
-    #hero {
-      position: relative;
-      overflow: hidden;
-      background: #ffffff;
-      padding: 100px 0 80px;
-    }
-
-    /* CSS-only abstract health blob */
-    #hero::before {
-      content: '';
-      position: absolute;
-      top: -120px;
-      right: -100px;
-      width: 700px;
-      height: 700px;
-      background: radial-gradient(ellipse at center, rgba(0,184,156,0.10) 0%, rgba(0,184,156,0.04) 50%, transparent 70%);
-      border-radius: 50%;
-      pointer-events: none;
-    }
-    #hero::after {
-      content: '';
-      position: absolute;
-      bottom: -80px;
-      left: -80px;
-      width: 500px;
-      height: 500px;
-      background: radial-gradient(ellipse at center, rgba(0,184,156,0.07) 0%, transparent 65%);
-      border-radius: 50%;
-      pointer-events: none;
-    }
-
-    .hero-inner {
-      position: relative;
-      z-index: 1;
-      max-width: 720px;
-    }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--teal-light);
-      color: var(--teal-dark);
-      font-size: 0.8rem;
-      font-weight: 600;
-      padding: 6px 14px;
-      border-radius: 100px;
-      margin-bottom: 28px;
-      letter-spacing: 0.3px;
-    }
-    .hero-badge::before {
-      content: '✦';
-      font-size: 0.65rem;
-    }
-
-    h1 {
-      font-size: clamp(2.6rem, 5.5vw, 4rem);
-      font-weight: 900;
-      line-height: 1.1;
-      letter-spacing: -1.5px;
-      color: var(--navy);
-      margin-bottom: 24px;
-    }
-    h1 span { color: var(--teal); }
-
-    .hero-sub {
-      font-size: 1.15rem;
-      color: var(--gray-dark);
-      line-height: 1.75;
-      max-width: 580px;
-      margin-bottom: 40px;
-    }
-
-    .hero-actions {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    .hero-link {
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: var(--teal-dark);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      transition: gap 0.2s;
-    }
-    .hero-link:hover { gap: 10px; }
-
-    .hero-stats {
-      display: flex;
-      gap: 40px;
-      margin-top: 60px;
-      flex-wrap: wrap;
-    }
-    .stat-item { }
-    .stat-num {
-      font-size: 1.8rem;
-      font-weight: 800;
-      color: var(--teal);
-      letter-spacing: -1px;
-    }
-    .stat-label {
-      font-size: 0.8rem;
-      color: var(--gray-mid);
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    /* ===================== TRUST BAR ===================== */
-    #trust {
-      background: var(--navy);
-      padding: 18px 0;
-    }
-
-    .trust-inner {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0;
-      flex-wrap: wrap;
-    }
-
-    .trust-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      color: rgba(255,255,255,0.9);
-      font-size: 0.82rem;
-      font-weight: 600;
-      padding: 6px 20px;
-      white-space: nowrap;
-      letter-spacing: 0.2px;
-    }
-    .trust-item + .trust-item {
-      border-left: 1px solid rgba(255,255,255,0.15);
-    }
-    .trust-item::before {
-      content: '✓';
-      color: var(--teal);
-      font-weight: 700;
-      font-size: 0.9rem;
-    }
-
-    /* ===================== SECTIONS SHARED ===================== */
-    section { padding: 88px 0; }
-
-    .section-label {
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--teal);
-      margin-bottom: 12px;
-    }
-
-    .section-title {
-      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
-      font-weight: 800;
-      letter-spacing: -0.8px;
-      color: var(--navy);
-      margin-bottom: 16px;
-      line-height: 1.2;
-    }
-
-    .section-sub {
-      font-size: 1rem;
-      color: var(--gray-dark);
-      line-height: 1.7;
-      max-width: 560px;
-    }
-
-    .section-header {
-      margin-bottom: 56px;
-    }
-    .section-header.center {
-      text-align: center;
-    }
-    .section-header.center .section-sub {
-      margin: 0 auto;
-    }
-
-    /* ===================== HOW IT WORKS ===================== */
-    #how {
-      background: var(--bg-soft);
-    }
-
-    .steps-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 32px;
-    }
-
-    .step-card {
-      background: #fff;
-      border-radius: var(--radius-lg);
-      padding: 40px 32px;
-      box-shadow: var(--shadow-sm);
-      position: relative;
-      overflow: hidden;
-      transition: box-shadow 0.2s, transform 0.2s;
-    }
-    .step-card:hover {
-      box-shadow: var(--shadow-md);
-      transform: translateY(-3px);
-    }
-    .step-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: var(--teal);
-    }
-
-    .step-num {
-      font-size: 3rem;
-      font-weight: 900;
-      color: var(--teal-light);
-      line-height: 1;
-      margin-bottom: 16px;
-    }
-
-    .step-icon {
-      width: 52px;
-      height: 52px;
-      background: var(--teal-light);
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.4rem;
-      margin-bottom: 20px;
-    }
-
-    .step-title {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--navy);
-      margin-bottom: 10px;
-    }
-
-    .step-desc {
-      font-size: 0.9rem;
-      color: var(--gray-dark);
-      line-height: 1.7;
-    }
-
-    /* ===================== SHOP / TREATMENTS ===================== */
-    #treatments {
-      background: #fff;
-    }
-
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-
-    .product-card {
-      background: #fff;
-      border: 1.5px solid var(--gray-light);
-      border-radius: var(--radius-lg);
-      padding: 28px 24px 24px;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      transition: box-shadow 0.25s, border-color 0.25s, transform 0.25s;
-      box-shadow: var(--shadow-sm);
-    }
-    .product-card:hover {
-      border-color: var(--teal);
-      box-shadow: 0 8px 32px rgba(0,184,156,0.15);
-      transform: translateY(-4px);
-    }
-
-    .rx-badge {
-      position: absolute;
-      top: 16px;
-      right: 16px;
-      background: #fff3cd;
-      color: #856404;
-      font-size: 0.68rem;
-      font-weight: 700;
-      padding: 3px 9px;
-      border-radius: 100px;
-      letter-spacing: 0.3px;
-      border: 1px solid #ffc107;
-    }
-
-    .product-icon {
-      width: 44px;
-      height: 44px;
-      background: var(--teal-light);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-      margin-bottom: 16px;
-    }
-
-    .product-name {
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--navy);
-      margin-bottom: 6px;
-    }
-
-    .product-tagline {
-      font-size: 0.85rem;
-      color: var(--gray-mid);
-      line-height: 1.5;
-      margin-bottom: 16px;
-      flex: 1;
-    }
-
-    .product-price {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: var(--teal-light);
-      color: var(--teal-dark);
-      font-size: 0.85rem;
-      font-weight: 700;
-      padding: 5px 12px;
-      border-radius: 100px;
-      margin-bottom: 18px;
-    }
-
-    .product-card .btn {
-      width: 100%;
-      font-size: 0.875rem;
-      padding: 11px 20px;
-    }
-
-    .products-note {
-      text-align: center;
-      margin-top: 32px;
-      font-size: 0.85rem;
-      color: var(--gray-mid);
-      line-height: 1.6;
-    }
-    .products-note a { color: var(--teal); font-weight: 600; }
-
-    /* ===================== LAB TESTING ===================== */
-    #labs {
-      background: var(--bg-soft);
-    }
-
-    .labs-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-
-    .lab-card {
-      background: #fff;
-      border: 1.5px solid var(--gray-light);
-      border-radius: var(--radius-lg);
-      padding: 32px 26px 26px;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      transition: box-shadow 0.25s, border-color 0.25s, transform 0.25s;
-      box-shadow: var(--shadow-sm);
-    }
-    .lab-card:hover {
-      border-color: var(--teal);
-      box-shadow: 0 8px 32px rgba(0,184,156,0.15);
-      transform: translateY(-4px);
-    }
-
-    .lab-card.featured {
-      border-color: var(--teal);
-      box-shadow: 0 4px 24px rgba(0,184,156,0.12);
-    }
-    .lab-card.featured::before {
-      content: 'Most Popular';
-      position: absolute;
-      top: -12px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--teal);
-      color: #fff;
-      font-size: 0.7rem;
-      font-weight: 700;
-      padding: 4px 14px;
-      border-radius: 100px;
-      white-space: nowrap;
-      letter-spacing: 0.3px;
-    }
-
-    .lab-icon {
-      width: 48px;
-      height: 48px;
-      background: var(--teal-light);
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.3rem;
-      margin-bottom: 18px;
-    }
-
-    .lab-name {
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--navy);
-      margin-bottom: 10px;
-    }
-
-    .lab-includes {
-      list-style: none;
-      margin-bottom: 20px;
-      flex: 1;
-    }
-    .lab-includes li {
-      font-size: 0.85rem;
-      color: var(--gray-dark);
-      padding: 4px 0;
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-    }
-    .lab-includes li::before {
-      content: '✓';
-      color: var(--teal);
-      font-weight: 700;
-      font-size: 0.85rem;
-      flex-shrink: 0;
-      margin-top: 1px;
-    }
-
-    .lab-price {
-      font-size: 1.6rem;
-      font-weight: 800;
-      color: var(--navy);
-      letter-spacing: -0.5px;
-      margin-bottom: 18px;
-    }
-    .lab-price span {
-      font-size: 0.85rem;
-      font-weight: 400;
-      color: var(--gray-mid);
-      letter-spacing: 0;
-    }
-
-    .lab-card .btn {
-      width: 100%;
-      font-size: 0.875rem;
-      padding: 11px 20px;
-    }
-
-    .labs-turnaround {
-      text-align: center;
-      margin-top: 36px;
-      display: flex;
-      justify-content: center;
-      gap: 32px;
-      flex-wrap: wrap;
-    }
-    .turnaround-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.85rem;
-      color: var(--gray-dark);
-      font-weight: 500;
-    }
-    .turnaround-item .icon {
-      width: 32px;
-      height: 32px;
-      background: var(--teal-light);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.9rem;
-    }
-
-    /* ===================== WHY ACCESSRX ===================== */
-    #why {
-      background: #fff;
-    }
-
-    .why-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
-    }
-
-    .why-card {
-      background: var(--bg-soft);
-      border-radius: var(--radius);
-      padding: 32px 24px;
-      text-align: center;
-      transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
-    }
-    .why-card:hover {
-      background: var(--teal-light);
-      box-shadow: var(--shadow-md);
-      transform: translateY(-3px);
-    }
-
-    .why-icon {
-      width: 60px;
-      height: 60px;
-      background: #fff;
-      border-radius: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.6rem;
-      margin: 0 auto 18px;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .why-title {
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: var(--navy);
-      margin-bottom: 8px;
-    }
-
-    .why-desc {
-      font-size: 0.83rem;
-      color: var(--gray-dark);
-      line-height: 1.65;
-    }
-
-    /* ===================== CTA SECTION ===================== */
-    #cta {
-      background: var(--navy);
-      padding: 96px 0;
-      position: relative;
-      overflow: hidden;
-    }
-    #cta::before {
-      content: '';
-      position: absolute;
-      top: -150px;
-      right: -150px;
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(ellipse, rgba(0,184,156,0.15) 0%, transparent 65%);
-      pointer-events: none;
-    }
-    #cta::after {
-      content: '';
-      position: absolute;
-      bottom: -100px;
-      left: -100px;
-      width: 400px;
-      height: 400px;
-      background: radial-gradient(ellipse, rgba(0,184,156,0.10) 0%, transparent 65%);
-      pointer-events: none;
-    }
-
-    .cta-inner {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-      max-width: 620px;
-      margin: 0 auto;
-    }
-
-    .cta-inner .section-title {
-      color: #fff;
-    }
-
-    .cta-inner .section-sub {
-      color: rgba(255,255,255,0.7);
-      margin: 0 auto 40px;
-    }
-
-    /* ===================== FOOTER ===================== */
-    footer {
-      background: #0a1628;
-      color: rgba(255,255,255,0.6);
-      padding: 48px 0 32px;
-    }
-
-    .footer-inner {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 40px;
-      flex-wrap: wrap;
-      margin-bottom: 36px;
-    }
-
-    .footer-brand .nav-logo {
-      color: #fff;
-      margin-bottom: 10px;
-    }
-
-    .footer-tagline {
-      font-size: 0.82rem;
-      color: rgba(255,255,255,0.4);
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 24px;
-      flex-wrap: wrap;
-    }
-    .footer-links a {
-      font-size: 0.85rem;
-      color: rgba(255,255,255,0.55);
-      transition: color 0.2s;
-    }
-    .footer-links a:hover { color: var(--teal); }
-
-    .footer-divider {
-      border: none;
-      border-top: 1px solid rgba(255,255,255,0.08);
-      margin-bottom: 24px;
-    }
-
-    .footer-disclaimer {
-      font-size: 0.75rem;
-      color: rgba(255,255,255,0.3);
-      line-height: 1.7;
-      max-width: 700px;
-      margin-bottom: 16px;
-    }
-
-    .footer-copy {
-      font-size: 0.8rem;
-      color: rgba(255,255,255,0.35);
-    }
-
-    /* ===================== INTAKE SECTION ===================== */
-    #intake {
-      background: var(--bg-soft);
-      padding: 80px 0;
-    }
-    .intake-box {
-      background: #fff;
-      border-radius: var(--radius-lg);
-      padding: 48px 40px;
-      max-width: 560px;
-      margin: 0 auto;
-      box-shadow: var(--shadow-md);
-      border: 1.5px solid var(--gray-light);
-      text-align: center;
-    }
-    .intake-box .section-title { margin-bottom: 12px; }
-    .intake-box p {
-      font-size: 0.95rem;
-      color: var(--gray-dark);
-      margin-bottom: 32px;
-      line-height: 1.7;
-    }
-    .intake-form {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      text-align: left;
-    }
-    .intake-form input,
-    .intake-form select {
-      width: 100%;
-      padding: 13px 16px;
-      border: 1.5px solid var(--gray-light);
-      border-radius: 8px;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.9rem;
-      color: var(--navy);
-      background: #fff;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-    .intake-form input:focus,
-    .intake-form select:focus {
-      border-color: var(--teal);
-      box-shadow: 0 0 0 3px rgba(0,184,156,0.1);
-    }
-    .intake-form .btn { width: 100%; margin-top: 4px; }
-    .intake-form .form-note {
-      font-size: 0.75rem;
-      color: var(--gray-mid);
-      text-align: center;
-      line-height: 1.6;
-    }
-
-    /* ===================== RESPONSIVE ===================== */
-    @media (max-width: 1024px) {
-      .why-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 900px) {
-      .steps-grid,
-      .products-grid,
-      .labs-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 768px) {
-      .nav-links, .nav-cta {
-        display: none;
-      }
-      .hamburger {
-        display: flex;
-      }
-
-      #hero {
-        padding: 72px 0 60px;
-      }
-
-      .hero-stats {
-        gap: 24px;
-      }
-
-      section { padding: 64px 0; }
-    }
-
-    @media (max-width: 600px) {
-      .steps-grid,
-      .products-grid,
-      .labs-grid,
-      .why-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .trust-inner {
-        gap: 4px;
-      }
-      .trust-item {
-        padding: 6px 12px;
-        font-size: 0.78rem;
-      }
-      .trust-item + .trust-item {
-        border-left: none;
-        border-top: 1px solid rgba(255,255,255,0.1);
-      }
-
-      .footer-inner {
-        flex-direction: column;
-        gap: 24px;
-      }
-      .footer-links {
-        gap: 16px;
-      }
-
-      .intake-box {
-        padding: 32px 24px;
-      }
-    }
-
-    /* ===================== SCROLL ANIMATIONS ===================== */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    .fade-up {
-      animation: fadeUp 0.6s ease both;
-    }
-
-    .fade-up-1 { animation-delay: 0.1s; }
-    .fade-up-2 { animation-delay: 0.2s; }
-    .fade-up-3 { animation-delay: 0.3s; }
-  </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>ASRX — Healthcare Access. Simplified.</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#fafaf8;--surface:#fff;--alt:#f4f6f2;--teal:#0d9488;--teal-light:#e6f4f3;--sand:#e8e0d0;
+  --text:#1a1a2e;--slate:#64748b;--border:#e2e8f0;--shadow:0 4px 24px rgba(0,0,0,0.08);
+  --radius:16px;--pill:50px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+.container{max-width:1160px;margin:0 auto;padding:0 24px}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid var(--border)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0;gap:20px}
+.logo{display:flex;flex-direction:column;line-height:1.1}
+.logo-main{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--text);letter-spacing:1px}
+.logo-main span{color:var(--teal)}
+.logo-sub{font-size:10px;color:var(--slate);letter-spacing:0.3px;margin-top:2px}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{font-size:14px;font-weight:500;color:var(--slate);transition:color .2s}
+.nav-links a:hover{color:var(--teal)}
+.nav-cta{background:var(--teal);color:#fff;padding:10px 22px;border-radius:var(--pill);font-size:14px;font-weight:600;transition:opacity .2s;white-space:nowrap}
+.nav-cta:hover{opacity:.9}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.hamburger span{width:22px;height:2px;background:var(--text);border-radius:2px;transition:.3s}
+.mobile-menu{display:none;flex-direction:column;gap:0;background:#fff;border-top:1px solid var(--border);padding:12px 0}
+.mobile-menu a{padding:12px 24px;font-size:15px;font-weight:500;color:var(--slate);border-bottom:1px solid var(--border)}
+.mobile-menu a:last-child{border:none}
+.mobile-menu .nav-cta{margin:12px 24px;text-align:center;border-radius:var(--pill)}
+.mobile-menu.open{display:flex}
+
+/* HERO */
+.hero{padding:80px 0 60px;overflow:hidden}
+.hero-inner{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--teal-light);color:var(--teal);font-size:13px;font-weight:600;padding:6px 14px;border-radius:var(--pill);margin-bottom:20px}
+.hero h1{font-family:'Playfair Display',serif;font-size:52px;line-height:1.15;font-weight:700;margin-bottom:20px;color:var(--text)}
+.hero p{font-size:17px;color:var(--slate);line-height:1.7;margin-bottom:32px;max-width:480px}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:36px}
+.btn-primary{background:var(--teal);color:#fff;padding:14px 28px;border-radius:var(--pill);font-weight:600;font-size:15px;transition:opacity .2s}
+.btn-primary:hover{opacity:.9}
+.btn-secondary{color:var(--teal);font-weight:600;font-size:15px;display:flex;align-items:center;gap:6px;padding:14px 0}
+.btn-secondary:hover{opacity:.7}
+.hero-stats{display:flex;gap:32px;flex-wrap:wrap}
+.hero-stat strong{font-size:22px;font-weight:700;color:var(--text);display:block}
+.hero-stat span{font-size:12px;color:var(--slate);text-transform:uppercase;letter-spacing:.5px}
+
+/* Hero visual */
+.hero-visual{display:flex;align-items:center;justify-content:center;position:relative;height:400px}
+.hero-rings{position:relative;width:320px;height:320px}
+.ring{position:absolute;inset:0;border-radius:50%;border:1.5px solid rgba(13,148,136,.15);animation:pulse-ring 4s ease-in-out infinite}
+.ring:nth-child(1){transform:scale(.3);animation-delay:0s}
+.ring:nth-child(2){transform:scale(.5);animation-delay:.4s}
+.ring:nth-child(3){transform:scale(.7);animation-delay:.8s}
+.ring:nth-child(4){transform:scale(.9);animation-delay:1.2s}
+.ring:nth-child(5){border:none;background:radial-gradient(circle,rgba(13,148,136,.18) 0%,transparent 70%)}
+.ring-core{position:absolute;inset:35%;border-radius:50%;background:var(--teal);opacity:.15}
+@keyframes pulse-ring{0%,100%{opacity:.3}50%{opacity:.8}}
+
+/* TRUST BAR */
+.trust-bar{background:var(--text);padding:16px 0}
+.trust-inner{display:flex;justify-content:center;gap:40px;flex-wrap:wrap}
+.trust-item{color:#fff;font-size:13px;font-weight:500;display:flex;align-items:center;gap:8px}
+.trust-item::before{content:'✓';color:var(--teal);font-weight:700}
+
+/* HOW IT WORKS */
+.how{padding:80px 0;background:var(--alt)}
+.section-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--teal);margin-bottom:12px}
+.section-title{font-family:'Playfair Display',serif;font-size:38px;font-weight:700;margin-bottom:16px;color:var(--text)}
+.section-sub{font-size:16px;color:var(--slate);max-width:520px;margin:0 auto 48px}
+.text-center{text-align:center}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative}
+.steps::before{content:'';position:absolute;top:32px;left:12.5%;right:12.5%;height:2px;background:linear-gradient(90deg,var(--teal),rgba(13,148,136,.3));z-index:0}
+.step{text-align:center;padding:0 16px;position:relative;z-index:1}
+.step-num{width:64px;height:64px;border-radius:50%;background:var(--teal);color:#fff;font-size:22px;font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-family:'Playfair Display',serif}
+.step h3{font-size:16px;font-weight:600;margin-bottom:8px;color:var(--text)}
+.step p{font-size:14px;color:var(--slate)}
+
+/* TREATMENTS */
+.treatments{padding:80px 0}
+.product-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:24px}
+.product-card{background:#fff;border-radius:var(--radius);padding:28px;box-shadow:var(--shadow);border:1.5px solid transparent;transition:all .25s;display:flex;flex-direction:column}
+.product-card:hover{transform:translateY(-4px);border-color:var(--teal);box-shadow:0 12px 40px rgba(13,148,136,.15)}
+.category-badge{display:inline-block;padding:4px 12px;border-radius:var(--pill);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:16px}
+.badge-teal{background:#e6f4f3;color:var(--teal)}
+.badge-green{background:#f0fdf4;color:#16a34a}
+.badge-amber{background:#fffbeb;color:#d97706}
+.badge-rose{background:#fff1f2;color:#e11d48}
+.product-card h3{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;margin-bottom:6px;color:var(--text)}
+.product-card .tagline{font-size:14px;color:var(--slate);margin-bottom:16px;flex-grow:1}
+.product-divider{height:1px;background:var(--border);margin-bottom:16px}
+.product-price{font-size:18px;font-weight:700;color:var(--teal);margin-bottom:8px}
+.rx-badge{font-size:11px;color:var(--slate);margin-bottom:16px;display:flex;align-items:center;gap:4px}
+.rx-badge::before{content:'℞';font-weight:700;color:var(--slate)}
+.btn-outline{display:block;text-align:center;border:1.5px solid var(--teal);color:var(--teal);padding:11px;border-radius:var(--pill);font-size:14px;font-weight:600;transition:all .2s;margin-top:auto}
+.btn-outline:hover{background:var(--teal);color:#fff}
+.grid-note{text-align:center;font-size:13px;color:var(--slate)}
+
+/* LAB TESTING */
+.labs{padding:80px 0;background:var(--alt)}
+.lab-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.lab-card{background:#fff;border-radius:var(--radius);padding:32px;box-shadow:var(--shadow);border:1.5px solid transparent;transition:all .25s;position:relative}
+.lab-card:hover{transform:translateY(-4px);border-color:var(--teal)}
+.popular-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--teal);color:#fff;font-size:11px;font-weight:700;padding:4px 16px;border-radius:var(--pill);white-space:nowrap}
+.lab-card h3{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;margin-bottom:8px;color:var(--text)}
+.lab-card p{font-size:14px;color:var(--slate);margin-bottom:20px}
+.lab-price{font-size:28px;font-weight:700;color:var(--teal);margin-bottom:20px}
+.btn-teal{display:block;text-align:center;background:var(--teal);color:#fff;padding:12px;border-radius:var(--pill);font-size:14px;font-weight:600;transition:opacity .2s}
+.btn-teal:hover{opacity:.9}
+
+/* WHY */
+.why{padding:80px 0}
+.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.feature-card{background:#fff;border-radius:var(--radius);padding:28px;box-shadow:var(--shadow)}
+.feature-icon{font-size:32px;margin-bottom:14px}
+.feature-card h3{font-size:16px;font-weight:700;margin-bottom:8px;color:var(--text)}
+.feature-card p{font-size:14px;color:var(--slate)}
+
+/* TESTIMONIALS */
+.testimonials{padding:80px 0;background:var(--alt)}
+.testimonial-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.testimonial-card{background:#fff;border-radius:var(--radius);padding:28px;box-shadow:var(--shadow)}
+.testimonial-card blockquote{font-size:15px;color:var(--text);line-height:1.7;margin-bottom:16px;font-style:italic}
+.testimonial-card cite{font-size:13px;color:var(--slate);font-weight:600;font-style:normal}
+.stars{color:#f59e0b;font-size:14px;margin-bottom:12px}
+
+/* INTAKE */
+.intake{padding:80px 0}
+.intake-card{background:#fff;max-width:580px;margin:0 auto;border-radius:var(--radius);padding:48px;box-shadow:0 8px 48px rgba(0,0,0,.1)}
+.intake-card h2{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;margin-bottom:10px;color:var(--text)}
+.intake-card .sub{font-size:15px;color:var(--slate);margin-bottom:28px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.form-group{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
+.form-group label{font-size:13px;font-weight:600;color:var(--text)}
+.form-group input,.form-group select{padding:12px 16px;border:1.5px solid var(--border);border-radius:12px;font-size:15px;font-family:'Inter',sans-serif;color:var(--text);background:#fff;transition:border-color .2s;appearance:none;-webkit-appearance:none}
+.form-group input:focus,.form-group select:focus{outline:none;border-color:var(--teal)}
+.btn-submit{width:100%;background:var(--teal);color:#fff;border:none;padding:16px;border-radius:var(--pill);font-size:16px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:opacity .2s;margin-top:8px}
+.btn-submit:hover{opacity:.9}
+.hipaa-note{text-align:center;font-size:12px;color:var(--slate);margin-top:12px}
+.success-msg{display:none;text-align:center;padding:32px}
+.success-msg .check{font-size:48px;margin-bottom:16px}
+.success-msg h3{font-family:'Playfair Display',serif;font-size:24px;color:var(--teal);margin-bottom:10px}
+.success-msg p{color:var(--slate)}
+
+/* FOOTER */
+footer{background:var(--text);color:#fff;padding:60px 0 32px}
+.footer-top{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
+.footer-logo-main{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:#fff;letter-spacing:1px}
+.footer-logo-sub{font-size:10px;color:rgba(255,255,255,.5);margin-top:4px}
+.footer-tagline{font-size:14px;color:rgba(255,255,255,.6);margin-top:12px;line-height:1.6}
+.footer-col h4{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.5);margin-bottom:16px}
+.footer-col a{display:block;font-size:14px;color:rgba(255,255,255,.7);margin-bottom:10px;transition:color .2s}
+.footer-col a:hover{color:#fff}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:24px}
+.footer-legal{font-size:12px;color:rgba(255,255,255,.4);line-height:1.7;margin-bottom:12px}
+.footer-copy{font-size:12px;color:rgba(255,255,255,.4)}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .hero-inner{grid-template-columns:1fr;text-align:center}
+  .hero-visual{display:none}
+  .hero p,.hero-btns{margin-left:auto;margin-right:auto}
+  .hero-btns{justify-content:center}
+  .hero-stats{justify-content:center}
+  .steps{grid-template-columns:1fr 1fr;gap:32px}
+  .steps::before{display:none}
+  .product-grid,.lab-grid,.feature-grid,.testimonial-grid{grid-template-columns:1fr 1fr}
+  .footer-top{grid-template-columns:1fr 1fr}
+}
+@media(max-width:600px){
+  .nav-links,.nav-cta{display:none}
+  .hamburger{display:flex}
+  .hero h1{font-size:36px}
+  .section-title{font-size:28px}
+  .steps,.product-grid,.lab-grid,.feature-grid,.testimonial-grid{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr}
+  .intake-card{padding:28px 20px}
+  .trust-inner{gap:16px}
+}
+</style>
 </head>
 <body>
 
-<!-- ==================== NAV ==================== -->
+<!-- NAV -->
 <nav>
-  <div class="container">
-    <div class="nav-inner">
-      <a href="#" class="nav-logo">Access<span>Rx</span></a>
-      <ul class="nav-links">
-        <li><a href="#how">How It Works</a></li>
-        <li><a href="#treatments">Treatments</a></li>
-        <li><a href="#labs">Lab Testing</a></li>
-        <li><a href="#why">About</a></li>
-        <li class="nav-cta"><a href="#intake" class="btn btn-primary btn-sm">Get Started</a></li>
-      </ul>
-      <div class="hamburger" onclick="toggleMenu()" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </div>
-    </div>
+<div class="container">
+<div class="nav-inner">
+  <a href="/" class="logo">
+    <span class="logo-main">AS<span>RX</span></span>
+    <span class="logo-sub">AccessRx | A subsidiary of August Aisles LLC</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#treatments">Treatments</a></li>
+    <li><a href="#lab-testing">Lab Testing</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#why">About</a></li>
+  </ul>
+  <a href="#intake" class="nav-cta">Get Started</a>
+  <div class="hamburger" onclick="document.querySelector('.mobile-menu').classList.toggle('open')">
+    <span></span><span></span><span></span>
   </div>
-  <div class="mobile-menu" id="mobileMenu">
-    <a href="#how" onclick="toggleMenu()">How It Works</a>
-    <a href="#treatments" onclick="toggleMenu()">Treatments</a>
-    <a href="#labs" onclick="toggleMenu()">Lab Testing</a>
-    <a href="#why" onclick="toggleMenu()">About</a>
-    <a href="#intake" class="btn btn-primary" onclick="toggleMenu()">Get Started</a>
-  </div>
+</div>
+</div>
+<div class="mobile-menu">
+  <a href="#treatments">Treatments</a>
+  <a href="#lab-testing">Lab Testing</a>
+  <a href="#how">How It Works</a>
+  <a href="#why">About</a>
+  <a href="#intake" class="nav-cta">Get Started</a>
+</div>
 </nav>
 
-<!-- ==================== HERO ==================== -->
-<section id="hero">
-  <div class="container">
-    <div class="hero-inner">
-      <div class="hero-badge fade-up">Direct-to-Patient Healthcare Platform</div>
-      <h1 class="fade-up fade-up-1">Your Health.<br><span>Your Terms.</span></h1>
-      <p class="hero-sub fade-up fade-up-2">
-        AccessRx connects you with licensed providers and pharmaceutical-grade treatments —
-        no insurance, no waiting rooms, no hassle.
-      </p>
-      <div class="hero-actions fade-up fade-up-3">
-        <a href="#intake" class="btn btn-primary">Start Free Assessment</a>
-        <a href="#how" class="hero-link">Learn how it works ↓</a>
-      </div>
-      <div class="hero-stats fade-up fade-up-3">
-        <div class="stat-item">
-          <div class="stat-num">50+</div>
-          <div class="stat-label">States Covered</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num">48h</div>
-          <div class="stat-label">Avg. Provider Match</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num">100%</div>
-          <div class="stat-label">HIPAA Compliant</div>
-        </div>
-      </div>
+<!-- HERO -->
+<section class="hero">
+<div class="container">
+<div class="hero-inner">
+  <div>
+    <div class="hero-badge">✦ Trusted Telehealth Platform</div>
+    <h1>Healthcare the Way<br><em>It Should Be</em></h1>
+    <p>ASRX connects you with board-certified providers and pharmaceutical-grade treatments — no insurance, no waiting rooms, no hassle. From the comfort of your home.</p>
+    <div class="hero-btns">
+      <a href="#intake" class="btn-primary">Start Free Assessment</a>
+      <a href="#treatments" class="btn-secondary">Explore Treatments →</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><strong>50+</strong><span>States Covered</span></div>
+      <div class="hero-stat"><strong>48hr</strong><span>Avg. Provider Match</span></div>
+      <div class="hero-stat"><strong>100%</strong><span>HIPAA Certified</span></div>
     </div>
   </div>
-</section>
-
-<!-- ==================== TRUST BAR ==================== -->
-<div id="trust">
-  <div class="container">
-    <div class="trust-inner">
-      <div class="trust-item">Licensed Providers</div>
-      <div class="trust-item">Domestic Sourcing</div>
-      <div class="trust-item">HIPAA Compliant</div>
-      <div class="trust-item">No Insurance Required</div>
-      <div class="trust-item">Discreet Shipping</div>
+  <div class="hero-visual">
+    <div class="hero-rings">
+      <div class="ring"></div>
+      <div class="ring"></div>
+      <div class="ring"></div>
+      <div class="ring"></div>
+      <div class="ring"></div>
+      <div class="ring-core"></div>
     </div>
   </div>
 </div>
-
-<!-- ==================== HOW IT WORKS ==================== -->
-<section id="how">
-  <div class="container">
-    <div class="section-header center">
-      <div class="section-label">The Process</div>
-      <h2 class="section-title">Three steps to better health</h2>
-      <p class="section-sub">From assessment to treatment, we've made access to quality healthcare simple and transparent.</p>
-    </div>
-    <div class="steps-grid">
-      <div class="step-card">
-        <div class="step-num">01</div>
-        <div class="step-icon">📋</div>
-        <div class="step-title">Complete Your Health Intake</div>
-        <p class="step-desc">A quick 2-minute intake form covers your health history, goals, and what you're looking to address. No appointment needed.</p>
-      </div>
-      <div class="step-card">
-        <div class="step-num">02</div>
-        <div class="step-icon">🩺</div>
-        <div class="step-title">Get Matched With a Licensed Provider</div>
-        <p class="step-desc">We match you with a licensed, board-certified provider in your state who reviews your intake and creates your care plan.</p>
-      </div>
-      <div class="step-card">
-        <div class="step-num">03</div>
-        <div class="step-icon">📦</div>
-        <div class="step-title">Receive Your Personalized Treatment Plan</div>
-        <p class="step-desc">If approved, your treatment ships directly to your door from a licensed US compounding pharmacy — discreetly packaged.</p>
-      </div>
-    </div>
-  </div>
+</div>
 </section>
 
-<!-- ==================== TREATMENTS / SHOP ==================== -->
-<section id="treatments">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-label">Treatments</div>
-      <h2 class="section-title">Pharmaceutical-grade treatments</h2>
-      <p class="section-sub">Browse our full treatment catalog. All products require provider review and a valid prescription.</p>
-    </div>
-    <div class="products-grid">
+<!-- TRUST BAR -->
+<div class="trust-bar">
+<div class="container">
+<div class="trust-inner">
+  <div class="trust-item">Licensed Providers</div>
+  <div class="trust-item">Domestic Sourcing</div>
+  <div class="trust-item">HIPAA Compliant</div>
+  <div class="trust-item">No Insurance Required</div>
+  <div class="trust-item">Discreet Shipping</div>
+</div>
+</div>
+</div>
 
-      <!-- Semaglutide -->
-      <div class="product-card">
-        <span class="rx-badge">Rx Required</span>
-        <div class="product-icon">💉</div>
-        <div class="product-name">Semaglutide (GLP-1)</div>
-        <div class="product-tagline">Clinically proven weight loss — the same active ingredient as Ozempic® and Wegovy®.</div>
-        <div class="product-price">Starting at $199/mo</div>
-        <a href="#intake" class="btn btn-primary">Sign Up to Order</a>
-      </div>
-
-      <!-- Tirzepatide -->
-      <div class="product-card">
-        <span class="rx-badge">Rx Required</span>
-        <div class="product-icon">⚗️</div>
-        <div class="product-name">Tirzepatide (GLP-1)</div>
-        <div class="product-tagline">Next-gen dual GIP/GLP-1 agonist for superior metabolic support and weight management.</div>
-        <div class="product-price">Starting at $249/mo</div>
-        <a href="#intake" class="btn btn-primary">Sign Up to Order</a>
-      </div>
-
-      <!-- BPC-157 -->
-      <div class="product-card">
-        <span class="rx-badge">Rx Required</span>
-        <div class="product-icon">🔬</div>
-        <div class="product-name">BPC-157</div>
-        <div class="product-tagline">Accelerated healing and recovery. Supports musculoskeletal repair and gut health.</div>
-        <div class="product-price">Starting at $149/mo</div>
-        <a href="#intake" class="btn btn-primary">Sign Up to Order</a>
-      </div>
-
-      <!-- TB-500 -->
-      <div class="product-card">
-        <span class="rx-badge">Rx Required</span>
-        <div class="product-icon">🧬</div>
-        <div class="product-name">TB-500</div>
-        <div class="product-tagline">Tissue repair and inflammation support. Promotes recovery from injury and chronic pain.</div>
-        <div class="product-price">Starting at $149/mo</div>
-        <a href="#intake" class="btn btn-primary">Sign Up to Order</a>
-      </div>
-
-      <!-- Sermorelin -->
-      <div class="product-card">
-        <span class="rx-badge">Rx Required</span>
-        <div class="product-icon">⚡</div>
-        <div class="product-name">Sermorelin</div>
-        <div class="product-tagline">Natural growth hormone support — improved sleep, body composition, and energy levels.</div>
-        <div class="product-price">Starting at $179/mo</div>
-        <a href="#intake" class="btn btn-primary">Sign Up to Order</a>
-      </div>
-
-      <!-- PT-141 -->
-      <div class="product-card">
-        <span class="rx-badge">Rx Required</span>
-        <div class="product-icon">❤️</div>
-        <div class="product-name">PT-141</div>
-        <div class="product-tagline">Sexual health and vitality. Clinically studied for enhanced sexual function in men and women.</div>
-        <div class="product-price">Starting at $129/mo</div>
-        <a href="#intake" class="btn btn-primary">Sign Up to Order</a>
-      </div>
-
-    </div>
-    <p class="products-note">
-      All treatments require provider review and a valid prescription.<br>
-      <a href="#intake">Complete your free assessment</a> to get started — a licensed provider in your state will review your intake and determine what's right for you.
-    </p>
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+<div class="container">
+<div class="text-center">
+  <div class="section-label">The Process</div>
+  <h2 class="section-title">Your Care, Guided Every Step</h2>
+  <p class="section-sub">From your first question to your treatment plan, we make it seamless.</p>
+</div>
+<div class="steps">
+  <div class="step">
+    <div class="step-num">1</div>
+    <h3>Complete Intake</h3>
+    <p>A quick 2-minute health questionnaire — from your phone or computer.</p>
   </div>
+  <div class="step">
+    <div class="step-num">2</div>
+    <h3>Provider Review</h3>
+    <p>A board-certified physician reviews your profile within 48 hours.</p>
+  </div>
+  <div class="step">
+    <div class="step-num">3</div>
+    <h3>Treatment Plan</h3>
+    <p>Your personalized protocol is approved and delivered to your door.</p>
+  </div>
+  <div class="step">
+    <div class="step-num">4</div>
+    <h3>Ongoing Care</h3>
+    <p>Check-ins, adjustments, and support — all through your care portal.</p>
+  </div>
+</div>
+</div>
 </section>
 
-<!-- ==================== LAB TESTING ==================== -->
-<section id="labs">
-  <div class="container">
-    <div class="section-header center">
-      <div class="section-label">Lab Testing</div>
-      <h2 class="section-title">Know Your Numbers.</h2>
-      <p class="section-sub">Order comprehensive lab panels — no doctor visit required. Results in 2–3 business days.</p>
-    </div>
-    <div class="labs-grid">
-
-      <!-- Basic Wellness -->
-      <div class="lab-card">
-        <div class="lab-icon">🧪</div>
-        <div class="lab-name">Basic Wellness Panel</div>
-        <ul class="lab-includes">
-          <li>Complete Blood Count (CBC)</li>
-          <li>Comprehensive Metabolic Panel</li>
-          <li>Lipid Panel (Cholesterol)</li>
-          <li>Thyroid (TSH)</li>
-          <li>Hemoglobin A1C</li>
-        </ul>
-        <div class="lab-price">$79 <span>one-time</span></div>
-        <a href="#intake" class="btn btn-outline">Request Labs</a>
-      </div>
-
-      <!-- Hormone & Metabolic -->
-      <div class="lab-card featured">
-        <div class="lab-icon">⚗️</div>
-        <div class="lab-name">Hormone & Metabolic Panel</div>
-        <ul class="lab-includes">
-          <li>Everything in Basic Wellness</li>
-          <li>Total &amp; Free Testosterone</li>
-          <li>Estradiol (E2)</li>
-          <li>DHEA-S &amp; Cortisol</li>
-          <li>Insulin &amp; Fasting Glucose</li>
-          <li>IGF-1 (Growth Hormone Marker)</li>
-        </ul>
-        <div class="lab-price">$149 <span>one-time</span></div>
-        <a href="#intake" class="btn btn-primary">Request Labs</a>
-      </div>
-
-      <!-- Complete Performance -->
-      <div class="lab-card">
-        <div class="lab-icon">🏆</div>
-        <div class="lab-name">Complete Performance Panel</div>
-        <ul class="lab-includes">
-          <li>Everything in Hormone Panel</li>
-          <li>LH &amp; FSH (pituitary markers)</li>
-          <li>PSA (men) / Prolactin</li>
-          <li>Vitamin D, B12 &amp; Ferritin</li>
-          <li>Inflammatory markers (CRP, homocysteine)</li>
-          <li>Full urinalysis</li>
-        </ul>
-        <div class="lab-price">$249 <span>one-time</span></div>
-        <a href="#intake" class="btn btn-outline">Request Labs</a>
-      </div>
-
-    </div>
-    <div class="labs-turnaround">
-      <div class="turnaround-item">
-        <div class="icon">🏥</div>
-        <span>1,000+ nationwide lab locations</span>
-      </div>
-      <div class="turnaround-item">
-        <div class="icon">⏱️</div>
-        <span>Results in 2–3 business days</span>
-      </div>
-      <div class="turnaround-item">
-        <div class="icon">🔒</div>
-        <span>HIPAA-secure digital results</span>
-      </div>
-      <div class="turnaround-item">
-        <div class="icon">📋</div>
-        <span>Provider review included</span>
-      </div>
-    </div>
+<!-- TREATMENTS -->
+<section class="treatments" id="treatments">
+<div class="container">
+<div class="text-center" style="margin-bottom:48px">
+  <div class="section-label">Our Treatments</div>
+  <h2 class="section-title">Pharmaceutical-Grade Protocols</h2>
+  <p class="section-sub">Browse our treatments. All orders require provider review and a valid prescription.</p>
+</div>
+<div class="product-grid">
+  <div class="product-card">
+    <span class="category-badge badge-teal">Weight Loss</span>
+    <h3>Semaglutide (GLP-1)</h3>
+    <p class="tagline">Clinically proven metabolic reset and sustained weight loss.</p>
+    <div class="product-divider"></div>
+    <div class="product-price">Starting at $199/mo</div>
+    <div class="rx-badge"> Prescription Required</div>
+    <a href="#intake" class="btn-outline">Sign Up to Order</a>
   </div>
+  <div class="product-card">
+    <span class="category-badge badge-teal">Weight Loss</span>
+    <h3>Tirzepatide</h3>
+    <p class="tagline">Dual-action GLP-1 & GIP therapy for next-gen metabolic support.</p>
+    <div class="product-divider"></div>
+    <div class="product-price">Starting at $249/mo</div>
+    <div class="rx-badge"> Prescription Required</div>
+    <a href="#intake" class="btn-outline">Sign Up to Order</a>
+  </div>
+  <div class="product-card">
+    <span class="category-badge badge-green">Recovery</span>
+    <h3>BPC-157</h3>
+    <p class="tagline">Accelerate healing from the inside out — joints, gut, tissue.</p>
+    <div class="product-divider"></div>
+    <div class="product-price">Starting at $149/mo</div>
+    <div class="rx-badge"> Prescription Required</div>
+    <a href="#intake" class="btn-outline">Sign Up to Order</a>
+  </div>
+  <div class="product-card">
+    <span class="category-badge badge-green">Recovery</span>
+    <h3>TB-500</h3>
+    <p class="tagline">Reduce inflammation and rebuild tissue for faster recovery.</p>
+    <div class="product-divider"></div>
+    <div class="product-price">Starting at $149/mo</div>
+    <div class="rx-badge"> Prescription Required</div>
+    <a href="#intake" class="btn-outline">Sign Up to Order</a>
+  </div>
+  <div class="product-card">
+    <span class="category-badge badge-amber">Performance</span>
+    <h3>Sermorelin</h3>
+    <p class="tagline">Restore natural growth hormone levels for energy and vitality.</p>
+    <div class="product-divider"></div>
+    <div class="product-price">Starting at $179/mo</div>
+    <div class="rx-badge"> Prescription Required</div>
+    <a href="#intake" class="btn-outline">Sign Up to Order</a>
+  </div>
+  <div class="product-card">
+    <span class="category-badge badge-rose">Sexual Health</span>
+    <h3>PT-141</h3>
+    <p class="tagline">Reignite vitality, drive, and sexual health naturally.</p>
+    <div class="product-divider"></div>
+    <div class="product-price">Starting at $129/mo</div>
+    <div class="rx-badge"> Prescription Required</div>
+    <a href="#intake" class="btn-outline">Sign Up to Order</a>
+  </div>
+</div>
+<p class="grid-note">All treatments require a valid prescription. Complete your free health assessment to connect with a licensed provider.</p>
+</div>
 </section>
 
-<!-- ==================== WHY ACCESSRX ==================== -->
-<section id="why">
-  <div class="container">
-    <div class="section-header center">
-      <div class="section-label">Why AccessRx</div>
-      <h2 class="section-title">Healthcare the way it should be</h2>
-    </div>
-    <div class="why-grid">
-      <div class="why-card">
-        <div class="why-icon">🚫💳</div>
-        <div class="why-title">No Insurance Required</div>
-        <p class="why-desc">Transparent, upfront pricing. No prior authorizations, no claim denials, no surprise bills.</p>
-      </div>
-      <div class="why-card">
-        <div class="why-icon">🩺</div>
-        <div class="why-title">Licensed Providers Nationwide</div>
-        <p class="why-desc">Board-certified physicians and nurse practitioners licensed in your state review every case.</p>
-      </div>
-      <div class="why-card">
-        <div class="why-icon">🇺🇸</div>
-        <div class="why-title">Domestic Pharmaceutical Grade</div>
-        <p class="why-desc">All compounds sourced from licensed US 503A/503B compounding pharmacies. Quality you can trust.</p>
-      </div>
-      <div class="why-card">
-        <div class="why-icon">🔒</div>
-        <div class="why-title">HIPAA Compliant &amp; Secure</div>
-        <p class="why-desc">Your health data is encrypted and protected at every step. We never sell or share your information.</p>
-      </div>
-    </div>
+<!-- LAB TESTING -->
+<section class="labs" id="lab-testing">
+<div class="container">
+<div class="text-center" style="margin-bottom:48px">
+  <div class="section-label">Lab Testing</div>
+  <h2 class="section-title">Know Your Numbers</h2>
+  <p class="section-sub">Order comprehensive panels — no referral needed. Results in 2–3 business days.</p>
+</div>
+<div class="lab-grid">
+  <div class="lab-card">
+    <h3>Basic Wellness Panel</h3>
+    <p>CBC, metabolic panel, thyroid function, vitamin D — your essential baseline.</p>
+    <div class="lab-price">$79</div>
+    <a href="#intake" class="btn-teal">Request This Panel</a>
   </div>
+  <div class="lab-card" style="border-color:var(--teal)">
+    <div class="popular-badge">Most Popular</div>
+    <h3>Hormone & Metabolic Panel</h3>
+    <p>Full hormone profile, cortisol, insulin resistance markers, and thyroid optimization.</p>
+    <div class="lab-price">$149</div>
+    <a href="#intake" class="btn-teal">Request This Panel</a>
+  </div>
+  <div class="lab-card">
+    <h3>Complete Performance Panel</h3>
+    <p>Comprehensive biomarkers for serious health optimization — the full picture.</p>
+    <div class="lab-price">$249</div>
+    <a href="#intake" class="btn-teal">Request This Panel</a>
+  </div>
+</div>
+</div>
 </section>
 
-<!-- ==================== CTA SECTION ==================== -->
-<section id="cta">
-  <div class="container">
-    <div class="cta-inner">
-      <div class="section-label">Get Started Today</div>
-      <h2 class="section-title">Ready to take control of your health?</h2>
-      <p class="section-sub">Join thousands taking charge of their wellbeing with AccessRx. Your free assessment takes less than 2 minutes.</p>
-      <a href="#intake" class="btn btn-primary">Start Free Assessment</a>
-    </div>
+<!-- WHY ASRX -->
+<section class="why" id="why">
+<div class="container">
+<div class="text-center" style="margin-bottom:48px">
+  <div class="section-label">Why ASRX</div>
+  <h2 class="section-title">Why Patients Choose ASRX</h2>
+</div>
+<div class="feature-grid">
+  <div class="feature-card">
+    <div class="feature-icon">🏥</div>
+    <h3>No Insurance Required</h3>
+    <p>Pay directly and transparently. No prior authorizations, no claim denials.</p>
   </div>
+  <div class="feature-card">
+    <div class="feature-icon">🌎</div>
+    <h3>Licensed in 50 States</h3>
+    <p>Board-certified providers available nationwide — wherever you are.</p>
+  </div>
+  <div class="feature-card">
+    <div class="feature-icon">🏭</div>
+    <h3>Domestic Sourcing</h3>
+    <p>No imports, no tariff risk. Pharmaceutical-grade compounds made in the USA.</p>
+  </div>
+  <div class="feature-card">
+    <div class="feature-icon">🔒</div>
+    <h3>HIPAA Compliant</h3>
+    <p>Your health data is encrypted, protected, and never shared without consent.</p>
+  </div>
+  <div class="feature-card">
+    <div class="feature-icon">📦</div>
+    <h3>Discreet Shipping</h3>
+    <p>Plain packaging, fast delivery. Your privacy is our priority.</p>
+  </div>
+  <div class="feature-card">
+    <div class="feature-icon">👤</div>
+    <h3>Real Human Support</h3>
+    <p>Our care team is a message away. You're never just a ticket number.</p>
+  </div>
+</div>
+</div>
 </section>
 
-<!-- ==================== INTAKE FORM ==================== -->
-<section id="intake">
-  <div class="container">
-    <div class="intake-box">
-      <div class="section-label" style="text-align:center;">Free Assessment</div>
-      <h2 class="section-title" style="font-size:1.8rem;">Start Your Health Journey</h2>
-      <p>Tell us a little about yourself to get matched with a licensed provider in your state.</p>
-      <form class="intake-form" onsubmit="handleSubmit(event)">
-        <input type="text" placeholder="Full Name" required />
-        <input type="email" placeholder="Email Address" required />
-        <input type="tel" placeholder="Phone Number (optional)" />
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+<div class="container">
+<div class="text-center" style="margin-bottom:48px">
+  <div class="section-label">Patient Stories</div>
+  <h2 class="section-title">Real People. Real Results.</h2>
+</div>
+<div class="testimonial-grid">
+  <div class="testimonial-card">
+    <div class="stars">★★★★★</div>
+    <blockquote>"I was skeptical but the whole process felt just like a real doctor visit — actually better because it was on my schedule."</blockquote>
+    <cite>— M.T., Texas</cite>
+  </div>
+  <div class="testimonial-card">
+    <div class="stars">★★★★★</div>
+    <blockquote>"Lost 22 lbs in 3 months with semaglutide. The provider was attentive and responsive throughout the whole process."</blockquote>
+    <cite>— J.R., Florida</cite>
+  </div>
+  <div class="testimonial-card">
+    <div class="stars">★★★★★</div>
+    <blockquote>"Finally found a platform that takes peptide therapy seriously. Legitimate, fast, and professional. Exactly what I was looking for."</blockquote>
+    <cite>— D.K., California</cite>
+  </div>
+</div>
+</div>
+</section>
+
+<!-- INTAKE FORM -->
+<section class="intake" id="intake" style="background:var(--alt)">
+<div class="container">
+<div class="intake-card">
+  <div id="intake-form-wrap">
+    <h2>Start Your Free Health Assessment</h2>
+    <p class="sub">Takes 2 minutes. No commitment. A licensed provider will review your profile within 48 hours.</p>
+    <form id="intake-form" onsubmit="submitIntake(event)">
+      <div class="form-row">
+        <div class="form-group"><label>First Name</label><input type="text" placeholder="Jane" required/></div>
+        <div class="form-group"><label>Last Name</label><input type="text" placeholder="Smith" required/></div>
+      </div>
+      <div class="form-group"><label>Email Address</label><input type="email" placeholder="jane@email.com" required/></div>
+      <div class="form-group"><label>Phone Number</label><input type="tel" placeholder="(555) 000-0000"/></div>
+      <div class="form-group">
+        <label>State</label>
         <select required>
-          <option value="" disabled selected>Select Your State</option>
-          <option>Alabama</option><option>Alaska</option><option>Arizona</option>
-          <option>Arkansas</option><option>California</option><option>Colorado</option>
-          <option>Connecticut</option><option>Delaware</option><option>Florida</option>
-          <option>Georgia</option><option>Hawaii</option><option>Idaho</option>
-          <option>Illinois</option><option>Indiana</option><option>Iowa</option>
-          <option>Kansas</option><option>Kentucky</option><option>Louisiana</option>
-          <option>Maine</option><option>Maryland</option><option>Massachusetts</option>
-          <option>Michigan</option><option>Minnesota</option><option>Mississippi</option>
-          <option>Missouri</option><option>Montana</option><option>Nebraska</option>
-          <option>Nevada</option><option>New Hampshire</option><option>New Jersey</option>
-          <option>New Mexico</option><option>New York</option><option>North Carolina</option>
-          <option>North Dakota</option><option>Ohio</option><option>Oklahoma</option>
-          <option>Oregon</option><option>Pennsylvania</option><option>Rhode Island</option>
-          <option>South Carolina</option><option>South Dakota</option><option>Tennessee</option>
-          <option>Texas</option><option>Utah</option><option>Vermont</option>
-          <option>Virginia</option><option>Washington</option><option>West Virginia</option>
-          <option>Wisconsin</option><option>Wyoming</option>
+          <option value="">Select your state...</option>
+          <option>Alabama</option><option>Alaska</option><option>Arizona</option><option>Arkansas</option><option>California</option><option>Colorado</option><option>Connecticut</option><option>Delaware</option><option>Florida</option><option>Georgia</option><option>Hawaii</option><option>Idaho</option><option>Illinois</option><option>Indiana</option><option>Iowa</option><option>Kansas</option><option>Kentucky</option><option>Louisiana</option><option>Maine</option><option>Maryland</option><option>Massachusetts</option><option>Michigan</option><option>Minnesota</option><option>Mississippi</option><option>Missouri</option><option>Montana</option><option>Nebraska</option><option>Nevada</option><option>New Hampshire</option><option>New Jersey</option><option>New Mexico</option><option>New York</option><option>North Carolina</option><option>North Dakota</option><option>Ohio</option><option>Oklahoma</option><option>Oregon</option><option>Pennsylvania</option><option>Rhode Island</option><option>South Carolina</option><option>South Dakota</option><option>Tennessee</option><option>Texas</option><option>Utah</option><option>Vermont</option><option>Virginia</option><option>Washington</option><option>West Virginia</option><option>Wisconsin</option><option>Wyoming</option>
         </select>
-        <select>
-          <option value="" disabled selected>I'm interested in... (optional)</option>
-          <option>Weight Loss (GLP-1)</option>
-          <option>Peptide Therapy (BPC-157, TB-500)</option>
-          <option>Hormone Optimization (Sermorelin)</option>
-          <option>Sexual Health (PT-141)</option>
+      </div>
+      <div class="form-group">
+        <label>What brings you to ASRX?</label>
+        <select required>
+          <option value="">Select a reason...</option>
+          <option>Weight Loss</option>
+          <option>Recovery & Healing</option>
+          <option>Performance Optimization</option>
+          <option>Sexual Health</option>
           <option>Lab Testing</option>
-          <option>General Wellness</option>
+          <option>Other</option>
         </select>
-        <button type="submit" class="btn btn-primary">Submit Free Assessment →</button>
-        <p class="form-note">🔒 Your information is encrypted and HIPAA protected. No commitment required.</p>
-      </form>
-    </div>
+      </div>
+      <button type="submit" class="btn-submit">Submit Assessment</button>
+      <p class="hipaa-note">🔒 Your information is protected by HIPAA-compliant encryption</p>
+    </form>
   </div>
+  <div class="success-msg" id="intake-success">
+    <div class="check">✅</div>
+    <h3>Assessment Received!</h3>
+    <p>Thank you! A licensed provider will review your profile within 48 hours. Check your email for next steps.</p>
+  </div>
+</div>
+</div>
 </section>
 
-<!-- ==================== FOOTER ==================== -->
+<!-- FOOTER -->
 <footer>
-  <div class="container">
-    <div class="footer-inner">
-      <div class="footer-brand">
-        <div class="nav-logo">Access<span>Rx</span></div>
-        <div class="footer-tagline">Healthcare Access. Simplified.</div>
-      </div>
-      <div class="footer-links">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Service</a>
-        <a href="#intake">Contact</a>
-      </div>
-    </div>
-    <hr class="footer-divider" />
-    <p class="footer-disclaimer">
-      AccessRx is a healthcare access and coordination platform. We are not a clinical provider.
-      All medical decisions are made by licensed healthcare professionals. Products require a valid prescription.
-      Statements on this site have not been evaluated by the FDA. These products are not intended to diagnose,
-      treat, cure, or prevent any disease.
-    </p>
-    <div class="footer-copy">© 2026 August Aisles LLC. All rights reserved. AccessRx | A subsidiary of August Aisles LLC</div>
+<div class="container">
+<div class="footer-top">
+  <div>
+    <div class="footer-logo-main">ASRX</div>
+    <div class="footer-logo-sub">AccessRx | A subsidiary of August Aisles LLC</div>
+    <p class="footer-tagline">Healthcare access, simplified. Connecting patients with licensed providers and pharmaceutical-grade treatments.</p>
   </div>
+  <div class="footer-col">
+    <h4>Treatments</h4>
+    <a href="#treatments">Semaglutide</a>
+    <a href="#treatments">Tirzepatide</a>
+    <a href="#treatments">BPC-157</a>
+    <a href="#treatments">TB-500</a>
+    <a href="#treatments">Sermorelin</a>
+    <a href="#treatments">PT-141</a>
+  </div>
+  <div class="footer-col">
+    <h4>Platform</h4>
+    <a href="#lab-testing">Lab Testing</a>
+    <a href="#how">How It Works</a>
+    <a href="#why">About</a>
+    <a href="#intake">Get Started</a>
+  </div>
+  <div class="footer-col">
+    <h4>Legal</h4>
+    <a href="#">Privacy Policy</a>
+    <a href="#">Terms of Service</a>
+    <a href="#">Contact</a>
+  </div>
+</div>
+<div class="footer-bottom">
+  <p class="footer-legal">ASRX / AccessRx is a healthcare access and coordination platform. We are not a licensed clinical provider. All medical decisions are made by board-certified healthcare professionals. Products require a valid prescription. This platform does not provide medical advice, diagnosis, or treatment.</p>
+  <p class="footer-copy">© 2026 August Aisles LLC. All rights reserved.</p>
+</div>
+</div>
 </footer>
 
 <script>
-  function toggleMenu() {
-    const menu = document.getElementById('mobileMenu');
-    menu.classList.toggle('open');
-  }
-
-  // Close mobile menu on outside click
-  document.addEventListener('click', function(e) {
-    const nav = document.querySelector('nav');
-    if (!nav.contains(e.target)) {
-      document.getElementById('mobileMenu').classList.remove('open');
-    }
-  });
-
-  // Form submission placeholder
-  function handleSubmit(e) {
-    e.preventDefault();
-    const btn = e.target.querySelector('button[type="submit"]');
-    btn.textContent = '✓ Assessment Submitted!';
-    btn.style.background = '#00b89c';
-    btn.disabled = true;
-    setTimeout(() => {
-      btn.textContent = 'Submit Free Assessment →';
-      btn.disabled = false;
-      e.target.reset();
-    }, 4000);
-  }
+function submitIntake(e){
+  e.preventDefault();
+  document.getElementById('intake-form-wrap').style.display='none';
+  document.getElementById('intake-success').style.display='block';
+}
 </script>
-
 </body>
 </html>
