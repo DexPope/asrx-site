@@ -103,15 +103,22 @@ nav{position:sticky;top:0;z-index:100;background:rgba(250,250,248,.95);backdrop-
 .text-center{text-align:center}
 
 /* ── MEDIA LOGOS BAR ── */
-.media-bar{padding:40px 0;background:var(--bg);border-bottom:1px solid var(--border)}
-.media-bar-label{text-align:center;font-size:14px;font-weight:600;color:var(--slate);margin-bottom:24px;letter-spacing:.3px}
-.media-logos{display:flex;align-items:center;justify-content:center;gap:48px;flex-wrap:wrap;opacity:.55}
-.media-logos span{font-size:18px;font-weight:700;letter-spacing:.5px;color:var(--text);white-space:nowrap}
-.media-logos .ml-jama{font-family:'Playfair Display',serif;font-style:italic;font-size:20px}
-.media-logos .ml-health{font-family:'Inter',sans-serif;font-weight:400;font-size:17px}
-.media-logos .ml-webmd{font-family:'Inter',sans-serif;font-weight:800;font-size:19px}
-.media-logos .ml-verywell{font-family:'Inter',sans-serif;font-weight:300;font-size:17px;letter-spacing:1px}
-.media-logos .ml-forbes{font-family:'Inter',sans-serif;font-weight:800;font-size:16px;text-transform:uppercase;letter-spacing:2px}
+.media-bar{padding:32px 0;background:var(--bg);border-bottom:1px solid var(--border);overflow:hidden}
+.media-bar-label{text-align:center;font-size:13px;font-weight:600;color:var(--slate);margin-bottom:22px;letter-spacing:.3px}
+.media-track-wrap{overflow:hidden;width:100%;position:relative}
+.media-track-wrap::before,.media-track-wrap::after{content:'';position:absolute;top:0;bottom:0;width:120px;z-index:2;pointer-events:none}
+.media-track-wrap::before{left:0;background:linear-gradient(90deg,var(--bg),transparent)}
+.media-track-wrap::after{right:0;background:linear-gradient(270deg,var(--bg),transparent)}
+.media-track{display:flex;align-items:center;gap:64px;width:max-content;animation:logoGlide 22s linear infinite}
+.media-track:hover{animation-play-state:paused}
+@keyframes logoGlide{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.media-track span{font-weight:700;letter-spacing:.5px;color:var(--text);white-space:nowrap;opacity:.45;font-size:17px}
+.media-track .ml-jama{font-family:'Playfair Display',serif;font-style:italic;font-size:19px}
+.media-track .ml-health{font-family:'Inter',sans-serif;font-weight:400;font-size:16px}
+.media-track .ml-webmd{font-family:'Inter',sans-serif;font-weight:800;font-size:18px}
+.media-track .ml-verywell{font-family:'Inter',sans-serif;font-weight:300;font-size:16px;letter-spacing:1px}
+.media-track .ml-forbes{font-family:'Inter',sans-serif;font-weight:800;font-size:15px;text-transform:uppercase;letter-spacing:2px}
+.media-sep{color:var(--border);font-size:20px;opacity:.6!important}
 
 /* ── CLINICAL STATS ── */
 .science{padding:88px 0;background:linear-gradient(135deg,#1a1a2e 0%,#1e2d4a 100%);color:#fff}
@@ -295,8 +302,6 @@ footer{background:#0e1520;padding:60px 0 32px}
   .trust-inner{gap:16px}
   .steps{grid-template-columns:1fr}
   .switch-cards{grid-template-columns:1fr}
-  .media-logos{gap:24px}
-  .media-logos span{font-size:15px!important}
   .stat-grid{grid-template-columns:1fr 1fr}
 }
 </style>
@@ -452,16 +457,44 @@ footer{background:#0e1520;padding:60px 0 32px}
 
 <!-- MEDIA LOGOS -->
 <div class="media-bar">
-<div class="container">
   <div class="media-bar-label">Protocols Backed by Research Published In</div>
-  <div class="media-logos">
-    <span class="ml-jama">JAMA Network</span>
-    <span class="ml-health">healthline</span>
-    <span class="ml-webmd">WebMD</span>
-    <span class="ml-verywell">verywell health</span>
-    <span class="ml-forbes">FORBES HEALTH</span>
+  <div class="media-track-wrap">
+    <div class="media-track">
+      <!-- Set 1 -->
+      <span class="ml-jama">JAMA Network</span>
+      <span class="media-sep">·</span>
+      <span class="ml-health">healthline</span>
+      <span class="media-sep">·</span>
+      <span class="ml-webmd">WebMD</span>
+      <span class="media-sep">·</span>
+      <span class="ml-verywell">verywell health</span>
+      <span class="media-sep">·</span>
+      <span class="ml-forbes">FORBES HEALTH</span>
+      <span class="media-sep">·</span>
+      <span class="ml-jama" style="font-family:'Playfair Display',serif;font-style:normal;font-weight:700">Nature Medicine</span>
+      <span class="media-sep">·</span>
+      <span class="ml-health" style="font-weight:700">PubMed</span>
+      <span class="media-sep">·</span>
+      <span class="ml-webmd" style="font-size:15px;letter-spacing:1.5px">NIH</span>
+      <!-- Set 2 (duplicate for seamless loop) -->
+      <span class="media-sep">·</span>
+      <span class="ml-jama">JAMA Network</span>
+      <span class="media-sep">·</span>
+      <span class="ml-health">healthline</span>
+      <span class="media-sep">·</span>
+      <span class="ml-webmd">WebMD</span>
+      <span class="media-sep">·</span>
+      <span class="ml-verywell">verywell health</span>
+      <span class="media-sep">·</span>
+      <span class="ml-forbes">FORBES HEALTH</span>
+      <span class="media-sep">·</span>
+      <span class="ml-jama" style="font-family:'Playfair Display',serif;font-style:normal;font-weight:700">Nature Medicine</span>
+      <span class="media-sep">·</span>
+      <span class="ml-health" style="font-weight:700">PubMed</span>
+      <span class="media-sep">·</span>
+      <span class="ml-webmd" style="font-size:15px;letter-spacing:1.5px">NIH</span>
+    </div>
   </div>
-</div>
 </div>
 
 <!-- HOW IT WORKS -->
