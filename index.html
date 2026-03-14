@@ -86,14 +86,26 @@ nav{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid va
 
 /* TREATMENTS */
 .treatments{padding:80px 0}
+/* Category Tabs */
+.cat-tabs{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:40px}
+.cat-tab{padding:9px 20px;border-radius:var(--pill);font-size:13px;font-weight:600;border:1.5px solid var(--border);background:#fff;color:var(--slate);cursor:pointer;transition:all .2s;white-space:nowrap}
+.cat-tab:hover{border-color:var(--teal);color:var(--teal)}
+.cat-tab.active{background:var(--teal);border-color:var(--teal);color:#fff}
+/* Product Grid */
 .product-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:24px}
 .product-card{background:#fff;border-radius:var(--radius);padding:28px;box-shadow:var(--shadow);border:1.5px solid transparent;transition:all .25s;display:flex;flex-direction:column}
 .product-card:hover{transform:translateY(-4px);border-color:var(--teal);box-shadow:0 12px 40px rgba(13,148,136,.15)}
+.product-card.hidden{display:none}
 .category-badge{display:inline-block;padding:4px 12px;border-radius:var(--pill);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:16px}
 .badge-teal{background:#e6f4f3;color:var(--teal)}
 .badge-green{background:#f0fdf4;color:#16a34a}
 .badge-amber{background:#fffbeb;color:#d97706}
 .badge-rose{background:#fff1f2;color:#e11d48}
+.badge-purple{background:#f5f3ff;color:#7c3aed}
+.badge-blue{background:#eff6ff;color:#2563eb}
+.badge-emerald{background:#ecfdf5;color:#059669}
+.badge-hot{background:#fef2f2;color:#dc2626;margin-left:6px}
+.badge-popular{background:#fffbeb;color:#d97706;margin-left:6px}
 .product-card h3{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;margin-bottom:6px;color:var(--text)}
 .product-card .tagline{font-size:14px;color:var(--slate);margin-bottom:16px;flex-grow:1}
 .product-divider{height:1px;background:var(--border);margin-bottom:16px}
@@ -300,70 +312,301 @@ footer{background:var(--text);color:#fff;padding:60px 0 32px}
 <!-- TREATMENTS -->
 <section class="treatments" id="treatments">
 <div class="container">
-<div class="text-center" style="margin-bottom:48px">
+<div class="text-center" style="margin-bottom:40px">
   <div class="section-label">Our Treatments</div>
   <h2 class="section-title">Pharmaceutical-Grade Protocols</h2>
-  <p class="section-sub">Browse our treatments. All orders require provider review and a valid prescription.</p>
+  <p class="section-sub">Browse by category. All treatments require provider review and a valid prescription.</p>
 </div>
-<div class="product-grid">
-  <div class="product-card">
-    <span class="category-badge badge-teal">Weight Loss</span>
+
+<!-- Category Filter Tabs -->
+<div class="cat-tabs">
+  <button class="cat-tab active" onclick="filterCat('all',this)">All Treatments</button>
+  <button class="cat-tab" onclick="filterCat('weight-loss',this)">⚡ Weight Loss</button>
+  <button class="cat-tab" onclick="filterCat('recovery',this)">💪 Recovery</button>
+  <button class="cat-tab" onclick="filterCat('longevity',this)">🔬 Anti-Aging</button>
+  <button class="cat-tab" onclick="filterCat('performance',this)">🏆 Performance</button>
+  <button class="cat-tab" onclick="filterCat('sexual-health',this)">❤️ Sexual Health</button>
+  <button class="cat-tab" onclick="filterCat('cognitive',this)">🧠 Cognitive</button>
+  <button class="cat-tab" onclick="filterCat('immune',this)">🛡️ Immune</button>
+</div>
+
+<div class="product-grid" id="productGrid">
+
+  <!-- WEIGHT LOSS -->
+  <div class="product-card" data-cat="weight-loss">
+    <div><span class="category-badge badge-teal">Weight Loss</span><span class="category-badge badge-hot">HOT</span></div>
     <h3>Semaglutide (GLP-1)</h3>
-    <p class="tagline">Clinically proven metabolic reset and sustained weight loss.</p>
+    <p class="tagline">Clinically proven GLP-1 agonist for sustained metabolic reset and weight loss.</p>
     <div class="product-divider"></div>
     <div class="product-price">Starting at $199/mo</div>
     <div class="rx-badge"> Prescription Required</div>
     <a href="/intake" class="btn-outline">Sign Up to Order</a>
   </div>
-  <div class="product-card">
-    <span class="category-badge badge-teal">Weight Loss</span>
+  <div class="product-card" data-cat="weight-loss">
+    <div><span class="category-badge badge-teal">Weight Loss</span><span class="category-badge badge-hot">HOT</span></div>
     <h3>Tirzepatide</h3>
-    <p class="tagline">Dual-action GLP-1 & GIP therapy for next-gen metabolic support.</p>
+    <p class="tagline">Dual-action GLP-1 & GIP therapy — superior fat loss with appetite control.</p>
     <div class="product-divider"></div>
     <div class="product-price">Starting at $249/mo</div>
     <div class="rx-badge"> Prescription Required</div>
     <a href="/intake" class="btn-outline">Sign Up to Order</a>
   </div>
-  <div class="product-card">
-    <span class="category-badge badge-green">Recovery</span>
+  <div class="product-card" data-cat="weight-loss">
+    <div><span class="category-badge badge-teal">Weight Loss</span></div>
+    <h3>Retatrutide</h3>
+    <p class="tagline">Triple-action GLP-1/GIP/Glucagon agonist — the next generation of metabolic therapy.</p>
+    <div class="product-divider"></div>
+    <div class="product-price">Starting at $299/mo</div>
+    <div class="rx-badge"> Prescription Required</div>
+    <a href="/intake" class="btn-outline">Sign Up to Order</a>
+  </div>
+  <div class="product-card" data-cat="weight-loss">
+    <div><span class="category-badge badge-teal">Weight Loss</span><span class="category-badge badge-hot">HOT</span></div>
+    <h3>Burn Blend</h3>
+    <p class="tagline">Retatrutide + Tirzepatide combined — maximum metabolic impact for aggressive fat loss.</p>
+    <div class="product-divider"></div>
+    <div class="product-price">Starting at $349/mo</div>
+    <div class="rx-badge"> Prescription Required</div>
+    <a href="/intake" class="btn-outline">Sign Up to Order</a>
+  </div>
+
+  <!-- RECOVERY -->
+  <div class="product-card" data-cat="recovery">
+    <div><span class="category-badge badge-green">Recovery</span></div>
     <h3>BPC-157</h3>
-    <p class="tagline">Accelerate healing from the inside out — joints, gut, tissue.</p>
+    <p class="tagline">Body Protection Compound — accelerate healing in joints, gut lining, and soft tissue.</p>
     <div class="product-divider"></div>
     <div class="product-price">Starting at $149/mo</div>
     <div class="rx-badge"> Prescription Required</div>
     <a href="/intake" class="btn-outline">Sign Up to Order</a>
   </div>
-  <div class="product-card">
-    <span class="category-badge badge-green">Recovery</span>
-    <h3>TB-500</h3>
-    <p class="tagline">Reduce inflammation and rebuild tissue for faster recovery.</p>
+  <div class="product-card" data-cat="recovery">
+    <div><span class="category-badge badge-green">Recovery</span></div>
+    <h3>TB-500 (Thymosin Beta 4)</h3>
+    <p class="tagline">Reduce inflammation, rebuild muscle and connective tissue for faster recovery.</p>
     <div class="product-divider"></div>
     <div class="product-price">Starting at $149/mo</div>
     <div class="rx-badge"> Prescription Required</div>
     <a href="/intake" class="btn-outline">Sign Up to Order</a>
   </div>
-  <div class="product-card">
-    <span class="category-badge badge-amber">Performance</span>
+  <div class="product-card" data-cat="recovery">
+    <div><span class="category-badge badge-green">Recovery</span><span class="category-badge badge-popular">POPULAR</span></div>
+    <h3>Wolverine Blend</h3>
+    <p class="tagline">BPC-157 + TB4 combined — the gold standard dual-peptide recovery stack.</p>
+    <div class="product-divider"></div>
+    <div class="product-price">Starting at $199/mo</div>
+    <div class="rx-badge"> Prescription Required</div>
+    <a href="/intake" class="btn-outline">Sign Up to Order</a>
+  </div>
+  <div class="product-card" data-cat="recovery">
+    <div><span class="category-badge badge-green">Recovery</span></div>
+    <h3>GI Mod</h3>
+    <p class="tagline">Targeted gastrointestinal support blend — gut repair, motility, and microbiome health.</p>
+    <div class="product-divider"></div>
+    <div class="product-price">Starting at $99/mo</div>
+    <div class="rx-badge"> Prescription Required</div>
+    <a href="/intake" class="btn-outline">Sign Up to Order</a>
+  </div>
+
+  <!-- ANTI-AGING / LONGEVITY -->
+  <div class="product-card" data-cat="longevity">
+    <div><span class="category-badge badge-purple">Anti-Aging</span></div>
+    <h3>NAD+</h3>
+    <p class="tagline">Cellular energy restoration — reverse metabolic aging at the mitochondrial level.</p>
+    <div class="product-divider"></div>
+    <div class="product-price">Starting at $149/mo</div>
+    <div class="rx-badge"> Prescription Required</div>
+    <a href="/intake" class="btn-outline">Sign Up to Order</a>
+  </div>
+  <div class="product-card" data-cat="longevity">
+    <div><span class="category-badge badge-purple">Anti-Aging</span></div>
+    <h3>Epithalon</h3>
+    <p class="tagline">Telomere support peptide — promotes longevity and cellular lifespan extension.</p>
+    <div class="product-divider"></div>
+    <div class="product-price">Starting at $149/mo</div>
+    <div class="rx-badge"> Prescription Required</div>
+    <a href="/intake" class="btn-outline">Sign Up to Order</a>
+  </div>
+  <div class="product-card" data-cat="longevity">
+    <div><span class="category-badge badge-purple">Anti-Aging</span></div>
+    <h3>SS-31</h3>
+    <p class="tagline">Mitochondria-targeting antioxidant peptide — reduces oxidative stress and aging markers.</p>
+    <div class="product-divider"></div>
+    <div class="product-price">Starting at $299/mo</div>
+    <div class="rx-badge"> Prescription Required</div>
+    <a href="/intake" class="btn-outline">Sign Up to Order</a>
+  </div>
+  <div class="product-card" data-cat="longevity">
+    <div><span class="category-badge badge-purple">Anti-Aging</span></div>
+    <h3>GHK-Cu</h3>
+    <p class="tagline">Copper peptide complex — skin regeneration, collagen synthesis, and hair restoration.</p>
+    <div class="product-divider"></div>
+    <div class="product-price">Starting at $99/mo</div>
+    <div class="rx-badge"> Prescription Required</div>
+    <a href="/intake" class="btn-outline">Sign Up to Order</a>
+  </div>
+  <div class="product-card" data-cat="longevity">
+    <div><span class="category-badge badge-purple">Anti-Aging</span></div>
+    <h3>MOTS-C</h3>
+    <p class="tagline">Mitochondrial-derived peptide — metabolic regulation, insulin sensitivity, and longevity.</p>
+    <div class="product-divider"></div>
+    <div class="product-price">Starting at $99/mo</div>
+    <div class="rx-badge"> Prescription Required</div>
+    <a href="/intake" class="btn-outline">Sign Up to Order</a>
+  </div>
+  <div class="product-card" data-cat="longevity">
+    <div><span class="category-badge badge-purple">Anti-Aging</span></div>
+    <h3>Thymosin Alpha 1</h3>
+    <p class="tagline">Immune-aging support blend — thymus regeneration, inflammation control, and cellular defense.</p>
+    <div class="product-divider"></div>
+    <div class="product-price">Starting at $149/mo</div>
+    <div class="rx-badge"> Prescription Required</div>
+    <a href="/intake" class="btn-outline">Sign Up to Order</a>
+  </div>
+
+  <!-- PERFORMANCE -->
+  <div class="product-card" data-cat="performance">
+    <div><span class="category-badge badge-amber">Performance</span></div>
     <h3>Sermorelin</h3>
-    <p class="tagline">Restore natural growth hormone levels for energy and vitality.</p>
+    <p class="tagline">Growth hormone-releasing hormone analog — restore GH levels for energy and body composition.</p>
     <div class="product-divider"></div>
     <div class="product-price">Starting at $179/mo</div>
     <div class="rx-badge"> Prescription Required</div>
     <a href="/intake" class="btn-outline">Sign Up to Order</a>
   </div>
-  <div class="product-card">
-    <span class="category-badge badge-rose">Sexual Health</span>
-    <h3>PT-141</h3>
-    <p class="tagline">Reignite vitality, drive, and sexual health naturally.</p>
+  <div class="product-card" data-cat="performance">
+    <div><span class="category-badge badge-amber">Performance</span></div>
+    <h3>CJC-1295 w/DAC</h3>
+    <p class="tagline">Long-acting GHRH analog — sustained GH pulse elevation for muscle and fat metabolism.</p>
     <div class="product-divider"></div>
     <div class="product-price">Starting at $129/mo</div>
     <div class="rx-badge"> Prescription Required</div>
     <a href="/intake" class="btn-outline">Sign Up to Order</a>
   </div>
-</div>
+  <div class="product-card" data-cat="performance">
+    <div><span class="category-badge badge-amber">Performance</span><span class="category-badge badge-popular">POPULAR</span></div>
+    <h3>2X Blend (CJC + Ipamorelin)</h3>
+    <p class="tagline">Synergistic GH stack — amplified growth hormone release with minimal side effects.</p>
+    <div class="product-divider"></div>
+    <div class="product-price">Starting at $129/mo</div>
+    <div class="rx-badge"> Prescription Required</div>
+    <a href="/intake" class="btn-outline">Sign Up to Order</a>
+  </div>
+  <div class="product-card" data-cat="performance">
+    <div><span class="category-badge badge-amber">Performance</span></div>
+    <h3>IGF-1 LR3</h3>
+    <p class="tagline">Insulin-like Growth Factor — muscle hypertrophy, satellite cell activation, and nutrient uptake.</p>
+    <div class="product-divider"></div>
+    <div class="product-price">Starting at $149/mo</div>
+    <div class="rx-badge"> Prescription Required</div>
+    <a href="/intake" class="btn-outline">Sign Up to Order</a>
+  </div>
+  <div class="product-card" data-cat="performance">
+    <div><span class="category-badge badge-amber">Performance</span></div>
+    <h3>Follistatin (FST-344)</h3>
+    <p class="tagline">Myostatin inhibitor — promotes lean muscle growth and suppresses muscle-limiting proteins.</p>
+    <div class="product-divider"></div>
+    <div class="product-price">Starting at $199/mo</div>
+    <div class="rx-badge"> Prescription Required</div>
+    <a href="/intake" class="btn-outline">Sign Up to Order</a>
+  </div>
+
+  <!-- SEXUAL HEALTH -->
+  <div class="product-card" data-cat="sexual-health">
+    <div><span class="category-badge badge-rose">Sexual Health</span></div>
+    <h3>PT-141 (Bremelanotide)</h3>
+    <p class="tagline">Centrally-acting sexual health peptide — increases libido and arousal in men and women.</p>
+    <div class="product-divider"></div>
+    <div class="product-price">Starting at $129/mo</div>
+    <div class="rx-badge"> Prescription Required</div>
+    <a href="/intake" class="btn-outline">Sign Up to Order</a>
+  </div>
+  <div class="product-card" data-cat="sexual-health">
+    <div><span class="category-badge badge-rose">Sexual Health</span></div>
+    <h3>Melanotan II</h3>
+    <p class="tagline">Melanocortin receptor agonist — enhanced libido, natural tan stimulation, and appetite control.</p>
+    <div class="product-divider"></div>
+    <div class="product-price">Starting at $99/mo</div>
+    <div class="rx-badge"> Prescription Required</div>
+    <a href="/intake" class="btn-outline">Sign Up to Order</a>
+  </div>
+
+  <!-- COGNITIVE -->
+  <div class="product-card" data-cat="cognitive">
+    <div><span class="category-badge badge-blue">Cognitive</span></div>
+    <h3>Semax</h3>
+    <p class="tagline">Neuroprotective peptide — enhance focus, memory retention, and stress resilience.</p>
+    <div class="product-divider"></div>
+    <div class="product-price">Starting at $99/mo</div>
+    <div class="rx-badge"> Prescription Required</div>
+    <a href="/intake" class="btn-outline">Sign Up to Order</a>
+  </div>
+  <div class="product-card" data-cat="cognitive">
+    <div><span class="category-badge badge-blue">Cognitive</span></div>
+    <h3>Selank</h3>
+    <p class="tagline">Anxiolytic peptide — reduce anxiety and mental fatigue while improving cognitive clarity.</p>
+    <div class="product-divider"></div>
+    <div class="product-price">Starting at $99/mo</div>
+    <div class="rx-badge"> Prescription Required</div>
+    <a href="/intake" class="btn-outline">Sign Up to Order</a>
+  </div>
+  <div class="product-card" data-cat="cognitive">
+    <div><span class="category-badge badge-blue">Cognitive</span></div>
+    <h3>BDNF</h3>
+    <p class="tagline">Brain-Derived Neurotrophic Factor — neuroplasticity, learning, and long-term cognitive health.</p>
+    <div class="product-divider"></div>
+    <div class="product-price">Starting at $109/mo</div>
+    <div class="rx-badge"> Prescription Required</div>
+    <a href="/intake" class="btn-outline">Sign Up to Order</a>
+  </div>
+
+  <!-- IMMUNE -->
+  <div class="product-card" data-cat="immune">
+    <div><span class="category-badge badge-emerald">Immune</span></div>
+    <h3>Thymosin Alpha 1</h3>
+    <p class="tagline">Thymus-derived immunomodulator — strengthen immune response and reduce chronic inflammation.</p>
+    <div class="product-divider"></div>
+    <div class="product-price">Starting at $149/mo</div>
+    <div class="rx-badge"> Prescription Required</div>
+    <a href="/intake" class="btn-outline">Sign Up to Order</a>
+  </div>
+  <div class="product-card" data-cat="immune">
+    <div><span class="category-badge badge-emerald">Immune</span></div>
+    <h3>Glutathione (IV Grade)</h3>
+    <p class="tagline">Master antioxidant — cellular detoxification, immune optimization, and oxidative stress reduction.</p>
+    <div class="product-divider"></div>
+    <div class="product-price">Starting at $129/mo</div>
+    <div class="rx-badge"> Prescription Required</div>
+    <a href="/intake" class="btn-outline">Sign Up to Order</a>
+  </div>
+  <div class="product-card" data-cat="immune">
+    <div><span class="category-badge badge-emerald">Immune</span></div>
+    <h3>Vitamin B-12 (IV Grade)</h3>
+    <p class="tagline">High-dose pharmaceutical B-12 — energy production, neurological support, and immune function.</p>
+    <div class="product-divider"></div>
+    <div class="product-price">Starting at $79/mo</div>
+    <div class="rx-badge"> Prescription Required</div>
+    <a href="/intake" class="btn-outline">Sign Up to Order</a>
+  </div>
+
+</div><!-- /product-grid -->
 <p class="grid-note">All treatments require a valid prescription. Complete your free health assessment to connect with a licensed provider.</p>
 </div>
 </section>
+
+<script>
+function filterCat(cat, btn) {
+  document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.product-card').forEach(card => {
+    if(cat === 'all' || card.dataset.cat === cat) {
+      card.classList.remove('hidden');
+    } else {
+      card.classList.add('hidden');
+    }
+  });
+}
+</script>
 
 <!-- LAB TESTING -->
 <section class="labs" id="lab-testing">
