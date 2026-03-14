@@ -116,6 +116,13 @@ nav{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid va
 .btn-outline:hover{background:var(--teal);color:#fff}
 .grid-note{text-align:center;font-size:13px;color:var(--slate)}
 
+/* PAGE TABS */
+.page-tabs-wrap{background:#fff;border-bottom:1px solid var(--border);position:sticky;top:57px;z-index:90}
+.page-tabs{display:flex;gap:0;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.page-tab{padding:16px 28px;font-size:14px;font-weight:600;color:var(--slate);background:none;border:none;border-bottom:3px solid transparent;cursor:pointer;transition:all .2s;white-space:nowrap;font-family:\'Inter\',sans-serif}
+.page-tab:hover{color:var(--teal)}
+.page-tab.active{color:var(--teal);border-bottom-color:var(--teal)}
+
 /* LAB TESTING */
 .labs{padding:80px 0;background:var(--alt)}
 .lab-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
@@ -211,10 +218,10 @@ footer{background:var(--text);color:#fff;padding:60px 0 32px}
     <span class="logo-sub">AccessRx | A subsidiary of August Aisles LLC</span>
   </a>
   <ul class="nav-links">
-    <li><a href="#treatments">Treatments</a></li>
-    <li><a href="#lab-testing">Lab Testing</a></li>
-    <li><a href="#how">How It Works</a></li>
-    <li><a href="#why">About</a></li>
+    <li><a href="#" onclick="showTabByName('treatments');return false">Treatments</a></li>
+    <li><a href="#" onclick="showTabByName('lab-testing');return false">Lab Testing</a></li>
+    <li><a href="#" onclick="showTabByName('how-it-works');return false">How It Works</a></li>
+    <li><a href="#" onclick="showTabByName('about');return false">About</a></li>
   </ul>
   <a href="/intake" class="nav-cta">Get Started</a>
   <div class="hamburger" onclick="document.querySelector('.mobile-menu').classList.toggle('open')">
@@ -223,10 +230,10 @@ footer{background:var(--text);color:#fff;padding:60px 0 32px}
 </div>
 </div>
 <div class="mobile-menu">
-  <a href="#treatments">Treatments</a>
-  <a href="#lab-testing">Lab Testing</a>
-  <a href="#how">How It Works</a>
-  <a href="#why">About</a>
+  <a href="#" onclick="showTabByName('treatments');document.querySelector('.mobile-menu').classList.remove('open');return false">Treatments</a>
+  <a href="#" onclick="showTabByName('lab-testing');document.querySelector('.mobile-menu').classList.remove('open');return false">Lab Testing</a>
+  <a href="#" onclick="showTabByName('how-it-works');document.querySelector('.mobile-menu').classList.remove('open');return false">How It Works</a>
+  <a href="#" onclick="showTabByName('about');document.querySelector('.mobile-menu').classList.remove('open');return false">About</a>
   <a href="/intake" class="nav-cta">Get Started</a>
 </div>
 </nav>
@@ -241,7 +248,7 @@ footer{background:var(--text);color:#fff;padding:60px 0 32px}
     <p>ASRX connects you with board-certified providers and pharmaceutical-grade treatments — no insurance, no waiting rooms, no hassle. From the comfort of your home.</p>
     <div class="hero-btns">
       <a href="/intake" class="btn-primary">Start Free Assessment</a>
-      <a href="#treatments" class="btn-secondary">Explore Treatments →</a>
+      <a href="#" onclick="showTabByName('treatments');document.getElementById('pageTabsWrap').scrollIntoView({behavior:'smooth'});return false" class="btn-secondary">Explore Treatments →</a>
     </div>
     <div class="hero-stats">
       <div class="hero-stat"><strong>50+</strong><span>States Covered</span></div>
@@ -276,49 +283,26 @@ footer{background:var(--text);color:#fff;padding:60px 0 32px}
 </div>
 </div>
 
-<!-- HOW IT WORKS -->
-<section class="how" id="how">
+<!-- PAGE TABS -->
+<div class="page-tabs-wrap" id="pageTabsWrap">
 <div class="container">
-<div class="text-center">
-  <div class="section-label">The Process</div>
-  <h2 class="section-title">Your Care, Guided Every Step</h2>
-  <p class="section-sub">From your first question to your treatment plan, we make it seamless.</p>
-</div>
-<div class="steps">
-  <div class="step">
-    <div class="step-num">1</div>
-    <h3>Complete Intake</h3>
-    <p>A quick 2-minute health questionnaire — from your phone or computer.</p>
-  </div>
-  <div class="step">
-    <div class="step-num">2</div>
-    <h3>Provider Review</h3>
-    <p>A board-certified physician reviews your profile within 48 hours.</p>
-  </div>
-  <div class="step">
-    <div class="step-num">3</div>
-    <h3>Treatment Plan</h3>
-    <p>Your personalized protocol is approved and delivered to your door.</p>
-  </div>
-  <div class="step">
-    <div class="step-num">4</div>
-    <h3>Ongoing Care</h3>
-    <p>Check-ins, adjustments, and support — all through your care portal.</p>
-  </div>
+<div class="page-tabs">
+  <button class="page-tab active" onclick="showTab('treatments',this)">Treatments</button>
+  <button class="page-tab" onclick="showTab('lab-testing',this)">Lab Testing</button>
+  <button class="page-tab" onclick="showTab('how-it-works',this)">How It Works</button>
+  <button class="page-tab" onclick="showTab('about',this)">About</button>
 </div>
 </div>
-</section>
+</div>
 
-<!-- TREATMENTS -->
-<section class="treatments" id="treatments">
-<div class="container">
+<!-- TAB CONTENT -->
+<div class="tab-content" id="tab-treatments">
+<div class="container" style="padding-top:60px;padding-bottom:60px">
 <div class="text-center" style="margin-bottom:40px">
   <div class="section-label">Our Treatments</div>
   <h2 class="section-title">Pharmaceutical-Grade Protocols</h2>
   <p class="section-sub">Browse by category. All treatments require provider review and a valid prescription.</p>
 </div>
-
-<!-- Category Filter Tabs -->
 <div class="cat-tabs">
   <button class="cat-tab active" onclick="filterCat('all',this)">All Treatments</button>
   <button class="cat-tab" onclick="filterCat('weight-loss',this)">⚡ Weight Loss</button>
@@ -329,9 +313,7 @@ footer{background:var(--text);color:#fff;padding:60px 0 32px}
   <button class="cat-tab" onclick="filterCat('cognitive',this)">🧠 Cognitive</button>
   <button class="cat-tab" onclick="filterCat('immune',this)">🛡️ Immune</button>
 </div>
-
 <div class="product-grid" id="productGrid">
-
   <!-- WEIGHT LOSS -->
   <div class="product-card" data-cat="weight-loss">
     <div><span class="category-badge badge-teal">Weight Loss</span><span class="category-badge badge-hot">HOT</span></div>
@@ -369,7 +351,6 @@ footer{background:var(--text);color:#fff;padding:60px 0 32px}
     <div class="rx-badge"> Prescription Required</div>
     <a href="/intake" class="btn-outline">Sign Up to Order</a>
   </div>
-
   <!-- RECOVERY -->
   <div class="product-card" data-cat="recovery">
     <div><span class="category-badge badge-green">Recovery</span></div>
@@ -407,8 +388,7 @@ footer{background:var(--text);color:#fff;padding:60px 0 32px}
     <div class="rx-badge"> Prescription Required</div>
     <a href="/intake" class="btn-outline">Sign Up to Order</a>
   </div>
-
-  <!-- ANTI-AGING / LONGEVITY -->
+  <!-- LONGEVITY -->
   <div class="product-card" data-cat="longevity">
     <div><span class="category-badge badge-purple">Anti-Aging</span></div>
     <h3>NAD+</h3>
@@ -463,7 +443,6 @@ footer{background:var(--text);color:#fff;padding:60px 0 32px}
     <div class="rx-badge"> Prescription Required</div>
     <a href="/intake" class="btn-outline">Sign Up to Order</a>
   </div>
-
   <!-- PERFORMANCE -->
   <div class="product-card" data-cat="performance">
     <div><span class="category-badge badge-amber">Performance</span></div>
@@ -510,12 +489,11 @@ footer{background:var(--text);color:#fff;padding:60px 0 32px}
     <div class="rx-badge"> Prescription Required</div>
     <a href="/intake" class="btn-outline">Sign Up to Order</a>
   </div>
-
   <!-- SEXUAL HEALTH -->
   <div class="product-card" data-cat="sexual-health">
     <div><span class="category-badge badge-rose">Sexual Health</span></div>
     <h3>PT-141 (Bremelanotide)</h3>
-    <p class="tagline">Centrally-acting sexual health peptide — increases libido and arousal in men and women.</p>
+    <p class="tagline">Centrally-acting peptide — increases libido and arousal in men and women.</p>
     <div class="product-divider"></div>
     <div class="product-price">Starting at $129/mo</div>
     <div class="rx-badge"> Prescription Required</div>
@@ -530,7 +508,6 @@ footer{background:var(--text);color:#fff;padding:60px 0 32px}
     <div class="rx-badge"> Prescription Required</div>
     <a href="/intake" class="btn-outline">Sign Up to Order</a>
   </div>
-
   <!-- COGNITIVE -->
   <div class="product-card" data-cat="cognitive">
     <div><span class="category-badge badge-blue">Cognitive</span></div>
@@ -559,7 +536,6 @@ footer{background:var(--text);color:#fff;padding:60px 0 32px}
     <div class="rx-badge"> Prescription Required</div>
     <a href="/intake" class="btn-outline">Sign Up to Order</a>
   </div>
-
   <!-- IMMUNE -->
   <div class="product-card" data-cat="immune">
     <div><span class="category-badge badge-emerald">Immune</span></div>
@@ -588,29 +564,14 @@ footer{background:var(--text);color:#fff;padding:60px 0 32px}
     <div class="rx-badge"> Prescription Required</div>
     <a href="/intake" class="btn-outline">Sign Up to Order</a>
   </div>
-
-</div><!-- /product-grid -->
+</div>
 <p class="grid-note">All treatments require a valid prescription. Complete your free health assessment to connect with a licensed provider.</p>
 </div>
-</section>
+</div>
 
-<script>
-function filterCat(cat, btn) {
-  document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
-  btn.classList.add('active');
-  document.querySelectorAll('.product-card').forEach(card => {
-    if(cat === 'all' || card.dataset.cat === cat) {
-      card.classList.remove('hidden');
-    } else {
-      card.classList.add('hidden');
-    }
-  });
-}
-</script>
-
-<!-- LAB TESTING -->
-<section class="labs" id="lab-testing">
-<div class="container">
+<!-- LAB TESTING TAB -->
+<div class="tab-content" id="tab-lab-testing" style="display:none">
+<div class="container" style="padding-top:60px;padding-bottom:60px">
 <div class="text-center" style="margin-bottom:48px">
   <div class="section-label">Lab Testing</div>
   <h2 class="section-title">Know Your Numbers</h2>
@@ -638,16 +599,52 @@ function filterCat(cat, btn) {
   </div>
 </div>
 </div>
-</section>
+</div>
 
-<!-- WHY ASRX -->
-<section class="why" id="why">
-<div class="container">
+<!-- HOW IT WORKS TAB -->
+<div class="tab-content" id="tab-how-it-works" style="display:none;background:var(--alt)">
+<div class="container" style="padding-top:60px;padding-bottom:60px">
+<div class="text-center" style="margin-bottom:48px">
+  <div class="section-label">The Process</div>
+  <h2 class="section-title">Your Care, Guided Every Step</h2>
+  <p class="section-sub">From your first question to your treatment plan, we make it seamless.</p>
+</div>
+<div class="steps">
+  <div class="step">
+    <div class="step-num">1</div>
+    <h3>Complete Your Assessment</h3>
+    <p>Answer a few questions about your health goals. Takes under 2 minutes.</p>
+  </div>
+  <div class="step">
+    <div class="step-num">2</div>
+    <h3>Provider Review</h3>
+    <p>A licensed provider reviews your profile and designs your personalized protocol.</p>
+  </div>
+  <div class="step">
+    <div class="step-num">3</div>
+    <h3>Prescription Issued</h3>
+    <p>If approved, your provider issues a valid prescription and coordinates your order.</p>
+  </div>
+  <div class="step">
+    <div class="step-num">4</div>
+    <h3>Delivered to Your Door</h3>
+    <p>Pharmaceutical-grade treatment shipped discreetly, directly to you.</p>
+  </div>
+</div>
+<div style="text-align:center;margin-top:48px">
+  <a href="/intake" class="btn-primary" style="display:inline-block">Start Your Free Assessment →</a>
+</div>
+</div>
+</div>
+
+<!-- ABOUT TAB -->
+<div class="tab-content" id="tab-about" style="display:none">
+<div class="container" style="padding-top:60px;padding-bottom:60px">
 <div class="text-center" style="margin-bottom:48px">
   <div class="section-label">Why ASRX</div>
   <h2 class="section-title">Why Patients Choose ASRX</h2>
 </div>
-<div class="feature-grid">
+<div class="feature-grid" style="margin-bottom:60px">
   <div class="feature-card">
     <div class="feature-icon">🏥</div>
     <h3>No Insurance Required</h3>
@@ -679,13 +676,7 @@ function filterCat(cat, btn) {
     <p>Our care team is a message away. You're never just a ticket number.</p>
   </div>
 </div>
-</div>
-</section>
-
-<!-- TESTIMONIALS -->
-<section class="testimonials">
-<div class="container">
-<div class="text-center" style="margin-bottom:48px">
+<div class="text-center" style="margin-bottom:32px">
   <div class="section-label">Patient Stories</div>
   <h2 class="section-title">Real People. Real Results.</h2>
 </div>
@@ -702,58 +693,12 @@ function filterCat(cat, btn) {
   </div>
   <div class="testimonial-card">
     <div class="stars">★★★★★</div>
-    <blockquote>"Finally found a platform that takes peptide therapy seriously. Legitimate, fast, and professional. Exactly what I was looking for."</blockquote>
+    <blockquote>"Finally found a platform that takes peptide therapy seriously. Legitimate, fast, and professional."</blockquote>
     <cite>— D.K., California</cite>
   </div>
 </div>
 </div>
-</section>
-
-<!-- INTAKE FORM -->
-<section class="intake" id="intake" style="background:var(--alt)">
-<div class="container">
-<div class="intake-card">
-  <div id="intake-form-wrap">
-    <h2>Start Your Free Health Assessment</h2>
-    <p class="sub">Takes 2 minutes. No commitment. A licensed provider will review your profile within 48 hours.</p>
-    <form id="intake-form" onsubmit="submitIntake(event)">
-      <div class="form-row">
-        <div class="form-group"><label>First Name</label><input type="text" placeholder="Jane" required/></div>
-        <div class="form-group"><label>Last Name</label><input type="text" placeholder="Smith" required/></div>
-      </div>
-      <div class="form-group"><label>Email Address</label><input type="email" placeholder="jane@email.com" required/></div>
-      <div class="form-group"><label>Phone Number</label><input type="tel" placeholder="(555) 000-0000"/></div>
-      <div class="form-group">
-        <label>State</label>
-        <select required>
-          <option value="">Select your state...</option>
-          <option>Alabama</option><option>Alaska</option><option>Arizona</option><option>Arkansas</option><option>California</option><option>Colorado</option><option>Connecticut</option><option>Delaware</option><option>Florida</option><option>Georgia</option><option>Hawaii</option><option>Idaho</option><option>Illinois</option><option>Indiana</option><option>Iowa</option><option>Kansas</option><option>Kentucky</option><option>Louisiana</option><option>Maine</option><option>Maryland</option><option>Massachusetts</option><option>Michigan</option><option>Minnesota</option><option>Mississippi</option><option>Missouri</option><option>Montana</option><option>Nebraska</option><option>Nevada</option><option>New Hampshire</option><option>New Jersey</option><option>New Mexico</option><option>New York</option><option>North Carolina</option><option>North Dakota</option><option>Ohio</option><option>Oklahoma</option><option>Oregon</option><option>Pennsylvania</option><option>Rhode Island</option><option>South Carolina</option><option>South Dakota</option><option>Tennessee</option><option>Texas</option><option>Utah</option><option>Vermont</option><option>Virginia</option><option>Washington</option><option>West Virginia</option><option>Wisconsin</option><option>Wyoming</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>What brings you to ASRX?</label>
-        <select required>
-          <option value="">Select a reason...</option>
-          <option>Weight Loss</option>
-          <option>Recovery & Healing</option>
-          <option>Performance Optimization</option>
-          <option>Sexual Health</option>
-          <option>Lab Testing</option>
-          <option>Other</option>
-        </select>
-      </div>
-      <button type="submit" class="btn-submit">Submit Assessment</button>
-      <p class="hipaa-note">🔒 Your information is protected by HIPAA-compliant encryption</p>
-    </form>
-  </div>
-  <div class="success-msg" id="intake-success">
-    <div class="check">✅</div>
-    <h3>Assessment Received!</h3>
-    <p>Thank you! A licensed provider will review your profile within 48 hours. Check your email for next steps.</p>
-  </div>
 </div>
-</div>
-</section>
 
 <!-- FOOTER -->
 <footer>
@@ -795,10 +740,23 @@ function filterCat(cat, btn) {
 </footer>
 
 <script>
-function submitIntake(e){
-  e.preventDefault();
-  document.getElementById('intake-form-wrap').style.display='none';
-  document.getElementById('intake-success').style.display='block';
+function showTab(id, btn) {
+  document.querySelectorAll('.tab-content').forEach(t => t.style.display = 'none');
+  document.querySelectorAll('.page-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).style.display = 'block';
+  if(btn) btn.classList.add('active');
+  document.getElementById('pageTabsWrap').scrollIntoView({behavior:'smooth', block:'start'});
+}
+function showTabByName(id) {
+  const btn = Array.from(document.querySelectorAll('.page-tab')).find(b => b.getAttribute('onclick') && b.getAttribute('onclick').includes("'" + id + "'"));
+  showTab(id, btn);
+}
+function filterCat(cat, btn) {
+  document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.product-card').forEach(card => {
+    card.style.display = (cat === 'all' || card.dataset.cat === cat) ? 'flex' : 'none';
+  });
 }
 </script>
 </body>
