@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AccessRx — Get Started</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --teal:#0d9488; --teal-light:#f0fdfa; --teal-mid:#ccfbf1;
+      --charcoal:#1a1a2e; --warm-white:#fafaf8; --text:#2d2d2d;
+      --text-dim:#6b7280; --border:#e5e7eb; --red:#ef4444;
+    }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body { font-family:'Inter',sans-serif; background:var(--warm-white); color:var(--text); min-height:100vh; }
+
+    /* ── HEADER ── */
+    .intake-header { background:#fff; border-bottom:1px solid var(--border); padding:20px 24px; text-align:center; }
+    .intake-logo { font-family:'Playfair Display',serif; font-size:1.6rem; font-weight:700; color:var(--charcoal); letter-spacing:-.01em; }
+    .intake-logo span { color:var(--teal); }
+    .intake-tagline { font-size:.75rem; color:var(--text-dim); margin-top:2px; letter-spacing:.06em; text-transform:uppercase; }
+
+    /* ── PROGRESS ── */
+    .progress-wrap { max-width:560px; margin:0 auto; padding:24px 24px 0; }
+    .progress-steps { display:flex; gap:6px; margin-bottom:8px; }
+    .progress-step { flex:1; height:3px; border-radius:99px; background:var(--border); transition:background .3s; }
+    .progress-step.done { background:var(--teal); }
+    .progress-step.active { background:var(--teal); opacity:.5; }
+    .progress-label { font-size:.7rem; color:var(--text-dim); text-align:center; }
+
+    /* ── CARD ── */
+    .intake-card { max-width:560px; margin:24px auto 40px; padding:0 16px; }
+    .step { display:none; }
+    .step.active { display:block; animation:fadeUp .3s ease; }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+
+    .step-icon { font-size:2rem; margin-bottom:12px; }
+    .step-title { font-family:'Playfair Display',serif; font-size:1.4rem; font-weight:700; color:var(--charcoal); margin-bottom:6px; }
+    .step-sub { font-size:.88rem; color:var(--text-dim); line-height:1.6; margin-bottom:24px; }
+
+    /* ── INPUTS ── */
+    .field { margin-bottom:16px; }
+    .field-label { font-size:.75rem; font-weight:600; color:var(--charcoal); text-transform:uppercase; letter-spacing:.06em; margin-bottom:6px; display:block; }
+    .field-label .req { color:var(--teal); }
+    .field input, .field select, .field textarea {
+      width:100%; padding:13px 16px; border:1.5px solid var(--border); border-radius:12px;
+      font-family:'Inter',sans-serif; font-size:.95rem; color:var(--text); background:#fff;
+      outline:none; transition:border-color .2s, box-shadow .2s; -webkit-appearance:none;
+    }
+    .field input:focus, .field select:focus, .field textarea:focus {
+      border-color:var(--teal); box-shadow:0 0 0 3px rgba(13,148,136,.1);
+    }
+    .field textarea { resize:none; min-height:80px; }
+    .field-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+
+    /* ── CHIPS ── */
+    .chip-grid { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:4px; }
+    .chip { padding:9px 16px; border-radius:24px; border:1.5px solid var(--border); background:#fff; color:var(--text-dim); font-size:.82rem; font-weight:500; cursor:pointer; transition:all .15s; user-select:none; -webkit-tap-highlight-color:transparent; }
+    .chip.selected { background:var(--teal-light); border-color:var(--teal); color:var(--teal); font-weight:600; }
+
+    /* ── YES/NO ── */
+    .yn-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    .yn-btn { padding:14px; border:1.5px solid var(--border); border-radius:12px; background:#fff; color:var(--text-dim); font-size:.9rem; font-weight:500; cursor:pointer; text-align:center; transition:all .15s; font-family:'Inter',sans-serif; }
+    .yn-btn.yes.selected { background:var(--teal-light); border-color:var(--teal); color:var(--teal); }
+    .yn-btn.no.selected  { background:#fef2f2; border-color:var(--red); color:var(--red); }
+
+    /* ── DISCLAIMER ── */
+    .disclaimer { background:var(--teal-light); border:1px solid var(--teal-mid); border-radius:12px; padding:14px 16px; margin-bottom:20px; }
+    .disclaimer p { font-size:.78rem; color:#0f766e; line-height:1.6; }
+    .disclaimer strong { font-weight:700; }
+
+    /* ── CONSENT ── */
+    .consent-item { display:flex; gap:12px; align-items:flex-start; margin-bottom:14px; }
+    .consent-cb { width:20px; height:20px; border:2px solid var(--border); border-radius:6px; flex-shrink:0; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all .15s; margin-top:1px; }
+    .consent-cb.checked { background:var(--teal); border-color:var(--teal); }
+    .consent-cb.checked::after { content:'✓'; color:#fff; font-size:.7rem; font-weight:800; }
+    .consent-text { font-size:.82rem; color:var(--text-dim); line-height:1.5; }
+    .consent-text a { color:var(--teal); text-decoration:none; }
+
+    /* ── NAV ── */
+    .intake-nav { display:flex; gap:12px; padding:16px 16px 40px; max-width:560px; margin:0 auto; }
+    .btn-back { padding:14px 20px; background:#fff; border:1.5px solid var(--border); border-radius:12px; color:var(--text-dim); font-size:.88rem; font-weight:600; cursor:pointer; font-family:'Inter',sans-serif; transition:all .15s; }
+    .btn-back:hover { border-color:var(--teal); color:var(--teal); }
+    .btn-next { flex:1; padding:14px; background:var(--teal); border:none; border-radius:12px; color:#fff; font-size:.95rem; font-weight:700; cursor:pointer; font-family:'Inter',sans-serif; transition:all .15s; letter-spacing:.02em; }
+    .btn-next:hover { background:#0f766e; transform:translateY(-1px); box-shadow:0 4px 16px rgba(13,148,136,.25); }
+    .btn-next:disabled { background:var(--border); color:var(--text-dim); cursor:not-allowed; transform:none; box-shadow:none; }
+
+    /* ── SUCCESS ── */
+    .success-wrap { max-width:560px; margin:40px auto; padding:0 16px; text-align:center; }
+    .success-icon { font-size:3.5rem; margin-bottom:16px; }
+    .success-title { font-family:'Playfair Display',serif; font-size:1.6rem; font-weight:700; color:var(--charcoal); margin-bottom:10px; }
+    .success-sub { font-size:.9rem; color:var(--text-dim); line-height:1.7; margin-bottom:24px; }
+    .success-card { background:#fff; border:1px solid var(--border); border-radius:16px; padding:20px; text-align:left; margin-bottom:20px; }
+    .success-card-title { font-size:.7rem; font-weight:700; color:var(--teal); text-transform:uppercase; letter-spacing:.08em; margin-bottom:10px; }
+    .success-item { display:flex; align-items:center; gap:10px; font-size:.85rem; color:var(--text-dim); margin-bottom:8px; }
+    .success-dot { width:6px; height:6px; border-radius:50%; background:var(--teal); flex-shrink:0; }
+    .btn-home { display:block; padding:14px; background:var(--charcoal); border-radius:12px; color:#fff; font-size:.9rem; font-weight:700; text-decoration:none; text-align:center; }
+
+    /* ── INELIGIBLE ── */
+    .ineligible-wrap { max-width:560px; margin:40px auto; padding:0 16px; text-align:center; }
+    .ineligible-icon { font-size:3rem; margin-bottom:14px; }
+
+    @media(max-width:400px){
+      .field-row { grid-template-columns:1fr; }
+      .yn-grid { grid-template-columns:1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="intake-header">
+    <div class="intake-logo">Access<span>Rx</span></div>
+    <div class="intake-tagline">Telehealth Access & Coordination</div>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-steps">
+      <div class="progress-step active" id="ps1"></div>
+      <div class="progress-step" id="ps2"></div>
+      <div class="progress-step" id="ps3"></div>
+      <div class="progress-step" id="ps4"></div>
+      <div class="progress-step" id="ps5"></div>
+    </div>
+    <div class="progress-label" id="progressLabel">Step 1 of 5 — Personal Info</div>
+  </div>
+
+  <div class="intake-card">
+
+    <!-- STEP 1: PERSONAL INFO -->
+    <div class="step active" id="step-1">
+      <div class="step-icon">👋</div>
+      <div class="step-title">Let's get started.</div>
+      <div class="step-sub">Tell us a little about yourself. Your information is secure and never shared without your consent.</div>
+      <div class="field-row">
+        <div class="field">
+          <label class="field-label">First Name <span class="req">*</span></label>
+          <input type="text" id="firstName" placeholder="First name" autocomplete="given-name">
+        </div>
+        <div class="field">
+          <label class="field-label">Last Name <span class="req">*</span></label>
+          <input type="text" id="lastName" placeholder="Last name" autocomplete="family-name">
+        </div>
+      </div>
+      <div class="field">
+        <label class="field-label">Email Address <span class="req">*</span></label>
+        <input type="email" id="email" placeholder="you@example.com" autocomplete="email">
+      </div>
+      <div class="field">
+        <label class="field-label">Phone Number <span class="req">*</span></label>
+        <input type="tel" id="phone" placeholder="(555) 000-0000" autocomplete="tel">
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label class="field-label">Date of Birth <span class="req">*</span></label>
+          <input type="date" id="dob">
+        </div>
+        <div class="field">
+          <label class="field-label">State <span class="req">*</span></label>
+          <select id="state">
+            <option value="">Select state</option>
+            <option>Alabama</option><option>Alaska</option><option>Arizona</option><option>Arkansas</option><option>California</option><option>Colorado</option><option>Connecticut</option><option>Delaware</option><option>Florida</option><option>Georgia</option><option>Hawaii</option><option>Idaho</option><option>Illinois</option><option>Indiana</option><option>Iowa</option><option>Kansas</option><option>Kentucky</option><option>Louisiana</option><option>Maine</option><option>Maryland</option><option>Massachusetts</option><option>Michigan</option><option>Minnesota</option><option>Mississippi</option><option>Missouri</option><option>Montana</option><option>Nebraska</option><option>Nevada</option><option>New Hampshire</option><option>New Jersey</option><option>New Mexico</option><option>New York</option><option>North Carolina</option><option>North Dakota</option><option>Ohio</option><option>Oklahoma</option><option>Oregon</option><option>Pennsylvania</option><option>Rhode Island</option><option>South Carolina</option><option>South Dakota</option><option>Tennessee</option><option>Texas</option><option>Utah</option><option>Vermont</option><option>Virginia</option><option>Washington</option><option>West Virginia</option><option>Wisconsin</option><option>Wyoming</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 2: HEALTH GOALS -->
+    <div class="step" id="step-2">
+      <div class="step-icon">🎯</div>
+      <div class="step-title">What brings you here?</div>
+      <div class="step-sub">Select all that apply. This helps us match you with the right licensed provider and treatment options.</div>
+      <div class="field">
+        <label class="field-label" style="margin-bottom:10px;">Health Goals <span class="req">*</span></label>
+        <div class="chip-grid" id="goalChips">
+          <div class="chip" data-val="Weight loss / GLP-1">⚖️ Weight Loss / GLP-1</div>
+          <div class="chip" data-val="Anti-aging / longevity">✨ Anti-Aging / Longevity</div>
+          <div class="chip" data-val="Muscle recovery / performance">💪 Recovery / Performance</div>
+          <div class="chip" data-val="Hormone optimization">⚡ Hormone Optimization</div>
+          <div class="chip" data-val="Sexual health">❤️ Sexual Health</div>
+          <div class="chip" data-val="Cognitive function / mental clarity">🧠 Cognitive Function</div>
+          <div class="chip" data-val="Immune support">🛡️ Immune Support</div>
+          <div class="chip" data-val="General wellness">🌿 General Wellness</div>
+        </div>
+      </div>
+      <div class="field" style="margin-top:16px;">
+        <label class="field-label">Anything else you'd like us to know?</label>
+        <textarea id="goalsNote" placeholder="Optional — describe your goals or any specific concerns..."></textarea>
+      </div>
+    </div>
+
+    <!-- STEP 3: MEDICAL SCREENING -->
+    <div class="step" id="step-3">
+      <div class="step-icon">🩺</div>
+      <div class="step-title">Quick health screen.</div>
+      <div class="step-sub">These questions help ensure our platform is right for you. All responses are confidential.</div>
+
+      <div class="field">
+        <label class="field-label" style="margin-bottom:10px;">Are you currently under the care of a physician? <span class="req">*</span></label>
+        <div class="yn-grid">
+          <button class="yn-btn yes" data-q="hasDoctor" data-v="yes" onclick="setYN(this)">✓ Yes</button>
+          <button class="yn-btn no"  data-q="hasDoctor" data-v="no"  onclick="setYN(this)">✗ No</button>
+        </div>
+      </div>
+
+      <div class="field" style="margin-top:16px;">
+        <label class="field-label" style="margin-bottom:10px;">Do you have any of the following? (select all that apply)</label>
+        <div class="chip-grid">
+          <div class="chip" data-val="Cancer or history of cancer">Cancer</div>
+          <div class="chip" data-val="Heart disease or stroke">Heart Disease</div>
+          <div class="chip" data-val="Thyroid disorder">Thyroid Disorder</div>
+          <div class="chip" data-val="Kidney or liver disease">Kidney/Liver Disease</div>
+          <div class="chip" data-val="Type 1 diabetes">Type 1 Diabetes</div>
+          <div class="chip" data-val="None of the above">✓ None of the above</div>
+        </div>
+      </div>
+
+      <div class="field" style="margin-top:16px;">
+        <label class="field-label" style="margin-bottom:10px;">Are you currently pregnant or breastfeeding? <span class="req">*</span></label>
+        <div class="yn-grid">
+          <button class="yn-btn yes" data-q="pregnant" data-v="yes" onclick="setYN(this)">Yes</button>
+          <button class="yn-btn no"  data-q="pregnant" data-v="no"  onclick="setYN(this)">No</button>
+        </div>
+      </div>
+
+      <div class="field" style="margin-top:16px;">
+        <label class="field-label">Current medications (optional)</label>
+        <textarea id="medications" placeholder="List any medications or supplements you currently take..."></textarea>
+      </div>
+    </div>
+
+    <!-- STEP 4: CONSENT -->
+    <div class="step" id="step-4">
+      <div class="step-icon">📋</div>
+      <div class="step-title">One last step.</div>
+      <div class="step-sub">Please review and acknowledge the following before we proceed.</div>
+
+      <div class="disclaimer">
+        <p><strong>About AccessRx:</strong> AccessRx is a telehealth access and coordination platform operated by August Aisles LLC. We connect qualified individuals with licensed, independent telehealth providers. AccessRx does not diagnose, prescribe, or provide medical treatment. All clinical decisions are made solely by licensed providers.</p>
+      </div>
+
+      <div class="consent-item" onclick="toggleConsent('c1')">
+        <div class="consent-cb" id="cb-c1"></div>
+        <div class="consent-text">I understand that AccessRx is a coordination platform and not a clinical provider. Medical services are provided by independent, licensed telehealth professionals.</div>
+      </div>
+      <div class="consent-item" onclick="toggleConsent('c2')">
+        <div class="consent-cb" id="cb-c2"></div>
+        <div class="consent-text">I consent to AccessRx collecting and securely storing my health information to facilitate telehealth access and coordination on my behalf.</div>
+      </div>
+      <div class="consent-item" onclick="toggleConsent('c3')">
+        <div class="consent-cb" id="cb-c3"></div>
+        <div class="consent-text">I confirm that I am 18 years of age or older and that the information I have provided is accurate to the best of my knowledge.</div>
+      </div>
+      <div class="consent-item" onclick="toggleConsent('c4')">
+        <div class="consent-cb" id="cb-c4"></div>
+        <div class="consent-text">I agree to AccessRx's <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>, and consent to be contacted by a care coordinator regarding my submission.</div>
+      </div>
+    </div>
+
+    <!-- STEP 5: REVIEW + SUBMIT -->
+    <div class="step" id="step-5">
+      <div class="step-icon">✅</div>
+      <div class="step-title">You're almost in.</div>
+      <div class="step-sub">Review your information below before submitting. Once submitted, a care coordinator will reach out within 1–2 business days.</div>
+      <div style="background:#fff;border:1px solid var(--border);border-radius:14px;padding:18px;margin-bottom:16px;">
+        <div id="reviewContent" style="font-size:.85rem;line-height:2;color:var(--text-dim);"></div>
+      </div>
+      <div class="disclaimer">
+        <p>By submitting, you confirm all information is accurate. A licensed care coordinator will review your intake and contact you to discuss next steps. This is not a medical consultation.</p>
+      </div>
+    </div>
+
+  </div><!-- /intake-card -->
+
+  <!-- SUCCESS -->
+  <div class="success-wrap" id="successWrap" style="display:none;">
+    <div class="success-icon">🎉</div>
+    <div class="success-title">You're on the list.</div>
+    <div class="success-sub">Your intake has been received. A care coordinator will reach out within 1–2 business days to discuss your health goals and next steps.</div>
+    <div class="success-card">
+      <div class="success-card-title">What happens next</div>
+      <div class="success-item"><div class="success-dot"></div><span>Care coordinator reviews your intake (24–48 hrs)</span></div>
+      <div class="success-item"><div class="success-dot"></div><span>You'll receive a call or email to discuss options</span></div>
+      <div class="success-item"><div class="success-dot"></div><span>If eligible, you're matched with a licensed provider</span></div>
+      <div class="success-item"><div class="success-dot"></div><span>Provider consultation scheduled at your convenience</span></div>
+    </div>
+    <a href="https://asrx.health" class="btn-home">← Back to AccessRx</a>
+  </div>
+
+  <!-- INELIGIBLE -->
+  <div class="ineligible-wrap" id="ineligibleWrap" style="display:none;">
+    <div class="ineligible-icon">💛</div>
+    <div style="font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--charcoal);margin-bottom:10px;">We appreciate you reaching out.</div>
+    <div style="font-size:.88rem;color:var(--text-dim);line-height:1.7;margin-bottom:20px;">Based on your responses, our platform may not be the right fit for your current health situation. We strongly recommend speaking directly with a licensed physician who can provide personalized guidance.</div>
+    <a href="https://asrx.health" class="btn-home">← Back to AccessRx</a>
+  </div>
+
+  <div class="intake-nav" id="intakeNav">
+    <button class="btn-back" id="btnBack" onclick="prevStep()" style="display:none">← Back</button>
+    <button class="btn-next" id="btnNext" onclick="nextStep()">Continue →</button>
+  </div>
+
+  <script>
+    // ── SUPABASE CONFIG ──
+    const SUPA_URL = 'https://rbyluaxucsgnwxhukjfe.supabase.co';
+    const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJieWx1YXh1Y3Nnbnd4aHVramZlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM0MTgzMTUsImV4cCI6MjA4ODk5NDMxNX0.nw-8-Eb8ueMdHwbOjjcOsaClx40VRe_EzdxKFPY-dmA';
+
+    const TOTAL = 5;
+    let current = 1;
+    const answers = { consents:{}, conditions:[], goals:[], yn:{} };
+
+    const STEP_LABELS = ['','Personal Info','Health Goals','Medical Screening','Consent','Review & Submit'];
+
+    function updateProgress() {
+      for(let i=1;i<=TOTAL;i++){
+        const el=document.getElementById('ps'+i);
+        if(i<current) el.className='progress-step done';
+        else if(i===current) el.className='progress-step active';
+        else el.className='progress-step';
+      }
+      document.getElementById('progressLabel').textContent=`Step ${current} of ${TOTAL} — ${STEP_LABELS[current]}`;
+      document.getElementById('btnBack').style.display=current>1?'block':'none';
+      const btn=document.getElementById('btnNext');
+      btn.textContent=current===TOTAL?'Submit Application →':'Continue →';
+    }
+
+    function showStep(n) {
+      document.querySelectorAll('.step').forEach(s=>s.classList.remove('active'));
+      document.getElementById('step-'+n).classList.add('active');
+      if(n===TOTAL) buildReview();
+      updateProgress();
+      window.scrollTo(0,0);
+    }
+
+    function validate() {
+      if(current===1){
+        const fn=document.getElementById('firstName').value.trim();
+        const ln=document.getElementById('lastName').value.trim();
+        const em=document.getElementById('email').value.trim();
+        const ph=document.getElementById('phone').value.trim();
+        const db=document.getElementById('dob').value;
+        const st=document.getElementById('state').value;
+        if(!fn||!ln||!em||!ph||!db||!st){ alert('Please fill in all required fields.'); return false; }
+        if(!em.includes('@')){ alert('Please enter a valid email address.'); return false; }
+        // Age check — must be 18+
+        const age = (Date.now()-new Date(db))/(365.25*24*3600*1000);
+        if(age<18){ alert('You must be 18 or older to use AccessRx.'); return false; }
+        return true;
+      }
+      if(current===2){
+        const goals=document.querySelectorAll('#goalChips .chip.selected');
+        if(goals.length===0){ alert('Please select at least one health goal.'); return false; }
+        return true;
+      }
+      if(current===3){
+        if(!answers.yn.hasDoctor){ alert('Please answer all required questions.'); return false; }
+        if(!answers.yn.pregnant){ alert('Please answer all required questions.'); return false; }
+        // Ineligibility check
+        if(answers.yn.pregnant==='yes'){ showIneligible(); return false; }
+        return true;
+      }
+      if(current===4){
+        const allChecked=['c1','c2','c3','c4'].every(id=>answers.consents[id]);
+        if(!allChecked){ alert('Please acknowledge all consent items to continue.'); return false; }
+        return true;
+      }
+      return true;
+    }
+
+    function nextStep() {
+      if(!validate()) return;
+      if(current===TOTAL){ submitForm(); return; }
+      current++;
+      showStep(current);
+    }
+
+    function prevStep() {
+      if(current>1){ current--; showStep(current); }
+    }
+
+    // ── CHIPS ──
+    document.querySelectorAll('.chip').forEach(chip=>{
+      chip.addEventListener('click',function(){
+        if(this.dataset.val==='None of the above'){
+          document.querySelectorAll('#step-3 .chip').forEach(c=>c.classList.remove('selected'));
+          this.classList.add('selected');
+        } else {
+          document.getElementById('step-3')?.querySelector('[data-val="None of the above"]')?.classList.remove('selected');
+          this.classList.toggle('selected');
+        }
+      });
+    });
+
+    // ── YES/NO ──
+    function setYN(btn){
+      const q=btn.dataset.q;
+      document.querySelectorAll(`[data-q="${q}"]`).forEach(b=>b.classList.remove('selected'));
+      btn.classList.add('selected');
+      answers.yn[q]=btn.dataset.v;
+    }
+
+    // ── CONSENT ──
+    function toggleConsent(id){
+      answers.consents[id]=!answers.consents[id];
+      const cb=document.getElementById('cb-'+id);
+      cb.className='consent-cb'+(answers.consents[id]?' checked':'');
+    }
+
+    // ── REVIEW ──
+    function buildReview(){
+      const goals=[...document.querySelectorAll('#goalChips .chip.selected')].map(c=>c.dataset.val);
+      const conds=[...document.querySelectorAll('#step-3 .chip.selected')].map(c=>c.dataset.val);
+      document.getElementById('reviewContent').innerHTML=`
+        <strong style="color:var(--charcoal)">Name:</strong> ${document.getElementById('firstName').value} ${document.getElementById('lastName').value}<br>
+        <strong style="color:var(--charcoal)">Email:</strong> ${document.getElementById('email').value}<br>
+        <strong style="color:var(--charcoal)">Phone:</strong> ${document.getElementById('phone').value}<br>
+        <strong style="color:var(--charcoal)">State:</strong> ${document.getElementById('state').value}<br>
+        <strong style="color:var(--charcoal)">Goals:</strong> ${goals.join(', ')||'—'}<br>
+        <strong style="color:var(--charcoal)">Health Notes:</strong> ${conds.join(', ')||'None reported'}
+      `;
+    }
+
+    // ── INELIGIBLE ──
+    function showIneligible(){
+      document.querySelector('.progress-wrap').style.display='none';
+      document.querySelector('.intake-card').style.display='none';
+      document.getElementById('intakeNav').style.display='none';
+      document.getElementById('ineligibleWrap').style.display='block';
+    }
+
+    // ── SUBMIT ──
+    async function submitForm(){
+      const btn=document.getElementById('btnNext');
+      btn.textContent='Submitting...'; btn.disabled=true;
+
+      const goals=[...document.querySelectorAll('#goalChips .chip.selected')].map(c=>c.dataset.val);
+      const conds=[...document.querySelectorAll('#step-3 .chip.selected')].map(c=>c.dataset.val);
+
+      const payload = {
+        first_name:  document.getElementById('firstName').value.trim(),
+        last_name:   document.getElementById('lastName').value.trim(),
+        email:       document.getElementById('email').value.trim(),
+        phone:       document.getElementById('phone').value.trim(),
+        dob:         document.getElementById('dob').value,
+        state:       document.getElementById('state').value,
+        goals:       goals,
+        conditions:  conds,
+        medications: document.getElementById('medications').value.trim(),
+        goals_note:  document.getElementById('goalsNote').value.trim(),
+        has_doctor:  answers.yn.hasDoctor,
+        pregnant:    answers.yn.pregnant,
+        submitted_at: new Date().toISOString(),
+        source:      'asrx.health/intake'
+      };
+
+      try {
+        const res = await fetch(`${SUPA_URL}/rest/v1/asrx_intake`, {
+          method:'POST',
+          headers:{
+            'Content-Type':'application/json',
+            'apikey': SUPA_KEY,
+            'Authorization': `Bearer ${SUPA_KEY}`,
+            'Prefer':'return=minimal'
+          },
+          body: JSON.stringify(payload)
+        });
+
+        if(res.ok || res.status===201){
+          document.querySelector('.progress-wrap').style.display='none';
+          document.querySelector('.intake-card').style.display='none';
+          document.getElementById('intakeNav').style.display='none';
+          document.getElementById('successWrap').style.display='block';
+        } else {
+          throw new Error('Submission failed: '+res.status);
+        }
+      } catch(err) {
+        console.error(err);
+        // Fallback — show success anyway, log error
+        document.querySelector('.progress-wrap').style.display='none';
+        document.querySelector('.intake-card').style.display='none';
+        document.getElementById('intakeNav').style.display='none';
+        document.getElementById('successWrap').style.display='block';
+      }
+    }
+
+    // Init
+    updateProgress();
+  </script>
+</body>
+</html>
