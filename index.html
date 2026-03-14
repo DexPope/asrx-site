@@ -146,6 +146,21 @@ nav{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid va
 .back-btn:hover{border-color:var(--teal);color:var(--teal)}
 .product-view-title{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--text)}
 
+/* BIOMARKER GUIDE */
+.biomarker-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.biomarker-card{background:#fff;border-radius:var(--radius);padding:28px;box-shadow:var(--shadow);border:1.5px solid var(--border);display:flex;flex-direction:column;gap:14px}
+.bm-header{}
+.bm-name{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--text);margin-bottom:4px}
+.bm-range{font-size:11px;font-weight:600;color:var(--teal);text-transform:uppercase;letter-spacing:.5px}
+.bm-what{font-size:14px;color:var(--slate);line-height:1.6}
+.bm-levels{display:flex;flex-direction:column;gap:6px}
+.bm-level{font-size:12px;padding:8px 12px;border-radius:8px;line-height:1.5}
+.bm-low{background:#eff6ff;color:#1d4ed8}
+.bm-high{background:#fef2f2;color:#dc2626}
+.bm-protocol{font-size:12px;color:var(--slate);border-top:1px solid var(--border);padding-top:12px;margin-top:auto}
+.bm-protocol a{color:var(--teal);font-weight:600;text-decoration:none}
+.bm-protocol a:hover{text-decoration:underline}
+
 /* LAB TESTING */
 .labs{padding:80px 0;background:var(--alt)}
 .lab-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
@@ -219,7 +234,7 @@ footer{background:var(--text);color:#fff;padding:60px 0 32px}
   .hero-stats{justify-content:center}
   .steps{grid-template-columns:1fr 1fr;gap:32px}
   .steps::before{display:none}
-  .product-grid,.lab-grid,.feature-grid,.testimonial-grid{grid-template-columns:1fr 1fr}
+  .product-grid,.lab-grid,.feature-grid,.testimonial-grid,.biomarker-grid{grid-template-columns:1fr 1fr}
   .footer-top{grid-template-columns:1fr 1fr}
 }
 @media(max-width:600px){
@@ -227,7 +242,7 @@ footer{background:var(--text);color:#fff;padding:60px 0 32px}
   .hamburger{display:flex}
   .hero h1{font-size:36px}
   .section-title{font-size:28px}
-  .steps,.product-grid,.lab-grid,.feature-grid,.testimonial-grid{grid-template-columns:1fr}
+  .steps,.product-grid,.lab-grid,.feature-grid,.testimonial-grid,.biomarker-grid{grid-template-columns:1fr}
   .form-row{grid-template-columns:1fr}
   .footer-top{grid-template-columns:1fr}
   .intake-card{padding:28px 20px}
@@ -631,33 +646,168 @@ footer{background:var(--text);color:#fff;padding:60px 0 32px}
 </div>
 
 <div class="tab-content" id="tab-lab-testing" style="display:none">
-<div class="container" style="padding-top:60px;padding-bottom:60px">
-<div class="text-center" style="margin-bottom:48px">
-  <div class="section-label">Lab Testing</div>
-  <h2 class="section-title">Know Your Numbers</h2>
-  <p class="section-sub">Order comprehensive panels — no referral needed. Results in 2–3 business days.</p>
-</div>
-<div class="lab-grid">
-  <div class="lab-card">
-    <h3>Basic Wellness Panel</h3>
-    <p>CBC, metabolic panel, thyroid function, vitamin D — your essential baseline.</p>
-    <div class="lab-price">$79</div>
-    <a href="/intake" class="btn-teal">Request This Panel</a>
+<div class="container" style="padding-top:60px;padding-bottom:80px">
+
+  <!-- LAB PANELS -->
+  <div class="text-center" style="margin-bottom:48px">
+    <div class="section-label">Lab Testing</div>
+    <h2 class="section-title">Know Your Numbers</h2>
+    <p class="section-sub">Order comprehensive panels — no referral needed. Results in 2–3 business days.</p>
   </div>
-  <div class="lab-card" style="border-color:var(--teal)">
-    <div class="popular-badge">Most Popular</div>
-    <h3>Hormone & Metabolic Panel</h3>
-    <p>Full hormone profile, cortisol, insulin resistance markers, and thyroid optimization.</p>
-    <div class="lab-price">$149</div>
-    <a href="/intake" class="btn-teal">Request This Panel</a>
+  <div class="lab-grid" style="margin-bottom:80px">
+    <div class="lab-card">
+      <h3>Basic Wellness Panel</h3>
+      <p>CBC, metabolic panel, thyroid function, vitamin D — your essential baseline.</p>
+      <div class="lab-price">$79</div>
+      <a href="/intake" class="btn-teal">Request This Panel</a>
+    </div>
+    <div class="lab-card" style="border-color:var(--teal)">
+      <div class="popular-badge">Most Popular</div>
+      <h3>Hormone &amp; Metabolic Panel</h3>
+      <p>Full hormone profile, cortisol, insulin resistance markers, and thyroid optimization.</p>
+      <div class="lab-price">$149</div>
+      <a href="/intake" class="btn-teal">Request This Panel</a>
+    </div>
+    <div class="lab-card">
+      <h3>Complete Performance Panel</h3>
+      <p>Comprehensive biomarkers for serious health optimization — the full picture.</p>
+      <div class="lab-price">$249</div>
+      <a href="/intake" class="btn-teal">Request This Panel</a>
+    </div>
   </div>
-  <div class="lab-card">
-    <h3>Complete Performance Panel</h3>
-    <p>Comprehensive biomarkers for serious health optimization — the full picture.</p>
-    <div class="lab-price">$249</div>
-    <a href="/intake" class="btn-teal">Request This Panel</a>
+
+  <!-- BIOMARKER GUIDE -->
+  <div class="text-center" style="margin-bottom:48px">
+    <div class="section-label">Results Guide</div>
+    <h2 class="section-title">Understanding Your Biomarkers</h2>
+    <p class="section-sub">Got your results? Here's what each marker is actually telling you — in plain language.</p>
   </div>
-</div>
+  <div class="biomarker-grid" id="biomarkerGrid">
+
+    <div class="biomarker-card">
+      <div class="bm-header">
+        <div class="bm-name">Testosterone (Total)</div>
+        <div class="bm-range">Normal: 300–1000 ng/dL (men) · 15–70 ng/dL (women)</div>
+      </div>
+      <p class="bm-what">The primary anabolic hormone — drives energy, muscle mass, libido, mood, and metabolic rate.</p>
+      <div class="bm-levels">
+        <div class="bm-level bm-low">⬇ Low — fatigue, low drive, brain fog, muscle loss, poor recovery</div>
+        <div class="bm-level bm-high">⬆ High — may indicate supplementation or adrenal issues; rarely a concern naturally</div>
+      </div>
+      <div class="bm-protocol">Related protocols: <a href="#" onclick="openCategoryFromLab('performance','Performance');return false">Performance</a> · <a href="#" onclick="openCategoryFromLab('sexual-health','Sexual Health');return false">Sexual Health</a></div>
+    </div>
+
+    <div class="biomarker-card">
+      <div class="bm-header">
+        <div class="bm-name">Cortisol</div>
+        <div class="bm-range">Normal (AM): 6–23 mcg/dL</div>
+      </div>
+      <p class="bm-what">Your primary stress hormone — regulates inflammation, blood sugar, immune response, and sleep cycles.</p>
+      <div class="bm-levels">
+        <div class="bm-level bm-low">⬇ Low — chronic fatigue, immune dysfunction, poor stress tolerance</div>
+        <div class="bm-level bm-high">⬆ High — poor sleep, weight gain (belly fat), anxiety, immune suppression</div>
+      </div>
+      <div class="bm-protocol">Related protocols: <a href="#" onclick="openCategoryFromLab('cognitive','Cognitive Health');return false">Cognitive</a> · <a href="#" onclick="openCategoryFromLab('longevity','Anti-Aging');return false">Anti-Aging</a></div>
+    </div>
+
+    <div class="biomarker-card">
+      <div class="bm-header">
+        <div class="bm-name">TSH (Thyroid-Stimulating Hormone)</div>
+        <div class="bm-range">Normal: 0.4–4.0 mIU/L</div>
+      </div>
+      <p class="bm-what">Controls how much thyroid hormone your body makes. A high TSH means your thyroid is underperforming; low means it may be overactive.</p>
+      <div class="bm-levels">
+        <div class="bm-level bm-low">⬇ Low — hyperthyroid: rapid heartbeat, weight loss, anxiety, insomnia</div>
+        <div class="bm-level bm-high">⬆ High — hypothyroid: fatigue, weight gain, cold sensitivity, hair loss</div>
+      </div>
+      <div class="bm-protocol">Related protocols: <a href="#" onclick="openCategoryFromLab('longevity','Anti-Aging');return false">Anti-Aging</a> · <a href="#" onclick="openCategoryFromLab('weight-loss','Weight Loss');return false">Weight Loss</a></div>
+    </div>
+
+    <div class="biomarker-card">
+      <div class="bm-header">
+        <div class="bm-name">IGF-1 (Insulin-like Growth Factor)</div>
+        <div class="bm-range">Normal: 100–300 ng/mL (age-dependent)</div>
+      </div>
+      <p class="bm-what">Reflects your body's growth hormone activity — critical for muscle growth, fat metabolism, cellular repair, and aging.</p>
+      <div class="bm-levels">
+        <div class="bm-level bm-low">⬇ Low — poor recovery, muscle loss, reduced fat burning, accelerated aging</div>
+        <div class="bm-level bm-high">⬆ High — may indicate GH excess; monitored under provider care</div>
+      </div>
+      <div class="bm-protocol">Related protocols: <a href="#" onclick="openCategoryFromLab('performance','Performance');return false">Performance</a> · <a href="#" onclick="openCategoryFromLab('longevity','Anti-Aging');return false">Anti-Aging</a></div>
+    </div>
+
+    <div class="biomarker-card">
+      <div class="bm-header">
+        <div class="bm-name">Fasting Glucose</div>
+        <div class="bm-range">Normal: 70–99 mg/dL · Pre-diabetic: 100–125</div>
+      </div>
+      <p class="bm-what">Measures blood sugar after fasting — a key marker for metabolic health, insulin sensitivity, and diabetes risk.</p>
+      <div class="bm-levels">
+        <div class="bm-level bm-low">⬇ Low — hypoglycemia: shakiness, confusion, fatigue between meals</div>
+        <div class="bm-level bm-high">⬆ High — insulin resistance, pre-diabetes, increased cardiovascular risk</div>
+      </div>
+      <div class="bm-protocol">Related protocols: <a href="#" onclick="openCategoryFromLab('weight-loss','Weight Loss');return false">Weight Loss</a> · <a href="#" onclick="openCategoryFromLab('longevity','Anti-Aging');return false">Anti-Aging</a></div>
+    </div>
+
+    <div class="biomarker-card">
+      <div class="bm-header">
+        <div class="bm-name">Vitamin D (25-OH)</div>
+        <div class="bm-range">Optimal: 40–80 ng/mL · Deficient: &lt;20</div>
+      </div>
+      <p class="bm-what">A hormone-like vitamin essential for immune function, bone density, mood regulation, and testosterone production.</p>
+      <div class="bm-levels">
+        <div class="bm-level bm-low">⬇ Low — immune dysfunction, low mood, bone loss, poor testosterone levels</div>
+        <div class="bm-level bm-high">⬆ High (&gt;100) — rare; may cause calcium buildup; usually from excess supplementation</div>
+      </div>
+      <div class="bm-protocol">Related protocols: <a href="#" onclick="openCategoryFromLab('immune','Immune Support');return false">Immune</a> · <a href="#" onclick="openCategoryFromLab('longevity','Anti-Aging');return false">Anti-Aging</a></div>
+    </div>
+
+    <div class="biomarker-card">
+      <div class="bm-header">
+        <div class="bm-name">Estradiol (E2)</div>
+        <div class="bm-range">Men: 10–40 pg/mL · Women (cycling): 30–400 pg/mL</div>
+      </div>
+      <p class="bm-what">The primary estrogen — affects mood, bone health, cardiovascular function, libido, and cognitive clarity in both sexes.</p>
+      <div class="bm-levels">
+        <div class="bm-level bm-low">⬇ Low — joint pain, low libido, brain fog, mood swings, bone loss</div>
+        <div class="bm-level bm-high">⬆ High (men) — water retention, gynecomastia, low testosterone symptoms</div>
+      </div>
+      <div class="bm-protocol">Related protocols: <a href="#" onclick="openCategoryFromLab('sexual-health','Sexual Health');return false">Sexual Health</a> · <a href="#" onclick="openCategoryFromLab('longevity','Anti-Aging');return false">Anti-Aging</a></div>
+    </div>
+
+    <div class="biomarker-card">
+      <div class="bm-header">
+        <div class="bm-name">CRP (C-Reactive Protein)</div>
+        <div class="bm-range">Optimal: &lt;1.0 mg/L · Elevated: &gt;3.0</div>
+      </div>
+      <p class="bm-what">A key marker of systemic inflammation — elevated CRP is linked to cardiovascular disease, metabolic dysfunction, and accelerated aging.</p>
+      <div class="bm-levels">
+        <div class="bm-level bm-low">⬇ Low — healthy inflammatory baseline; ideal</div>
+        <div class="bm-level bm-high">⬆ High — chronic inflammation: poor recovery, cardiovascular risk, immune dysfunction</div>
+      </div>
+      <div class="bm-protocol">Related protocols: <a href="#" onclick="openCategoryFromLab('recovery','Recovery');return false">Recovery</a> · <a href="#" onclick="openCategoryFromLab('immune','Immune Support');return false">Immune</a></div>
+    </div>
+
+    <div class="biomarker-card">
+      <div class="bm-header">
+        <div class="bm-name">DHEA-S</div>
+        <div class="bm-range">Men: 100–500 mcg/dL · Women: 35–430 mcg/dL</div>
+      </div>
+      <p class="bm-what">A precursor hormone produced by the adrenal glands — supports energy, immune function, and is a key anti-aging marker.</p>
+      <div class="bm-levels">
+        <div class="bm-level bm-low">⬇ Low — fatigue, poor immune response, low mood, accelerated aging signs</div>
+        <div class="bm-level bm-high">⬆ High — may indicate adrenal overactivity; acne, hair changes in women</div>
+      </div>
+      <div class="bm-protocol">Related protocols: <a href="#" onclick="openCategoryFromLab('longevity','Anti-Aging');return false">Anti-Aging</a> · <a href="#" onclick="openCategoryFromLab('performance','Performance');return false">Performance</a></div>
+    </div>
+
+  </div><!-- /biomarkerGrid -->
+
+  <div class="text-center" style="margin-top:48px">
+    <p style="font-size:14px;color:var(--slate);max-width:560px;margin:0 auto 24px">This guide is for educational purposes only. Always review your results with a licensed provider before making any health decisions.</p>
+    <a href="/intake" class="btn-primary" style="display:inline-block">Discuss My Results With a Provider</a>
+  </div>
+
 </div>
 </div>
 
@@ -849,6 +999,11 @@ function openCategory(cat, title) {
     card.style.display = card.dataset.cat === cat ? 'flex' : 'none';
   });
   document.getElementById('pageTabsWrap').scrollIntoView({behavior:'smooth', block:'start'});
+}
+function openCategoryFromLab(cat, title) {
+  // Switch to Treatments tab first, then open category
+  showTabByName('treatments');
+  setTimeout(() => openCategory(cat, title), 100);
 }
 function closeCategory() {
   const cg = document.getElementById('categoryGrid');
