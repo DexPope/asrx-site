@@ -218,7 +218,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(250,250,248,.95);backdrop-
 
 /* ── TESTIMONIALS ── */
 .testimonials{padding:88px 0;background:var(--alt)}
-.testimonial-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.testimonial-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:0}
 .testimonial-card{background:#fff;border-radius:var(--radius);padding:32px;box-shadow:var(--shadow)}
 .stars{color:#f59e0b;font-size:15px;margin-bottom:14px;letter-spacing:2px}
 .testimonial-card blockquote{font-size:15px;color:var(--text);line-height:1.75;margin-bottom:18px;font-style:italic;font-family:'Playfair Display',serif}
@@ -440,6 +440,19 @@ footer{background:#0e1520;padding:60px 0 32px}
     <div class="hero-actions">
       <a href="/intake" class="btn-primary">Begin Your Assessment</a>
       <span class="hero-note">Takes 2 min · No commitment · No referral needed</span>
+    </div>
+    <!-- Social proof avatar cluster -->
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:36px;flex-wrap:wrap">
+      <div style="display:flex">
+        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=60&h=60&fit=crop&crop=face" style="width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid #fff;margin-right:-10px"/>
+        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=60&h=60&fit=crop&crop=face" style="width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid #fff;margin-right:-10px"/>
+        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=60&h=60&fit=crop&crop=face" style="width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid #fff;margin-right:-10px"/>
+        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=60&h=60&fit=crop&crop=face" style="width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid #fff"/>
+      </div>
+      <div>
+        <div style="font-size:14px;font-weight:700;color:var(--text)">4,200+ active members</div>
+        <div style="display:flex;gap:2px;color:#f59e0b;font-size:12px;margin-top:1px">★★★★★ <span style="color:var(--slate);font-weight:500;margin-left:4px">4.9 avg rating</span></div>
+      </div>
     </div>
     <div class="hero-proof">
       <div class="hero-stat"><strong>50+</strong><span>States Covered</span></div>
@@ -799,21 +812,21 @@ footer{background:#0e1520;padding:60px 0 32px}
 </div>
 <div class="team-grid">
   <div class="team-card">
-    <div class="team-avatar">👩‍⚕️</div>
+    <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=160&h=160&fit=crop&crop=face" alt="Provider" style="width:80px;height:80px;border-radius:50%;object-fit:cover;margin:0 auto 18px;display:block;border:3px solid var(--teal-light)"/>
     <h3>Metabolic Medicine</h3>
     <div class="credentials">MD · Board Certified</div>
     <p>Specialists in GLP-1 therapy, insulin resistance, and body composition. Experienced in prescribing and monitoring weight management protocols for complex patients.</p>
     <div class="team-badge">⚡ GLP-1 · Metabolic Health</div>
   </div>
   <div class="team-card">
-    <div class="team-avatar">👨‍⚕️</div>
+    <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=160&h=160&fit=crop&crop=face" alt="Provider" style="width:80px;height:80px;border-radius:50%;object-fit:cover;margin:0 auto 18px;display:block;border:3px solid var(--teal-light)"/>
     <h3>Endocrinology & Hormones</h3>
     <div class="credentials">MD · Fellowship Trained</div>
     <p>Deep expertise in hormone optimization — testosterone, estrogen, thyroid, and adrenal function. Designing protocols for men and women seeking hormonal balance.</p>
     <div class="team-badge">🔬 Hormones · Anti-Aging</div>
   </div>
   <div class="team-card">
-    <div class="team-avatar">🧬</div>
+    <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=160&h=160&fit=crop&crop=face" alt="Provider" style="width:80px;height:80px;border-radius:50%;object-fit:cover;margin:0 auto 18px;display:block;border:3px solid var(--teal-light)"/>
     <h3>Regenerative Medicine</h3>
     <div class="credentials">DO · Longevity Specialist</div>
     <p>Experts in peptide therapy, cellular repair, and performance optimization. Trained in the latest research on BPC-157, growth hormone secretagogues, and NAD+ protocols.</p>
@@ -951,8 +964,9 @@ footer{background:#0e1520;padding:60px 0 32px}
 </section>
 
 <!-- SWITCH SECTION -->
-<section class="switch-section">
-<div class="container">
+<section class="switch-section" style="position:relative;overflow:hidden">
+<img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1400&h=600&fit=crop&crop=center" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.08;pointer-events:none"/>
+<div class="container" style="position:relative;z-index:1">
 <div class="switch-inner">
   <div class="section-label" style="color:var(--teal-dark)">Already on a Protocol?</div>
   <h2>Switch to ASRX and Keep Your Current Dose</h2>
@@ -985,22 +999,74 @@ footer{background:#0e1520;padding:60px 0 32px}
 <div class="text-center" style="margin-bottom:52px">
   <div class="section-label">Patient Stories</div>
   <h2 class="section-title">Real People. Real Results.</h2>
+  <p class="section-sub">From weight loss to recovery to performance — here's what ASRX members are experiencing.</p>
 </div>
 <div class="testimonial-grid">
   <div class="testimonial-card">
-    <div class="stars">★★★★★</div>
-    <blockquote>"I was skeptical at first — but the whole process felt just like a real doctor's visit. Actually better, because it was completely on my schedule."</blockquote>
-    <cite><div class="cite-dot">M</div>M.T., Texas</cite>
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px">
+      <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&h=80&fit=crop&crop=face" alt="" style="width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid var(--teal-light)"/>
+      <div>
+        <div style="font-weight:700;font-size:15px;color:var(--text)">Marcus T.</div>
+        <div style="font-size:12px;color:var(--slate)">Austin, TX · Semaglutide</div>
+      </div>
+      <div class="stars" style="margin-left:auto;font-size:13px">★★★★★</div>
+    </div>
+    <blockquote>"I was skeptical at first — but the whole process felt just like a real doctor's visit. Actually better, because it was completely on my schedule. Down 18 lbs in 10 weeks."</blockquote>
   </div>
   <div class="testimonial-card">
-    <div class="stars">★★★★★</div>
-    <blockquote>"Lost 22 lbs in 3 months with semaglutide. The provider was attentive and responsive throughout the whole process. I felt genuinely cared for."</blockquote>
-    <cite><div class="cite-dot">J</div>J.R., Florida</cite>
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px">
+      <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&h=80&fit=crop&crop=face" alt="" style="width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid var(--teal-light)"/>
+      <div>
+        <div style="font-weight:700;font-size:15px;color:var(--text)">Jamie R.</div>
+        <div style="font-size:12px;color:var(--slate)">Miami, FL · Tirzepatide</div>
+      </div>
+      <div class="stars" style="margin-left:auto;font-size:13px">★★★★★</div>
+    </div>
+    <blockquote>"Lost 22 lbs in 3 months. The provider was attentive and responsive throughout the whole process. I felt genuinely cared for — not just another patient number."</blockquote>
   </div>
   <div class="testimonial-card">
-    <div class="stars">★★★★★</div>
-    <blockquote>"Finally a platform that takes peptide therapy seriously. Legitimate, professional, and fast. I've recommended ASRX to everyone in my circle."</blockquote>
-    <cite><div class="cite-dot">D</div>D.K., California</cite>
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px">
+      <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&crop=face" alt="" style="width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid var(--teal-light)"/>
+      <div>
+        <div style="font-weight:700;font-size:15px;color:var(--text)">Derek K.</div>
+        <div style="font-size:12px;color:var(--slate)">San Diego, CA · BPC-157 + TB-500</div>
+      </div>
+      <div class="stars" style="margin-left:auto;font-size:13px">★★★★★</div>
+    </div>
+    <blockquote>"Finally a platform that takes peptide therapy seriously. My shoulder injury that wouldn't heal for 8 months recovered in 6 weeks. Legitimate, professional, and fast."</blockquote>
+  </div>
+  <div class="testimonial-card">
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px">
+      <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=80&h=80&fit=crop&crop=face" alt="" style="width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid var(--teal-light)"/>
+      <div>
+        <div style="font-weight:700;font-size:15px;color:var(--text)">Alicia M.</div>
+        <div style="font-size:12px;color:var(--slate)">Chicago, IL · CJC-1295 / Ipamorelin</div>
+      </div>
+      <div class="stars" style="margin-left:auto;font-size:13px">★★★★★</div>
+    </div>
+    <blockquote>"My energy, sleep quality, and body composition have all improved dramatically. The intake process was seamless — I had a provider response within 24 hours."</blockquote>
+  </div>
+  <div class="testimonial-card">
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px">
+      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=face" alt="" style="width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid var(--teal-light)"/>
+      <div>
+        <div style="font-weight:700;font-size:15px;color:var(--text)">Ryan P.</div>
+        <div style="font-size:12px;color:var(--slate)">Nashville, TN · NAD+ Protocol</div>
+      </div>
+      <div class="stars" style="margin-left:auto;font-size:13px">★★★★★</div>
+    </div>
+    <blockquote>"I'm 51 and feel better than I did at 38. The NAD+ protocol combined with my provider's guidance completely changed how I think about aging. This is the future of healthcare."</blockquote>
+  </div>
+  <div class="testimonial-card">
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px">
+      <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&h=80&fit=crop&crop=face" alt="" style="width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid var(--teal-light)"/>
+      <div>
+        <div style="font-weight:700;font-size:15px;color:var(--text)">Sofia L.</div>
+        <div style="font-size:12px;color:var(--slate)">Atlanta, GA · Semax / Cognitive</div>
+      </div>
+      <div class="stars" style="margin-left:auto;font-size:13px">★★★★★</div>
+    </div>
+    <blockquote>"Brain fog I'd had for years cleared within the first month. The cognitive protocol was tailored exactly to what I described. I can't recommend ASRX enough."</blockquote>
   </div>
 </div>
 </div>
