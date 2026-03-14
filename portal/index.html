@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Member Portal — ASRX</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#fafaf8;--surface:#fff;--alt:#f2f5f3;
+  --teal:#0d9488;--teal-light:#e6f4f3;--teal-dark:#0a7870;
+  --text:#1a1a2e;--slate:#5a6478;--border:#e2e8f0;
+  --shadow:0 4px 24px rgba(0,0,0,.07);--shadow-lg:0 20px 60px rgba(0,0,0,.12);
+  --radius:18px;--pill:50px;--red:#ef4444;
+}
+html,body{height:100%;font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+
+/* ── SHARED NAV ── */
+nav{background:#fff;border-bottom:1px solid var(--border);padding:14px 24px;display:flex;align-items:center;justify-content:space-between}
+.logo-wrap{display:flex;flex-direction:column;line-height:1.15;text-decoration:none}
+.logo-main{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--text);letter-spacing:.5px}
+.logo-main span{color:var(--teal)}
+.logo-sub{font-size:9px;color:var(--slate);letter-spacing:.3px}
+
+/* ══════════════════════
+   LOGIN SCREEN
+══════════════════════ */
+.login-wrap{min-height:calc(100vh - 57px);display:flex;align-items:center;justify-content:center;padding:40px 24px;background:linear-gradient(150deg,#fafaf8 0%,#edf7f5 60%,#d4eeeb 100%)}
+.login-card{background:#fff;border-radius:28px;padding:48px 44px;box-shadow:var(--shadow-lg);width:100%;max-width:440px}
+.login-head{text-align:center;margin-bottom:36px}
+.login-head h1{font-family:'Playfair Display',serif;font-size:30px;font-weight:700;color:var(--text);margin-bottom:8px}
+.login-head p{font-size:14px;color:var(--slate)}
+.form-group{margin-bottom:20px}
+.form-group label{display:block;font-size:13px;font-weight:600;color:var(--text);margin-bottom:7px}
+.form-group input{width:100%;padding:13px 16px;border:1.5px solid var(--border);border-radius:12px;font-family:'Inter',sans-serif;font-size:15px;color:var(--text);background:#fff;outline:none;transition:border-color .2s}
+.form-group input:focus{border-color:var(--teal)}
+.form-group input::placeholder{color:#b0b8c8}
+.forgot{display:block;text-align:right;font-size:12px;color:var(--teal);font-weight:600;margin-top:-12px;margin-bottom:24px}
+.btn-login{width:100%;background:var(--teal);color:#fff;padding:14px;border-radius:var(--pill);font-size:15px;font-weight:700;border:none;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s}
+.btn-login:hover{background:var(--teal-dark)}
+.btn-login:disabled{opacity:.6;cursor:not-allowed}
+.login-divider{text-align:center;font-size:13px;color:var(--slate);margin:20px 0}
+.login-card .alt-cta{display:block;text-align:center;border:1.5px solid var(--border);color:var(--text);padding:13px;border-radius:var(--pill);font-size:14px;font-weight:600;transition:all .2s;text-decoration:none}
+.login-card .alt-cta:hover{border-color:var(--teal);color:var(--teal)}
+.login-error{background:#fef2f2;border:1px solid #fecaca;color:var(--red);border-radius:10px;padding:12px 16px;font-size:13px;margin-bottom:20px;display:none}
+.login-error.show{display:block}
+
+/* ══════════════════════
+   DASHBOARD
+══════════════════════ */
+#dashboardView{display:none}
+.portal-layout{display:grid;grid-template-columns:260px 1fr;min-height:calc(100vh - 57px)}
+
+/* Sidebar */
+.sidebar{background:var(--text);color:#fff;padding:32px 20px;display:flex;flex-direction:column;gap:4px}
+.sidebar-section{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,.3);padding:14px 12px 8px;margin-top:8px}
+.sidebar-section:first-child{margin-top:0}
+.sidebar a,.sidebar-btn{display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;font-size:14px;font-weight:500;color:rgba(255,255,255,.7);cursor:pointer;border:none;background:none;font-family:'Inter',sans-serif;width:100%;text-align:left;text-decoration:none;transition:all .15s}
+.sidebar a:hover,.sidebar-btn:hover{background:rgba(255,255,255,.08);color:#fff}
+.sidebar a.active{background:rgba(13,148,136,.25);color:#fff}
+.sidebar-icon{width:18px;text-align:center;font-size:16px;flex-shrink:0}
+.sidebar-footer{margin-top:auto;padding-top:20px;border-top:1px solid rgba(255,255,255,.1)}
+.sidebar-user{display:flex;align-items:center;gap:12px;padding:8px 0;margin-bottom:12px}
+.sidebar-avatar{width:36px;height:36px;border-radius:50%;background:rgba(13,148,136,.3);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:var(--teal);flex-shrink:0}
+.sidebar-user-name{font-size:14px;font-weight:600;color:#fff}
+.sidebar-user-label{font-size:11px;color:rgba(255,255,255,.4)}
+
+/* Main content */
+.portal-main{background:var(--bg);overflow-y:auto}
+.portal-topbar{background:#fff;border-bottom:1px solid var(--border);padding:18px 32px;display:flex;align-items:center;justify-content:space-between}
+.portal-topbar h2{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--text)}
+.portal-topbar-right{display:flex;align-items:center;gap:12px}
+.notif-btn{width:38px;height:38px;border-radius:50%;border:1.5px solid var(--border);background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;transition:all .2s}
+.notif-btn:hover{border-color:var(--teal)}
+.portal-content{padding:32px}
+.dash-greeting{margin-bottom:32px}
+.dash-greeting h3{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--text);margin-bottom:4px}
+.dash-greeting p{font-size:14px;color:var(--slate)}
+
+/* Cards grid */
+.dash-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:32px}
+.dash-card{background:#fff;border-radius:var(--radius);padding:24px;box-shadow:var(--shadow)}
+.dash-card-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--slate);margin-bottom:10px}
+.dash-card-val{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--text);margin-bottom:4px}
+.dash-card-sub{font-size:12px;color:var(--slate)}
+.dash-card-icon{float:right;font-size:28px;opacity:.4}
+.status-pill{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:var(--pill);font-size:12px;font-weight:600}
+.status-active{background:#f0fdf4;color:#16a34a}
+.status-pending{background:#fffbeb;color:#d97706}
+.status-shipped{background:var(--teal-light);color:var(--teal)}
+
+/* Protocol card */
+.protocol-card{background:#fff;border-radius:var(--radius);padding:28px;box-shadow:var(--shadow);margin-bottom:24px}
+.protocol-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:gap}
+.protocol-header h4{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--text)}
+.protocol-details{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:20px}
+.protocol-detail{background:var(--alt);border-radius:12px;padding:14px}
+.pd-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--slate);margin-bottom:4px}
+.pd-val{font-size:15px;font-weight:700;color:var(--text)}
+.progress-wrap{margin-bottom:8px}
+.progress-label{display:flex;justify-content:space-between;font-size:12px;color:var(--slate);margin-bottom:8px}
+.progress-bar{background:var(--border);border-radius:4px;height:8px;overflow:hidden}
+.progress-fill{height:100%;background:var(--teal);border-radius:4px;transition:width .6s}
+
+/* Messages */
+.messages-list{display:flex;flex-direction:column;gap:12px}
+.message-item{background:#fff;border-radius:14px;padding:18px 20px;box-shadow:var(--shadow);display:flex;align-items:flex-start;gap:16px}
+.msg-avatar{width:40px;height:40px;border-radius:50%;background:var(--teal-light);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.msg-body h5{font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px}
+.msg-body p{font-size:13px;color:var(--slate);line-height:1.6}
+.msg-time{font-size:11px;color:var(--slate);white-space:nowrap;margin-left:auto}
+.unread-dot{width:8px;height:8px;border-radius:50%;background:var(--teal);flex-shrink:0;margin-top:4px}
+
+/* Section title */
+.section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.section-head h4{font-size:16px;font-weight:700;color:var(--text)}
+.section-head a{font-size:13px;color:var(--teal);font-weight:600;text-decoration:none}
+
+/* Tab views (hidden by default) */
+.portal-view{display:none}
+.portal-view.active{display:block}
+
+/* Shipment tracker */
+.shipment-timeline{display:flex;align-items:center;gap:0;margin:28px 0}
+.ship-step{flex:1;text-align:center;position:relative}
+.ship-step::before{content:'';position:absolute;top:18px;left:50%;right:-50%;height:2px;background:var(--border);z-index:0}
+.ship-step:last-child::before{display:none}
+.ship-step-dot{width:36px;height:36px;border-radius:50%;background:var(--alt);border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:14px;margin:0 auto 10px;position:relative;z-index:1}
+.ship-step.done .ship-step-dot{background:var(--teal);border-color:var(--teal);color:#fff}
+.ship-step.current .ship-step-dot{background:#fff;border-color:var(--teal);border-width:3px;box-shadow:0 0 0 4px var(--teal-light)}
+.ship-step-label{font-size:12px;font-weight:600;color:var(--slate)}
+.ship-step.done .ship-step-label,.ship-step.current .ship-step-label{color:var(--text)}
+.ship-step-date{font-size:11px;color:var(--slate);margin-top:2px}
+
+/* Responsive */
+@media(max-width:900px){
+  .portal-layout{grid-template-columns:1fr}
+  .sidebar{display:none}
+  .dash-cards{grid-template-columns:1fr 1fr}
+  .protocol-details{grid-template-columns:1fr 1fr}
+}
+@media(max-width:600px){
+  .dash-cards{grid-template-columns:1fr}
+  .portal-content{padding:20px}
+  .login-card{padding:32px 24px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="logo-wrap">
+    <span class="logo-main">AS<span>RX</span></span>
+    <span class="logo-sub">AccessRx | A Subsidiary of August Aisles LLC</span>
+  </a>
+  <div id="navRight" style="font-size:13px;color:var(--slate)">Member Portal</div>
+</nav>
+
+<!-- ══════════════ LOGIN SCREEN ══════════════ -->
+<div id="loginView" class="login-wrap">
+<div class="login-card">
+  <div class="login-head">
+    <h1>Welcome Back</h1>
+    <p>Log in to access your health protocol and provider messages.</p>
+  </div>
+  <div class="login-error" id="loginError"></div>
+  <div class="form-group">
+    <label>Email Address</label>
+    <input type="email" id="loginEmail" placeholder="you@example.com" autocomplete="email"/>
+  </div>
+  <div class="form-group">
+    <label>Password</label>
+    <input type="password" id="loginPassword" placeholder="••••••••" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()"/>
+  </div>
+  <a href="#" class="forgot" onclick="doForgotPassword();return false">Forgot password?</a>
+  <button class="btn-login" id="loginBtn" onclick="doLogin()">Log In</button>
+  <div class="login-divider">— or —</div>
+  <a href="/intake" class="alt-cta">New here? Begin Your Assessment →</a>
+</div>
+</div>
+
+<!-- ══════════════ DASHBOARD ══════════════ -->
+<div id="dashboardView">
+<div class="portal-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-section">Menu</div>
+    <a href="#" class="active" onclick="showView('overview',this);return false"><span class="sidebar-icon">🏠</span>Overview</a>
+    <a href="#" onclick="showView('protocol',this);return false"><span class="sidebar-icon">💊</span>My Protocol</a>
+    <a href="#" onclick="showView('shipments',this);return false"><span class="sidebar-icon">📦</span>Shipments</a>
+    <a href="#" onclick="showView('labs',this);return false"><span class="sidebar-icon">🧪</span>Lab Results</a>
+    <a href="#" onclick="showView('messages',this);return false"><span class="sidebar-icon">💬</span>Provider Messages</a>
+
+    <div class="sidebar-section">Account</div>
+    <a href="#" onclick="showView('profile',this);return false"><span class="sidebar-icon">👤</span>My Profile</a>
+    <a href="#" onclick="showView('billing',this);return false"><span class="sidebar-icon">💳</span>Billing</a>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <div class="sidebar-avatar" id="sidebarInitial">?</div>
+        <div>
+          <div class="sidebar-user-name" id="sidebarName">Loading...</div>
+          <div class="sidebar-user-label">Active Member</div>
+        </div>
+      </div>
+      <button class="sidebar-btn" onclick="doLogout()"><span class="sidebar-icon">🚪</span>Log Out</button>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="portal-main">
+    <div class="portal-topbar">
+      <h2 id="viewTitle">Overview</h2>
+      <div class="portal-topbar-right">
+        <button class="notif-btn" title="Notifications">🔔</button>
+        <a href="/" style="font-size:13px;color:var(--teal);font-weight:600;text-decoration:none">← Back to Site</a>
+      </div>
+    </div>
+    <div class="portal-content">
+
+      <!-- OVERVIEW VIEW -->
+      <div class="portal-view active" id="view-overview">
+        <div class="dash-greeting">
+          <h3>Good to see you, <span id="greetName">Member</span> 👋</h3>
+          <p id="greetDate">Loading your health summary...</p>
+        </div>
+        <div class="dash-cards">
+          <div class="dash-card">
+            <span class="dash-card-icon">💊</span>
+            <div class="dash-card-label">Active Protocol</div>
+            <div class="dash-card-val" style="font-size:20px">Semaglutide</div>
+            <div style="margin-top:8px"><span class="status-pill status-active">● Active</span></div>
+          </div>
+          <div class="dash-card">
+            <span class="dash-card-icon">📦</span>
+            <div class="dash-card-label">Next Shipment</div>
+            <div class="dash-card-val">Mar 21</div>
+            <div class="dash-card-sub">4-week supply · In transit</div>
+          </div>
+          <div class="dash-card">
+            <span class="dash-card-icon">💬</span>
+            <div class="dash-card-label">Provider Messages</div>
+            <div class="dash-card-val">2</div>
+            <div class="dash-card-sub">Unread messages</div>
+          </div>
+        </div>
+
+        <!-- Protocol progress -->
+        <div class="protocol-card" style="margin-bottom:24px">
+          <div class="section-head"><h4>Current Protocol Progress</h4><span class="status-pill status-active">Month 2 of 6</span></div>
+          <div class="progress-wrap">
+            <div class="progress-label"><span>Semaglutide — Week 8</span><span>33% Complete</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width:33%"></div></div>
+          </div>
+          <div class="protocol-details" style="margin-top:16px">
+            <div class="protocol-detail"><div class="pd-label">Dose</div><div class="pd-val">0.5mg / week</div></div>
+            <div class="protocol-detail"><div class="pd-label">Started</div><div class="pd-val">Feb 3, 2026</div></div>
+            <div class="protocol-detail"><div class="pd-label">Provider</div><div class="pd-val">Dr. M. Reyes</div></div>
+            <div class="protocol-detail"><div class="pd-label">Next Review</div><div class="pd-val">Mar 18, 2026</div></div>
+          </div>
+        </div>
+
+        <!-- Messages preview -->
+        <div class="section-head"><h4>Recent Messages</h4><a href="#" onclick="showView('messages',null);return false">View all →</a></div>
+        <div class="messages-list">
+          <div class="message-item">
+            <div class="msg-avatar">👩‍⚕️</div>
+            <div class="msg-body">
+              <h5>Dr. Maria Reyes</h5>
+              <p>Your Week 8 check-in looks great. Based on your progress I'd like to discuss titrating your dose up to 1.0mg next cycle...</p>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;flex-shrink:0">
+              <span class="msg-time">2 days ago</span>
+              <div class="unread-dot"></div>
+            </div>
+          </div>
+          <div class="message-item">
+            <div class="msg-avatar">⚕️</div>
+            <div class="msg-body">
+              <h5>ASRX Care Team</h5>
+              <p>Your next shipment (order #AX-2847) has been processed and will ship by March 19th. Tracking number will be sent shortly.</p>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;flex-shrink:0">
+              <span class="msg-time">3 days ago</span>
+              <div class="unread-dot"></div>
+            </div>
+          </div>
+        </div>
+      </div><!-- /overview -->
+
+      <!-- PROTOCOL VIEW -->
+      <div class="portal-view" id="view-protocol">
+        <div class="protocol-card">
+          <div class="section-head"><h4>Your Active Protocol</h4><span class="status-pill status-active">● Active</span></div>
+          <div style="margin-bottom:20px">
+            <div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:700;margin-bottom:4px">Semaglutide (GLP-1)</div>
+            <div style="font-size:14px;color:var(--slate)">Prescribed by Dr. Maria Reyes · Started February 3, 2026</div>
+          </div>
+          <div class="protocol-details">
+            <div class="protocol-detail"><div class="pd-label">Current Dose</div><div class="pd-val">0.5mg</div></div>
+            <div class="protocol-detail"><div class="pd-label">Frequency</div><div class="pd-val">Once Weekly</div></div>
+            <div class="protocol-detail"><div class="pd-label">Administration</div><div class="pd-val">SubQ Injection</div></div>
+            <div class="protocol-detail"><div class="pd-label">Duration</div><div class="pd-val">6 Months</div></div>
+          </div>
+          <div class="progress-wrap">
+            <div class="progress-label"><span>Protocol Duration</span><span>Month 2 of 6</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width:33%"></div></div>
+          </div>
+        </div>
+        <div class="protocol-card">
+          <h4 style="font-size:16px;font-weight:700;margin-bottom:16px">Dosing Schedule</h4>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 18px;background:var(--alt);border-radius:12px">
+              <span style="font-weight:600">Weeks 1–4</span><span style="font-size:14px;color:var(--slate)">0.25mg / week (titration)</span><span class="status-pill" style="background:#e8f4fd;color:#2563eb">✓ Complete</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 18px;background:var(--teal-light);border-radius:12px;border:1px solid rgba(13,148,136,.2)">
+              <span style="font-weight:600">Weeks 5–8</span><span style="font-size:14px;color:var(--slate)">0.5mg / week</span><span class="status-pill status-active">● Current</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 18px;background:var(--alt);border-radius:12px;opacity:.5">
+              <span style="font-weight:600">Weeks 9–16</span><span style="font-size:14px;color:var(--slate)">1.0mg / week</span><span class="status-pill status-pending">Upcoming</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 18px;background:var(--alt);border-radius:12px;opacity:.5">
+              <span style="font-weight:600">Weeks 17–24</span><span style="font-size:14px;color:var(--slate)">2.0mg / week (maintenance)</span><span class="status-pill status-pending">Upcoming</span>
+            </div>
+          </div>
+        </div>
+      </div><!-- /protocol -->
+
+      <!-- SHIPMENTS VIEW -->
+      <div class="portal-view" id="view-shipments">
+        <div class="protocol-card">
+          <div class="section-head"><h4>Order #AX-2847 — In Transit</h4><span class="status-pill status-shipped">📦 Shipped</span></div>
+          <div class="shipment-timeline">
+            <div class="ship-step done"><div class="ship-step-dot">✓</div><div class="ship-step-label">Order Placed</div><div class="ship-step-date">Mar 14</div></div>
+            <div class="ship-step done"><div class="ship-step-dot">✓</div><div class="ship-step-label">Processed</div><div class="ship-step-date">Mar 15</div></div>
+            <div class="ship-step current"><div class="ship-step-dot">🚚</div><div class="ship-step-label">In Transit</div><div class="ship-step-date">Mar 17</div></div>
+            <div class="ship-step"><div class="ship-step-dot">📬</div><div class="ship-step-label">Out for Delivery</div><div class="ship-step-date">—</div></div>
+            <div class="ship-step"><div class="ship-step-dot">🏠</div><div class="ship-step-label">Delivered</div><div class="ship-step-date">Est. Mar 21</div></div>
+          </div>
+          <div style="background:var(--alt);border-radius:12px;padding:18px;margin-top:8px">
+            <div style="font-size:13px;color:var(--slate);margin-bottom:6px">Contents</div>
+            <div style="font-size:15px;font-weight:600">Semaglutide 0.5mg — 4-Week Supply</div>
+            <div style="font-size:13px;color:var(--slate);margin-top:4px">Discreet packaging · Temperature controlled · Tracking: FEDX-4821-0394</div>
+          </div>
+        </div>
+        <div class="protocol-card">
+          <h4 style="font-size:16px;font-weight:700;margin-bottom:16px">Order History</h4>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 18px;background:var(--alt);border-radius:12px">
+              <div><div style="font-weight:600;font-size:14px">Order #AX-2847</div><div style="font-size:12px;color:var(--slate)">Semaglutide 0.5mg · 4-week · Mar 14, 2026</div></div>
+              <span class="status-pill status-shipped">In Transit</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 18px;background:var(--alt);border-radius:12px">
+              <div><div style="font-weight:600;font-size:14px">Order #AX-2391</div><div style="font-size:12px;color:var(--slate)">Semaglutide 0.25mg · 4-week · Feb 10, 2026</div></div>
+              <span class="status-pill status-active">Delivered</span>
+            </div>
+          </div>
+        </div>
+      </div><!-- /shipments -->
+
+      <!-- LAB RESULTS VIEW -->
+      <div class="portal-view" id="view-labs">
+        <div class="protocol-card">
+          <div class="section-head"><h4>Lab Panel — Feb 28, 2026</h4><a href="/portal#labs">View Guide →</a></div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:8px">
+            <div style="background:var(--alt);border-radius:12px;padding:16px"><div style="font-size:11px;font-weight:700;text-transform:uppercase;color:var(--slate);margin-bottom:6px">Fasting Glucose</div><div style="font-size:24px;font-weight:700;font-family:'Playfair Display',serif">94 <span style="font-size:13px;font-weight:400;color:var(--slate)">mg/dL</span></div><span class="status-pill status-active" style="margin-top:6px;display:inline-flex">✓ Normal</span></div>
+            <div style="background:var(--alt);border-radius:12px;padding:16px"><div style="font-size:11px;font-weight:700;text-transform:uppercase;color:var(--slate);margin-bottom:6px">Testosterone</div><div style="font-size:24px;font-weight:700;font-family:'Playfair Display',serif">612 <span style="font-size:13px;font-weight:400;color:var(--slate)">ng/dL</span></div><span class="status-pill status-active" style="margin-top:6px;display:inline-flex">✓ Normal</span></div>
+            <div style="background:var(--alt);border-radius:12px;padding:16px"><div style="font-size:11px;font-weight:700;text-transform:uppercase;color:var(--slate);margin-bottom:6px">IGF-1</div><div style="font-size:24px;font-weight:700;font-family:'Playfair Display',serif">142 <span style="font-size:13px;font-weight:400;color:var(--slate)">ng/mL</span></div><span class="status-pill status-active" style="margin-top:6px;display:inline-flex">✓ Normal</span></div>
+            <div style="background:var(--alt);border-radius:12px;padding:16px"><div style="font-size:11px;font-weight:700;text-transform:uppercase;color:var(--slate);margin-bottom:6px">TSH</div><div style="font-size:24px;font-weight:700;font-family:'Playfair Display',serif">1.8 <span style="font-size:13px;font-weight:400;color:var(--slate)">mIU/L</span></div><span class="status-pill status-active" style="margin-top:6px;display:inline-flex">✓ Normal</span></div>
+            <div style="background:var(--alt);border-radius:12px;padding:16px"><div style="font-size:11px;font-weight:700;text-transform:uppercase;color:var(--slate);margin-bottom:6px">Vitamin D</div><div style="font-size:24px;font-weight:700;font-family:'Playfair Display',serif">58 <span style="font-size:13px;font-weight:400;color:var(--slate)">ng/mL</span></div><span class="status-pill status-active" style="margin-top:6px;display:inline-flex">✓ Optimal</span></div>
+            <div style="background:#fff8f0;border-radius:12px;padding:16px;border:1px solid #fde8c8"><div style="font-size:11px;font-weight:700;text-transform:uppercase;color:var(--slate);margin-bottom:6px">CRP</div><div style="font-size:24px;font-weight:700;font-family:'Playfair Display',serif">2.4 <span style="font-size:13px;font-weight:400;color:var(--slate)">mg/L</span></div><span class="status-pill status-pending" style="margin-top:6px;display:inline-flex">⚠ Elevated</span></div>
+          </div>
+          <div style="background:#fff8f0;border:1px solid #fde8c8;border-radius:12px;padding:16px;margin-top:8px">
+            <div style="font-size:13px;font-weight:600;color:#d97706;margin-bottom:4px">⚠ Provider Note</div>
+            <div style="font-size:13px;color:var(--slate)">Your CRP is mildly elevated (2.4 mg/L). Dr. Reyes recommends discussing a Recovery protocol at your next check-in on March 18th.</div>
+          </div>
+        </div>
+      </div><!-- /labs -->
+
+      <!-- MESSAGES VIEW -->
+      <div class="portal-view" id="view-messages">
+        <div class="messages-list">
+          <div class="message-item">
+            <div class="msg-avatar">👩‍⚕️</div>
+            <div class="msg-body">
+              <h5>Dr. Maria Reyes — Your Week 8 Check-In</h5>
+              <p>Your progress is excellent. You've lost 14 lbs since starting and your metabolic markers are improving. I'd like to discuss moving to 1.0mg next cycle. Please confirm your injection site tolerance has been comfortable. Looking forward to our March 18th review.</p>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;flex-shrink:0">
+              <span class="msg-time">2 days ago</span>
+              <div class="unread-dot"></div>
+            </div>
+          </div>
+          <div class="message-item">
+            <div class="msg-avatar">⚕️</div>
+            <div class="msg-body">
+              <h5>ASRX Care Team — Shipment Processed</h5>
+              <p>Your next shipment (Order #AX-2847) has been processed and will ship by March 19th. You'll receive a tracking number once dispatched. If you have any questions about your upcoming delivery, reply to this message.</p>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;flex-shrink:0">
+              <span class="msg-time">3 days ago</span>
+              <div class="unread-dot"></div>
+            </div>
+          </div>
+          <div class="message-item" style="opacity:.7">
+            <div class="msg-avatar">👩‍⚕️</div>
+            <div class="msg-body">
+              <h5>Dr. Maria Reyes — Welcome to Your Protocol</h5>
+              <p>Welcome to ASRX! I've reviewed your intake assessment and your protocol is ready to begin. We'll start with a conservative titration — please read the included administration guide carefully before your first dose.</p>
+            </div>
+            <span class="msg-time" style="flex-shrink:0">Feb 3</span>
+          </div>
+        </div>
+      </div><!-- /messages -->
+
+      <!-- PROFILE VIEW -->
+      <div class="portal-view" id="view-profile">
+        <div class="protocol-card">
+          <h4 style="font-size:16px;font-weight:700;margin-bottom:24px">Account Information</h4>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+            <div class="protocol-detail"><div class="pd-label">First Name</div><div class="pd-val" id="profileName">—</div></div>
+            <div class="protocol-detail"><div class="pd-label">Email</div><div class="pd-val" id="profileEmail" style="font-size:13px">—</div></div>
+            <div class="protocol-detail"><div class="pd-label">Member Since</div><div class="pd-val">Feb 3, 2026</div></div>
+            <div class="protocol-detail"><div class="pd-label">Plan</div><div class="pd-val">Active Member</div></div>
+          </div>
+        </div>
+      </div><!-- /profile -->
+
+      <!-- BILLING VIEW -->
+      <div class="portal-view" id="view-billing">
+        <div class="protocol-card">
+          <h4 style="font-size:16px;font-weight:700;margin-bottom:20px">Billing & Subscription</h4>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:18px;background:var(--teal-light);border-radius:14px;margin-bottom:20px">
+            <div><div style="font-weight:700;font-size:16px">Semaglutide Protocol</div><div style="font-size:13px;color:var(--slate)">Billed monthly · Next charge March 21, 2026</div></div>
+            <div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--teal)">$199<span style="font-size:14px;font-weight:400;color:var(--slate)">/mo</span></div>
+          </div>
+          <div style="background:var(--alt);border-radius:12px;padding:16px;display:flex;align-items:center;gap:14px">
+            <div style="font-size:24px">💳</div>
+            <div><div style="font-weight:600;font-size:14px">Visa ending in 4242</div><div style="font-size:12px;color:var(--slate)">Expires 08/2027</div></div>
+            <a href="#" style="margin-left:auto;font-size:13px;color:var(--teal);font-weight:600;text-decoration:none">Update →</a>
+          </div>
+        </div>
+      </div><!-- /billing -->
+
+    </div><!-- /portal-content -->
+  </main>
+</div><!-- /portal-layout -->
+</div><!-- /dashboardView -->
+
+<script>
+const SUPABASE_URL = 'https://rbyluaxucsgnwxhukjfe.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJieWx1YXh1Y3Nnbnd4aHVramZlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM0MTgzMTUsImV4cCI6MjA4ODk5NDMxNX0.placeholder';
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+async function doLogin() {
+  const email = document.getElementById('loginEmail').value.trim();
+  const password = document.getElementById('loginPassword').value;
+  const btn = document.getElementById('loginBtn');
+  const err = document.getElementById('loginError');
+  err.classList.remove('show');
+  if (!email || !password) { showError('Please enter your email and password.'); return; }
+  btn.disabled = true;
+  btn.textContent = 'Logging in...';
+  try {
+    const { data, error } = await sb.auth.signInWithPassword({ email, password });
+    if (error) throw error;
+    loadDashboard(data.user);
+  } catch(e) {
+    showError(e.message || 'Invalid email or password. Please try again.');
+    btn.disabled = false;
+    btn.textContent = 'Log In';
+  }
+}
+
+function showError(msg) {
+  const err = document.getElementById('loginError');
+  err.textContent = msg;
+  err.classList.add('show');
+}
+
+function loadDashboard(user) {
+  document.getElementById('loginView').style.display = 'none';
+  document.getElementById('dashboardView').style.display = 'block';
+  const name = user.user_metadata?.full_name || user.email.split('@')[0];
+  const initial = name[0].toUpperCase();
+  document.getElementById('sidebarInitial').textContent = initial;
+  document.getElementById('sidebarName').textContent = name;
+  document.getElementById('greetName').textContent = name.split(' ')[0];
+  document.getElementById('profileName').textContent = name;
+  document.getElementById('profileEmail').textContent = user.email;
+  const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const d = new Date();
+  document.getElementById('greetDate').textContent = days[d.getDay()] + ', ' + months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
+  document.getElementById('navRight').innerHTML = '<a href="#" onclick="doLogout();return false" style="font-size:13px;color:var(--teal);font-weight:600;text-decoration:none">Log Out</a>';
+}
+
+async function doForgotPassword() {
+  const email = document.getElementById('loginEmail').value.trim();
+  if (!email) { showError('Enter your email address first, then click Forgot Password.'); return; }
+  await sb.auth.resetPasswordForEmail(email, { redirectTo: window.location.origin + '/portal' });
+  showError('Password reset email sent — check your inbox.');
+  document.getElementById('loginError').style.background = '#f0fdf4';
+  document.getElementById('loginError').style.borderColor = '#86efac';
+  document.getElementById('loginError').style.color = '#16a34a';
+}
+
+async function doLogout() {
+  await sb.auth.signOut();
+  document.getElementById('dashboardView').style.display = 'none';
+  document.getElementById('loginView').style.display = 'flex';
+  document.getElementById('navRight').textContent = 'Member Portal';
+}
+
+function showView(id, link) {
+  document.querySelectorAll('.portal-view').forEach(v => v.classList.remove('active'));
+  document.getElementById('view-' + id).classList.add('active');
+  document.querySelectorAll('.sidebar a').forEach(a => a.classList.remove('active'));
+  if (link) link.classList.add('active');
+  const titles = {overview:'Overview',protocol:'My Protocol',shipments:'Shipments',labs:'Lab Results',messages:'Provider Messages',profile:'My Profile',billing:'Billing'};
+  document.getElementById('viewTitle').textContent = titles[id] || 'Portal';
+}
+
+// Auto-restore session
+(async () => {
+  const { data: { session } } = await sb.auth.getSession();
+  if (session?.user) loadDashboard(session.user);
+})();
+</script>
+</body>
+</html>
