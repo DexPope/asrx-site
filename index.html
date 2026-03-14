@@ -125,15 +125,16 @@ nav{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid va
 
 /* CATEGORY SLIDER */
 .cat-slider-wrap{position:relative;margin-bottom:48px}
-.cat-slider{display:flex;gap:16px;overflow-x:auto;padding:4px 2px 12px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.cat-slider{display:flex;gap:14px;overflow-x:auto;padding:4px 2px 12px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .cat-slider::-webkit-scrollbar{display:none}
-.cat-card{flex:0 0 150px;background:#fff;border:2px solid var(--border);border-radius:20px;padding:22px 16px 18px;text-align:center;cursor:pointer;transition:all .25s;display:flex;flex-direction:column;align-items:center;gap:8px;user-select:none}
-.cat-card:hover{border-color:var(--teal);transform:translateY(-3px);box-shadow:0 8px 24px rgba(13,148,136,.12)}
-.cat-card.active{border-color:var(--teal);background:var(--teal-light);transform:translateY(-3px);box-shadow:0 8px 24px rgba(13,148,136,.15)}
-.cat-card-icon{font-size:36px;line-height:1}
-.cat-card-name{font-size:13px;font-weight:700;color:var(--text);line-height:1.3}
+.cat-card{flex:0 0 140px;background:#fff;border:1.5px solid var(--border);border-radius:16px;padding:20px 14px 16px;text-align:center;cursor:pointer;transition:all .22s;display:flex;flex-direction:column;align-items:center;gap:10px;user-select:none;border-top:3px solid var(--border)}
+.cat-card:hover{border-color:var(--teal);border-top-color:var(--teal);transform:translateY(-2px);box-shadow:0 6px 20px rgba(13,148,136,.1)}
+.cat-card.active{border-color:var(--teal);border-top-color:var(--teal);background:var(--teal-light);transform:translateY(-2px);box-shadow:0 6px 20px rgba(13,148,136,.12)}
+.cat-card-accent{width:28px;height:2px;background:var(--border);border-radius:2px;transition:background .22s}
+.cat-card.active .cat-card-accent,.cat-card:hover .cat-card-accent{background:var(--teal)}
+.cat-card-name{font-size:13px;font-weight:700;color:var(--text);line-height:1.3;letter-spacing:.2px}
 .cat-card.active .cat-card-name{color:var(--teal)}
-.cat-card-count{font-size:11px;color:var(--slate);font-weight:500}
+.cat-card-count{font-size:11px;color:var(--slate);font-weight:500;text-transform:uppercase;letter-spacing:.5px}
 .cat-card.active .cat-card-count{color:var(--teal)}
 
 /* LAB TESTING */
@@ -245,51 +246,6 @@ footer{background:var(--text);color:#fff;padding:60px 0 32px}
 </div>
 </nav>
 
-<!-- HERO -->
-<section class="hero">
-<div class="container">
-<div class="hero-inner">
-  <div>
-    <div class="hero-badge">✦ Trusted Telehealth Platform</div>
-    <h1>Healthcare the Way<br><em>It Should Be</em></h1>
-    <p>ASRX connects you with board-certified providers and pharmaceutical-grade treatments — no insurance, no waiting rooms, no hassle. From the comfort of your home.</p>
-    <div class="hero-btns">
-      <a href="/intake" class="btn-primary">Start Free Assessment</a>
-      <a href="#" onclick="showTabByName('treatments');document.getElementById('pageTabsWrap').scrollIntoView({behavior:'smooth'});return false" class="btn-secondary">Explore Treatments →</a>
-    </div>
-    <div class="hero-stats">
-      <div class="hero-stat"><strong>50+</strong><span>States Covered</span></div>
-      <div class="hero-stat"><strong>48hr</strong><span>Avg. Provider Match</span></div>
-      <div class="hero-stat"><strong>100%</strong><span>HIPAA Certified</span></div>
-    </div>
-  </div>
-  <div class="hero-visual">
-    <div class="hero-rings">
-      <div class="ring"></div>
-      <div class="ring"></div>
-      <div class="ring"></div>
-      <div class="ring"></div>
-      <div class="ring"></div>
-      <div class="ring-core"></div>
-    </div>
-  </div>
-</div>
-</div>
-</section>
-
-<!-- TRUST BAR -->
-<div class="trust-bar">
-<div class="container">
-<div class="trust-inner">
-  <div class="trust-item">Licensed Providers</div>
-  <div class="trust-item">Domestic Sourcing</div>
-  <div class="trust-item">HIPAA Compliant</div>
-  <div class="trust-item">No Insurance Required</div>
-  <div class="trust-item">Discreet Shipping</div>
-</div>
-</div>
-</div>
-
 <!-- PAGE TABS -->
 <div class="page-tabs-wrap" id="pageTabsWrap">
 <div class="container">
@@ -304,53 +260,53 @@ footer{background:var(--text);color:#fff;padding:60px 0 32px}
 
 <!-- TAB CONTENT -->
 <div class="tab-content" id="tab-treatments">
-<div class="container" style="padding-top:60px;padding-bottom:60px">
+<div class="container" style="padding-top:48px;padding-bottom:60px">
 <div class="text-center" style="margin-bottom:40px">
   <div class="section-label">Our Treatments</div>
   <h2 class="section-title">Pharmaceutical-Grade Protocols</h2>
-  <p class="section-sub">Browse by category. All treatments require provider review and a valid prescription.</p>
+  <p class="section-sub">Select a category below. All treatments require provider review and a valid prescription.</p>
 </div>
 <div class="cat-slider-wrap">
 <div class="cat-slider" id="catSlider">
   <div class="cat-card active" onclick="filterCat('all',this)" data-cat="all">
-    <div class="cat-card-icon">✦</div>
+    <div class="cat-card-accent"></div>
     <div class="cat-card-name">All Treatments</div>
-    <div class="cat-card-count">25 treatments</div>
+    <div class="cat-card-count">25 protocols</div>
   </div>
   <div class="cat-card" onclick="filterCat('weight-loss',this)" data-cat="weight-loss">
-    <div class="cat-card-icon">⚡</div>
+    <div class="cat-card-accent"></div>
     <div class="cat-card-name">Weight Loss</div>
-    <div class="cat-card-count">4 treatments</div>
+    <div class="cat-card-count">4 protocols</div>
   </div>
   <div class="cat-card" onclick="filterCat('recovery',this)" data-cat="recovery">
-    <div class="cat-card-icon">💪</div>
+    <div class="cat-card-accent"></div>
     <div class="cat-card-name">Recovery</div>
-    <div class="cat-card-count">4 treatments</div>
+    <div class="cat-card-count">4 protocols</div>
   </div>
   <div class="cat-card" onclick="filterCat('longevity',this)" data-cat="longevity">
-    <div class="cat-card-icon">🔬</div>
+    <div class="cat-card-accent"></div>
     <div class="cat-card-name">Anti-Aging</div>
-    <div class="cat-card-count">6 treatments</div>
+    <div class="cat-card-count">6 protocols</div>
   </div>
   <div class="cat-card" onclick="filterCat('performance',this)" data-cat="performance">
-    <div class="cat-card-icon">🏆</div>
+    <div class="cat-card-accent"></div>
     <div class="cat-card-name">Performance</div>
-    <div class="cat-card-count">5 treatments</div>
+    <div class="cat-card-count">5 protocols</div>
   </div>
   <div class="cat-card" onclick="filterCat('sexual-health',this)" data-cat="sexual-health">
-    <div class="cat-card-icon">❤️</div>
+    <div class="cat-card-accent"></div>
     <div class="cat-card-name">Sexual Health</div>
-    <div class="cat-card-count">2 treatments</div>
+    <div class="cat-card-count">2 protocols</div>
   </div>
   <div class="cat-card" onclick="filterCat('cognitive',this)" data-cat="cognitive">
-    <div class="cat-card-icon">🧠</div>
+    <div class="cat-card-accent"></div>
     <div class="cat-card-name">Cognitive</div>
-    <div class="cat-card-count">3 treatments</div>
+    <div class="cat-card-count">3 protocols</div>
   </div>
   <div class="cat-card" onclick="filterCat('immune',this)" data-cat="immune">
-    <div class="cat-card-icon">🛡️</div>
+    <div class="cat-card-accent"></div>
     <div class="cat-card-name">Immune</div>
-    <div class="cat-card-count">3 treatments</div>
+    <div class="cat-card-count">3 protocols</div>
   </div>
 </div>
 </div>
@@ -680,6 +636,32 @@ footer{background:var(--text);color:#fff;padding:60px 0 32px}
 
 <!-- ABOUT TAB -->
 <div class="tab-content" id="tab-about" style="display:none">
+<div style="background:linear-gradient(135deg,var(--bg) 0%,#e8f7f5 100%);padding:60px 0 48px">
+<div class="container">
+<div class="hero-inner">
+  <div>
+    <div class="hero-badge">✦ Trusted Telehealth Platform</div>
+    <h1>Healthcare the Way<br><em>It Should Be</em></h1>
+    <p style="font-size:17px;color:var(--slate);line-height:1.7;margin-bottom:32px;max-width:480px">ASRX connects you with board-certified providers and pharmaceutical-grade treatments — no insurance, no waiting rooms, no hassle. From the comfort of your home.</p>
+    <div class="hero-btns">
+      <a href="/intake" class="btn-primary">Start Free Assessment</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><strong>50+</strong><span>States Covered</span></div>
+      <div class="hero-stat"><strong>48hr</strong><span>Avg. Provider Match</span></div>
+      <div class="hero-stat"><strong>100%</strong><span>HIPAA Certified</span></div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-rings">
+      <div class="ring"></div><div class="ring"></div><div class="ring"></div>
+      <div class="ring"></div><div class="ring"></div>
+      <div class="ring-core"></div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
 <div class="container" style="padding-top:60px;padding-bottom:60px">
 <div class="text-center" style="margin-bottom:48px">
   <div class="section-label">Why ASRX</div>
