@@ -21,10 +21,12 @@ a{color:inherit;text-decoration:none}
 /* ── NAV ── */
 nav{position:sticky;top:0;z-index:100;background:rgba(250,250,248,.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
 .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0;gap:20px}
-.logo-wrap{display:flex;flex-direction:column;line-height:1.15}
-.logo-main{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--text);letter-spacing:.5px}
-.logo-main span{color:var(--teal)}
-.logo-sub{font-size:9.5px;color:var(--slate);letter-spacing:.3px}
+.logo-wrap{display:flex;align-items:center;gap:11px;text-decoration:none}
+.logo-icon{flex-shrink:0}
+.logo-text{display:flex;flex-direction:column;line-height:1.2}
+.logo-main{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--text);letter-spacing:2px;text-transform:uppercase}
+.logo-main span{color:var(--teal);font-weight:700}
+.logo-sub{font-size:8.5px;color:var(--slate);letter-spacing:1.8px;text-transform:uppercase;font-weight:500;font-family:'Inter',sans-serif}
 .nav-links{display:flex;gap:28px;list-style:none}
 .nav-links a{font-size:14px;font-weight:500;color:var(--slate);transition:color .2s}
 .nav-links a:hover{color:var(--teal)}
@@ -306,8 +308,27 @@ footer{background:#0e1520;padding:60px 0 32px}
 <div class="container">
 <div class="nav-inner">
   <a href="/" class="logo-wrap">
-    <span class="logo-main">AS<span>RX</span></span>
-    <span class="logo-sub">AccessRx | A Subsidiary of August Aisles LLC</span>
+    <span class="logo-icon">
+      <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Outer ring -->
+        <circle cx="19" cy="19" r="17" stroke="#0d9488" stroke-width="1.5" opacity="0.25"/>
+        <!-- Middle ring -->
+        <circle cx="19" cy="19" r="12" stroke="#0d9488" stroke-width="1.5" opacity="0.5"/>
+        <!-- Filled core -->
+        <circle cx="19" cy="19" r="6.5" fill="#0d9488"/>
+        <!-- Cross-hair lines -->
+        <line x1="19" y1="2" x2="19" y2="9.5" stroke="#0d9488" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
+        <line x1="19" y1="28.5" x2="19" y2="36" stroke="#0d9488" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
+        <line x1="2" y1="19" x2="9.5" y2="19" stroke="#0d9488" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
+        <line x1="28.5" y1="19" x2="36" y2="19" stroke="#0d9488" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
+        <!-- Center dot -->
+        <circle cx="19" cy="19" r="2" fill="white"/>
+      </svg>
+    </span>
+    <span class="logo-text">
+      <span class="logo-main">AS<span>RX</span></span>
+      <span class="logo-sub">AccessRx · Personalized Medicine</span>
+    </span>
   </a>
   <ul class="nav-links">
     <li><a href="#treatments">Treatments</a></li>
@@ -839,8 +860,23 @@ footer{background:#0e1520;padding:60px 0 32px}
 <div class="container">
 <div class="footer-top">
   <div>
-    <div class="footer-logo">ASRX</div>
-    <div class="footer-logo-sub">AccessRx | A Subsidiary of August Aisles LLC</div>
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+      <svg width="34" height="34" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="19" cy="19" r="17" stroke="#0d9488" stroke-width="1.5" opacity="0.3"/>
+        <circle cx="19" cy="19" r="12" stroke="#0d9488" stroke-width="1.5" opacity="0.5"/>
+        <circle cx="19" cy="19" r="6.5" fill="#0d9488"/>
+        <line x1="19" y1="2" x2="19" y2="9.5" stroke="#0d9488" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
+        <line x1="19" y1="28.5" x2="19" y2="36" stroke="#0d9488" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
+        <line x1="2" y1="19" x2="9.5" y2="19" stroke="#0d9488" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
+        <line x1="28.5" y1="19" x2="36" y2="19" stroke="#0d9488" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
+        <circle cx="19" cy="19" r="2" fill="white"/>
+      </svg>
+      <div>
+        <div class="footer-logo">AS<span style="color:var(--teal)">RX</span></div>
+        <div class="footer-logo-sub" style="letter-spacing:1.5px;text-transform:uppercase">AccessRx · Personalized Medicine</div>
+      </div>
+    </div>
+    <div class="footer-logo-sub" style="margin-top:4px">A Subsidiary of August Aisles LLC</div>
     <p class="footer-tagline">A self-directed healthcare access platform. Connecting patients with licensed providers and pharmaceutical-grade protocols.</p>
   </div>
   <div class="footer-col">

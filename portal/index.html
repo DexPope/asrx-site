@@ -19,10 +19,11 @@ html,body{height:100%;font-family:'Inter',sans-serif;background:var(--bg);color:
 
 /* ── SHARED NAV ── */
 nav{background:#fff;border-bottom:1px solid var(--border);padding:14px 24px;display:flex;align-items:center;justify-content:space-between}
-.logo-wrap{display:flex;flex-direction:column;line-height:1.15;text-decoration:none}
-.logo-main{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--text);letter-spacing:.5px}
+.logo-wrap{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-text{display:flex;flex-direction:column;line-height:1.2}
+.logo-main{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--text);letter-spacing:2px;text-transform:uppercase}
 .logo-main span{color:var(--teal)}
-.logo-sub{font-size:9px;color:var(--slate);letter-spacing:.3px}
+.logo-sub{font-size:8px;color:var(--slate);letter-spacing:1.8px;text-transform:uppercase;font-weight:500;font-family:'Inter',sans-serif}
 
 /* ══════════════════════
    LOGIN SCREEN
@@ -153,8 +154,20 @@ nav{background:#fff;border-bottom:1px solid var(--border);padding:14px 24px;disp
 <!-- NAV -->
 <nav>
   <a href="/" class="logo-wrap">
-    <span class="logo-main">AS<span>RX</span></span>
-    <span class="logo-sub">AccessRx | A Subsidiary of August Aisles LLC</span>
+    <svg width="34" height="34" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="19" cy="19" r="17" stroke="#0d9488" stroke-width="1.5" opacity="0.25"/>
+      <circle cx="19" cy="19" r="12" stroke="#0d9488" stroke-width="1.5" opacity="0.5"/>
+      <circle cx="19" cy="19" r="6.5" fill="#0d9488"/>
+      <line x1="19" y1="2" x2="19" y2="9.5" stroke="#0d9488" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
+      <line x1="19" y1="28.5" x2="19" y2="36" stroke="#0d9488" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
+      <line x1="2" y1="19" x2="9.5" y2="19" stroke="#0d9488" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
+      <line x1="28.5" y1="19" x2="36" y2="19" stroke="#0d9488" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
+      <circle cx="19" cy="19" r="2" fill="white"/>
+    </svg>
+    <span class="logo-text">
+      <span class="logo-main">AS<span>RX</span></span>
+      <span class="logo-sub">AccessRx · Personalized Medicine</span>
+    </span>
   </a>
   <div id="navRight" style="font-size:13px;color:var(--slate)">Member Portal</div>
 </nav>
