@@ -251,6 +251,70 @@ nav{position:sticky;top:0;z-index:100;background:rgba(250,250,248,.95);backdrop-
 .bm-protocol{font-size:12px;color:var(--slate);border-top:1px solid var(--border);padding-top:10px;margin-top:auto}
 .bm-protocol a{color:var(--teal);font-weight:600}
 
+/* ── PROTOCOL QUIZ ── */
+.quiz-section{padding:88px 0;background:linear-gradient(135deg,var(--text) 0%,#1e2d4a 100%)}
+.quiz-wrap{max-width:700px;margin:0 auto}
+.quiz-step{display:none}
+.quiz-step.active{display:block}
+.quiz-q{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:#fff;margin-bottom:10px;line-height:1.3}
+.quiz-sub{font-size:15px;color:rgba(255,255,255,.6);margin-bottom:32px}
+.quiz-options{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.quiz-option{background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.15);border-radius:16px;padding:18px 20px;cursor:pointer;transition:all .2s;text-align:left}
+.quiz-option:hover{background:rgba(13,148,136,.2);border-color:var(--teal)}
+.quiz-option.selected{background:rgba(13,148,136,.25);border-color:var(--teal)}
+.quiz-option-icon{font-size:22px;margin-bottom:8px;display:block}
+.quiz-option-label{font-size:15px;font-weight:600;color:#fff;display:block}
+.quiz-option-desc{font-size:12px;color:rgba(255,255,255,.5);margin-top:3px;display:block}
+.quiz-nav{display:flex;align-items:center;justify-content:space-between;margin-top:28px}
+.quiz-progress{display:flex;gap:6px;align-items:center}
+.quiz-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.2);transition:all .3s}
+.quiz-dot.done{background:var(--teal)}
+.quiz-dot.active{background:#fff;width:22px;border-radius:4px}
+.quiz-btn{background:var(--teal);color:#fff;padding:12px 28px;border-radius:var(--pill);font-size:14px;font-weight:700;border:none;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s}
+.quiz-btn:hover{background:var(--teal-dark)}
+.quiz-btn-back{background:none;border:1.5px solid rgba(255,255,255,.2);color:rgba(255,255,255,.6);padding:12px 24px;border-radius:var(--pill);font-size:14px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s}
+.quiz-btn-back:hover{border-color:rgba(255,255,255,.5);color:#fff}
+.quiz-result{background:rgba(255,255,255,.08);border:1.5px solid rgba(13,148,136,.4);border-radius:24px;padding:36px;text-align:center}
+.quiz-result-badge{display:inline-block;background:rgba(13,148,136,.3);color:var(--teal);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;padding:6px 16px;border-radius:var(--pill);margin-bottom:20px}
+.quiz-result h3{font-family:'Playfair Display',serif;font-size:28px;color:#fff;font-weight:700;margin-bottom:10px}
+.quiz-result p{font-size:15px;color:rgba(255,255,255,.7);margin-bottom:28px;line-height:1.7}
+
+/* ── MEDICAL TEAM ── */
+.team{padding:88px 0;background:var(--surface)}
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.team-card{background:var(--alt);border-radius:var(--radius);padding:32px;text-align:center}
+.team-avatar{width:80px;height:80px;border-radius:50%;background:var(--teal-light);display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 18px}
+.team-card h3{font-family:'Playfair Display',serif;font-size:19px;font-weight:700;color:var(--text);margin-bottom:4px}
+.team-card .credentials{font-size:12px;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:.8px;margin-bottom:12px}
+.team-card p{font-size:13px;color:var(--slate);line-height:1.65}
+.team-badge{display:inline-flex;align-items:center;gap:6px;background:#fff;border-radius:var(--pill);padding:6px 14px;font-size:11px;font-weight:600;color:var(--slate);margin-top:14px;box-shadow:var(--shadow)}
+
+/* ── FAQ ── */
+.faq{padding:88px 0;background:var(--alt)}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 48px;max-width:960px;margin:0 auto}
+.faq-item{border-bottom:1px solid var(--border);padding:20px 0}
+.faq-q{display:flex;align-items:center;justify-content:space-between;cursor:pointer;gap:16px}
+.faq-q span{font-size:15px;font-weight:600;color:var(--text);line-height:1.4}
+.faq-icon{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--slate);flex-shrink:0;transition:all .2s}
+.faq-item.open .faq-icon{background:var(--teal);border-color:var(--teal);color:#fff;transform:rotate(45deg)}
+.faq-a{font-size:14px;color:var(--slate);line-height:1.7;max-height:0;overflow:hidden;transition:max-height .35s ease,padding .35s ease}
+.faq-item.open .faq-a{max-height:200px;padding-top:12px}
+
+/* ── LIVE CHAT FLOAT ── */
+.chat-float{position:fixed;bottom:28px;right:28px;z-index:200}
+.chat-btn{width:58px;height:58px;border-radius:50%;background:var(--teal);color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:24px;box-shadow:0 8px 28px rgba(13,148,136,.4);transition:all .2s;font-family:'Inter',sans-serif}
+.chat-btn:hover{transform:scale(1.08);box-shadow:0 12px 36px rgba(13,148,136,.5)}
+.chat-bubble{position:absolute;bottom:70px;right:0;width:300px;background:#fff;border-radius:20px 20px 4px 20px;padding:20px;box-shadow:var(--shadow-lg);display:none;border:1px solid var(--border)}
+.chat-bubble.open{display:block;animation:bubblePop .2s ease}
+@keyframes bubblePop{from{opacity:0;transform:scale(.9) translateY(8px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.chat-bubble h4{font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px}
+.chat-bubble p{font-size:13px;color:var(--slate);line-height:1.6;margin-bottom:14px}
+.chat-bubble a,.chat-bubble button{display:block;width:100%;text-align:center;padding:11px;border-radius:var(--pill);font-size:13px;font-weight:600;margin-bottom:8px;cursor:pointer;font-family:'Inter',sans-serif;border:none;transition:all .2s}
+.chat-bubble .chat-primary{background:var(--teal);color:#fff}
+.chat-bubble .chat-secondary{background:var(--alt);color:var(--text)}
+.chat-bubble .chat-secondary:hover{background:var(--border)}
+.chat-notification{position:absolute;top:-3px;right:-3px;width:14px;height:14px;border-radius:50%;background:#ef4444;border:2px solid #fff}
+
 /* ── CTA BANNER ── */
 .cta-banner{padding:88px 0;background:linear-gradient(135deg,var(--text) 0%,#1e2d4a 100%)}
 .cta-inner{text-align:center;max-width:640px;margin:0 auto}
@@ -301,8 +365,10 @@ footer{background:#0e1520;padding:60px 0 32px}
   .footer-top{grid-template-columns:1fr}
   .trust-inner{gap:16px}
   .steps{grid-template-columns:1fr}
-  .switch-cards{grid-template-columns:1fr}
+  .switch-cards,.team-grid,.faq-grid{grid-template-columns:1fr}
+  .quiz-options{grid-template-columns:1fr!important}
   .stat-grid{grid-template-columns:1fr 1fr}
+  .chat-float{bottom:16px;right:16px}
 }
 </style>
 </head>
@@ -723,6 +789,51 @@ footer{background:#0e1520;padding:60px 0 32px}
 </div>
 </section>
 
+<!-- MEDICAL TEAM -->
+<section class="team">
+<div class="container">
+<div class="text-center" style="margin-bottom:52px">
+  <div class="section-label">Our Medical Network</div>
+  <h2 class="section-title">Board-Certified Providers<br>You Can Trust</h2>
+  <p class="section-sub">Every ASRX protocol is reviewed and issued by a licensed physician — specialists in metabolic medicine, endocrinology, and longevity science.</p>
+</div>
+<div class="team-grid">
+  <div class="team-card">
+    <div class="team-avatar">👩‍⚕️</div>
+    <h3>Metabolic Medicine</h3>
+    <div class="credentials">MD · Board Certified</div>
+    <p>Specialists in GLP-1 therapy, insulin resistance, and body composition. Experienced in prescribing and monitoring weight management protocols for complex patients.</p>
+    <div class="team-badge">⚡ GLP-1 · Metabolic Health</div>
+  </div>
+  <div class="team-card">
+    <div class="team-avatar">👨‍⚕️</div>
+    <h3>Endocrinology & Hormones</h3>
+    <div class="credentials">MD · Fellowship Trained</div>
+    <p>Deep expertise in hormone optimization — testosterone, estrogen, thyroid, and adrenal function. Designing protocols for men and women seeking hormonal balance.</p>
+    <div class="team-badge">🔬 Hormones · Anti-Aging</div>
+  </div>
+  <div class="team-card">
+    <div class="team-avatar">🧬</div>
+    <h3>Regenerative Medicine</h3>
+    <div class="credentials">DO · Longevity Specialist</div>
+    <p>Experts in peptide therapy, cellular repair, and performance optimization. Trained in the latest research on BPC-157, growth hormone secretagogues, and NAD+ protocols.</p>
+    <div class="team-badge">💊 Peptides · Recovery</div>
+  </div>
+</div>
+<div class="text-center" style="margin-top:40px">
+  <div style="display:inline-flex;align-items:center;gap:32px;background:var(--alt);border-radius:var(--pill);padding:16px 36px;flex-wrap:wrap;justify-content:center;gap:24px">
+    <div style="text-align:center"><div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--text)">200+</div><div style="font-size:12px;color:var(--slate);text-transform:uppercase;letter-spacing:.5px">Licensed Providers</div></div>
+    <div style="width:1px;height:36px;background:var(--border)"></div>
+    <div style="text-align:center"><div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--text)">50</div><div style="font-size:12px;color:var(--slate);text-transform:uppercase;letter-spacing:.5px">States Covered</div></div>
+    <div style="width:1px;height:36px;background:var(--border)"></div>
+    <div style="text-align:center"><div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--text)">48hr</div><div style="font-size:12px;color:var(--slate);text-transform:uppercase;letter-spacing:.5px">Average Match Time</div></div>
+    <div style="width:1px;height:36px;background:var(--border)"></div>
+    <div style="text-align:center"><div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--text)">HIPAA</div><div style="font-size:12px;color:var(--slate);text-transform:uppercase;letter-spacing:.5px">Fully Compliant</div></div>
+  </div>
+</div>
+</div>
+</section>
+
 <!-- BENEFITS -->
 <section class="benefits">
 <div class="container">
@@ -757,6 +868,82 @@ footer{background:#0e1520;padding:60px 0 32px}
     <div class="benefit-item">
       <div class="benefit-icon">🛡️</div>
       <div><h4>Immune System Support</h4><p>Thymosin Alpha-1 and glutathione protocols strengthen your body's natural defenses.</p></div>
+    </div>
+  </div>
+</div>
+</div>
+</section>
+
+<!-- PROTOCOL QUIZ -->
+<section class="quiz-section" id="quiz">
+<div class="container">
+<div class="quiz-wrap">
+  <div class="text-center" style="margin-bottom:44px">
+    <div class="section-label" style="color:rgba(255,255,255,.4)">Find Your Protocol</div>
+    <h2 style="font-family:'Playfair Display',serif;font-size:42px;font-weight:700;color:#fff;line-height:1.2;margin-bottom:14px">Not Sure Where to Start?</h2>
+    <p style="font-size:16px;color:rgba(255,255,255,.6);max-width:480px;margin:0 auto">Answer 3 quick questions — we'll recommend the right protocol for your goals.</p>
+  </div>
+
+  <!-- Step 1 -->
+  <div class="quiz-step active" id="qStep1">
+    <div class="quiz-q">What's your primary health goal?</div>
+    <div class="quiz-sub">Select the one that fits best right now.</div>
+    <div class="quiz-options">
+      <div class="quiz-option" onclick="selectOption(this,'weight-loss')"><span class="quiz-option-icon">⚖️</span><span class="quiz-option-label">Lose Weight</span><span class="quiz-option-desc">GLP-1 therapy, metabolic reset</span></div>
+      <div class="quiz-option" onclick="selectOption(this,'performance')"><span class="quiz-option-icon">💪</span><span class="quiz-option-label">Build & Perform</span><span class="quiz-option-desc">GH optimization, muscle, strength</span></div>
+      <div class="quiz-option" onclick="selectOption(this,'longevity')"><span class="quiz-option-icon">🧬</span><span class="quiz-option-label">Slow Aging</span><span class="quiz-option-desc">Cellular repair, longevity protocols</span></div>
+      <div class="quiz-option" onclick="selectOption(this,'recovery')"><span class="quiz-option-icon">🩹</span><span class="quiz-option-label">Heal & Recover</span><span class="quiz-option-desc">Tissue repair, inflammation, joints</span></div>
+      <div class="quiz-option" onclick="selectOption(this,'cognitive')"><span class="quiz-option-icon">🧠</span><span class="quiz-option-label">Sharpen My Mind</span><span class="quiz-option-desc">Focus, memory, cognitive health</span></div>
+      <div class="quiz-option" onclick="selectOption(this,'sexual-health')"><span class="quiz-option-icon">❤️</span><span class="quiz-option-label">Sexual Wellness</span><span class="quiz-option-desc">Libido, arousal, hormonal balance</span></div>
+    </div>
+    <div class="quiz-nav">
+      <div class="quiz-progress"><div class="quiz-dot active" id="dot1"></div><div class="quiz-dot" id="dot2"></div><div class="quiz-dot" id="dot3"></div></div>
+      <button class="quiz-btn" onclick="quizNext(1)">Next →</button>
+    </div>
+  </div>
+
+  <!-- Step 2 -->
+  <div class="quiz-step" id="qStep2">
+    <div class="quiz-q">How would you describe your current health?</div>
+    <div class="quiz-sub">This helps us calibrate the right protocol intensity.</div>
+    <div class="quiz-options">
+      <div class="quiz-option" onclick="selectOption(this,'beginner')"><span class="quiz-option-icon">🌱</span><span class="quiz-option-label">Just Starting Out</span><span class="quiz-option-desc">New to this, want a gentle start</span></div>
+      <div class="quiz-option" onclick="selectOption(this,'active')"><span class="quiz-option-icon">🏃</span><span class="quiz-option-label">Active & Healthy</span><span class="quiz-option-desc">Good baseline, ready to optimize</span></div>
+      <div class="quiz-option" onclick="selectOption(this,'optimizing')"><span class="quiz-option-icon">🎯</span><span class="quiz-option-label">Already Optimizing</span><span class="quiz-option-desc">Biohacker, experienced with protocols</span></div>
+      <div class="quiz-option" onclick="selectOption(this,'recovering')"><span class="quiz-option-icon">🔄</span><span class="quiz-option-label">Recovering / Rebuilding</span><span class="quiz-option-desc">Coming back from injury or setback</span></div>
+    </div>
+    <div class="quiz-nav">
+      <button class="quiz-btn-back" onclick="quizBack(2)">← Back</button>
+      <div class="quiz-progress"><div class="quiz-dot done" id="dot1b"></div><div class="quiz-dot active" id="dot2b"></div><div class="quiz-dot" id="dot3b"></div></div>
+      <button class="quiz-btn" onclick="quizNext(2)">Next →</button>
+    </div>
+  </div>
+
+  <!-- Step 3 -->
+  <div class="quiz-step" id="qStep3">
+    <div class="quiz-q">Have you worked with a provider on this before?</div>
+    <div class="quiz-sub">No judgment — this helps us match you with the right level of guidance.</div>
+    <div class="quiz-options" style="grid-template-columns:1fr 1fr 1fr">
+      <div class="quiz-option" onclick="selectOption(this,'yes')"><span class="quiz-option-icon">✅</span><span class="quiz-option-label">Yes, I have</span><span class="quiz-option-desc">Familiar with the process</span></div>
+      <div class="quiz-option" onclick="selectOption(this,'no')"><span class="quiz-option-icon">🆕</span><span class="quiz-option-label">No, first time</span><span class="quiz-option-desc">New to provider-guided care</span></div>
+      <div class="quiz-option" onclick="selectOption(this,'open')"><span class="quiz-option-icon">🤔</span><span class="quiz-option-label">Open to it</span><span class="quiz-option-desc">Exploring options</span></div>
+    </div>
+    <div class="quiz-nav">
+      <button class="quiz-btn-back" onclick="quizBack(3)">← Back</button>
+      <div class="quiz-progress"><div class="quiz-dot done"></div><div class="quiz-dot done"></div><div class="quiz-dot active"></div></div>
+      <button class="quiz-btn" onclick="quizFinish()">See My Protocol →</button>
+    </div>
+  </div>
+
+  <!-- Result -->
+  <div class="quiz-step" id="qResult">
+    <div class="quiz-result">
+      <div class="quiz-result-badge">Your Recommended Protocol</div>
+      <div style="font-size:48px;margin-bottom:12px" id="resultIcon">💊</div>
+      <h3 id="resultTitle">Protocol Match</h3>
+      <p id="resultDesc">Based on your answers, here's the best fit for your goals.</p>
+      <a href="/intake" class="btn-primary" style="display:block;max-width:280px;margin:0 auto 16px;text-align:center">Begin My Assessment →</a>
+      <button class="quiz-btn-back" onclick="quizReset()" style="background:none;border:none;color:rgba(255,255,255,.4);font-size:13px;cursor:pointer;font-family:'Inter',sans-serif;width:100%">Start over</button>
     </div>
   </div>
 </div>
@@ -883,6 +1070,63 @@ footer{background:#0e1520;padding:60px 0 32px}
 </div>
 </section>
 
+<!-- FAQ -->
+<section class="faq" id="faq">
+<div class="container">
+<div class="text-center" style="margin-bottom:52px">
+  <div class="section-label">FAQ</div>
+  <h2 class="section-title">Questions We Hear Every Day</h2>
+  <p class="section-sub">Straight answers — no fluff.</p>
+</div>
+<div class="faq-grid">
+  <div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>Is ASRX a licensed medical provider?</span><div class="faq-icon">+</div></div>
+      <div class="faq-a">ASRX is a healthcare access and coordination platform. We connect you with board-certified, licensed physicians who review your profile and issue prescriptions within their licensed scope. We are not a clinical provider — your provider relationship is directly with the physician.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>Do I need a prescription?</span><div class="faq-icon">+</div></div>
+      <div class="faq-a">Yes — all protocols on ASRX require a valid prescription. A licensed provider reviews your intake assessment and issues a prescription before any treatment ships. This is what separates ASRX from unregulated supplement companies.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>Is this legal in my state?</span><div class="faq-icon">+</div></div>
+      <div class="faq-a">Yes. ASRX operates through a network of telehealth providers licensed in all 50 states. Every prescription is issued by a provider with active licensure in your state of residence, in full compliance with federal and state telehealth regulations.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>What if my provider doesn't approve my request?</span><div class="faq-icon">+</div></div>
+      <div class="faq-a">If a provider determines a protocol isn't appropriate for you based on your health profile, you won't be charged for the protocol. Our care team will reach out to discuss alternative options or next steps. Your safety always comes first.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>How is ASRX different from my regular doctor?</span><div class="faq-icon">+</div></div>
+      <div class="faq-a">Traditional primary care often deprioritizes optimization — peptide therapy, GLP-1s, and performance protocols are frequently outside the scope of what a GP will prescribe. ASRX connects you with providers who specialize in these therapies and understand them deeply.</div>
+    </div>
+  </div>
+  <div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>How is my health data protected?</span><div class="faq-icon">+</div></div>
+      <div class="faq-a">All patient data is encrypted at rest and in transit, stored in HIPAA-compliant infrastructure. Your information is never sold or shared with third parties. Only your assigned provider and the care team have access to your health records.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>How does delivery work?</span><div class="faq-icon">+</div></div>
+      <div class="faq-a">Once your prescription is issued, your treatment is dispensed by a licensed pharmacy and shipped directly to your door in plain, unmarked packaging. Most shipments arrive within 3–5 business days. Temperature-sensitive medications are shipped with proper cold-chain packaging.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>What does treatment cost?</span><div class="faq-icon">+</div></div>
+      <div class="faq-a">Pricing varies by protocol — most start between $79–$299/month. You pay directly without insurance involvement, so there are no surprise bills or claim denials. Your pricing is transparent and set before you commit.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>Can I cancel anytime?</span><div class="faq-icon">+</div></div>
+      <div class="faq-a">Yes. There are no long-term contracts. You can pause or cancel your membership at any time from your member portal. If you cancel before your next billing cycle, you won't be charged. Active prescriptions will be honored through the end of your current supply.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>Do you accept insurance?</span><div class="faq-icon">+</div></div>
+      <div class="faq-a">ASRX is a direct-pay platform — we do not bill insurance. This keeps your costs transparent, your care private, and the process fast. Many patients find that paying directly is comparable to or less than their insurance copays for specialist visits.</div>
+    </div>
+  </div>
+</div>
+</div>
+</section>
+
 <!-- CTA BANNER -->
 <section class="cta-banner">
 <div class="container">
@@ -951,7 +1195,81 @@ footer{background:#0e1520;padding:60px 0 32px}
 </div>
 </footer>
 
+<!-- FLOATING CHAT -->
+<div class="chat-float">
+  <div class="chat-bubble" id="chatBubble">
+    <h4>👋 Hi there — questions?</h4>
+    <p>Our care coordination team is here to help. Start your assessment or send us a message.</p>
+    <a href="/intake" class="chat-primary">Begin My Assessment →</a>
+    <button class="chat-secondary" onclick="document.getElementById('chatBubble').classList.remove('open');document.getElementById('chatBtn').style.display='flex'">Not right now</button>
+  </div>
+  <button class="chat-btn" id="chatBtn" onclick="toggleChat()">💬<div class="chat-notification"></div></button>
+</div>
+
 <script>
+// Quiz logic
+var quizAnswers = {};
+function selectOption(el, val) {
+  el.closest('.quiz-options').querySelectorAll('.quiz-option').forEach(o=>o.classList.remove('selected'));
+  el.classList.add('selected');
+  var step = el.closest('.quiz-step').id;
+  if(step==='qStep1') quizAnswers.goal=val;
+  else if(step==='qStep2') quizAnswers.level=val;
+  else if(step==='qStep3') quizAnswers.experience=val;
+}
+function quizNext(step) {
+  var cur = document.getElementById('qStep'+step);
+  if(!cur.querySelector('.selected')){cur.querySelector('.quiz-options').style.outline='1px solid rgba(255,100,100,.4)';return;}
+  cur.classList.remove('active');
+  document.getElementById('qStep'+(step+1)).classList.add('active');
+}
+function quizBack(step) {
+  document.getElementById('qStep'+step).classList.remove('active');
+  document.getElementById('qStep'+(step-1)).classList.add('active');
+}
+function quizFinish() {
+  var cur = document.getElementById('qStep3');
+  if(!cur.querySelector('.selected')) return;
+  cur.classList.remove('active');
+  var results = {
+    'weight-loss':{icon:'⚖️',title:'Weight Loss Protocol',desc:'Based on your profile, a GLP-1 therapy like Semaglutide or Tirzepatide is your strongest path to sustainable, clinically supervised weight loss. A provider will review your assessment and design your dose schedule.'},
+    'performance':{icon:'💪',title:'Performance Protocol',desc:'You\'re a strong candidate for a GH optimization stack — CJC-1295, Sermorelin, or IGF-1 LR3 depending on your goals. A provider will assess your baseline and build your protocol.'},
+    'longevity':{icon:'🧬',title:'Anti-Aging & Longevity Protocol',desc:'NAD+, Epithalon, or a cellular defense stack would align with your longevity goals. A provider will review your biomarkers and recommend the right entry point.'},
+    'recovery':{icon:'🩹',title:'Recovery Protocol',desc:'BPC-157, TB-500, or the Wolverine Blend are ideal for accelerating tissue repair and reducing chronic inflammation. Your provider will tailor the protocol to your specific injury or recovery goals.'},
+    'cognitive':{icon:'🧠',title:'Cognitive Health Protocol',desc:'Semax, Selank, or BDNF therapy can meaningfully support focus, memory, and stress resilience. A provider will match the right neuroprotective protocol to your profile.'},
+    'sexual-health':{icon:'❤️',title:'Sexual Wellness Protocol',desc:'PT-141 or Melanotan II may be appropriate based on your assessment. A provider will review your health profile and determine the best path forward for your goals.'}
+  };
+  var r = results[quizAnswers.goal] || results['performance'];
+  document.getElementById('resultIcon').textContent=r.icon;
+  document.getElementById('resultTitle').textContent=r.title;
+  document.getElementById('resultDesc').textContent=r.desc;
+  document.getElementById('qResult').classList.add('active');
+}
+function quizReset() {
+  quizAnswers={};
+  document.querySelectorAll('.quiz-step').forEach(s=>{s.classList.remove('active');s.querySelectorAll('.quiz-option').forEach(o=>o.classList.remove('selected'));});
+  document.getElementById('qStep1').classList.add('active');
+}
+
+// FAQ accordion
+function toggleFaq(el) {
+  var item = el.closest('.faq-item');
+  var isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));
+  if(!isOpen) item.classList.add('open');
+}
+
+// Chat float
+function toggleChat() {
+  var bubble = document.getElementById('chatBubble');
+  bubble.classList.toggle('open');
+}
+// Show chat bubble after 8 seconds
+setTimeout(()=>{
+  var bubble = document.getElementById('chatBubble');
+  if(!bubble.classList.contains('open')) bubble.classList.add('open');
+}, 8000);
+
 function updateEstimator(){
   var w=document.getElementById('weightSlider').value;
   document.getElementById('weightVal').textContent=w;
