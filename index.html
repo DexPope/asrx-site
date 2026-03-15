@@ -478,7 +478,7 @@ footer{background:#0e1520;padding:60px 0 32px}
   </a>
   <ul class="nav-links">
     <li><a href="#treatments" onclick="showTreatments();return false;">Treatments</a></li>
-    <li><a href="#lab-testing">Lab Testing</a></li>
+    <li><a href="#lab-testing" onclick="showLabTesting();return false;">Lab Testing</a></li>
     <li><a href="#how">How It Works</a></li>
     <li><a href="#why" onclick="showAbout();return false;">About</a></li>
     <li><a href="/portal" style="font-weight:600;color:var(--text)">Log In</a></li>
@@ -491,7 +491,7 @@ footer{background:#0e1520;padding:60px 0 32px}
 </div>
 <div class="mobile-menu">
   <a href="#treatments" onclick="showTreatments();return false;">Treatments</a>
-  <a href="#lab-testing">Lab Testing</a>
+  <a href="#lab-testing" onclick="showLabTesting();return false;">Lab Testing</a>
   <a href="#how">How It Works</a>
   <a href="#why" onclick="showAbout();return false;">About</a>
   <a href="/portal" style="padding:13px 24px;font-size:15px;font-weight:600;color:var(--text);border-bottom:1px solid var(--border);display:block">Log In</a>
@@ -1146,7 +1146,7 @@ footer{background:#0e1520;padding:60px 0 32px}
 </section>
 
 <!-- LAB TESTING -->
-<section class="labs" id="lab-testing">
+<section class="labs" id="lab-testing" style="display:none">
 <div class="container" style="padding-top:88px;padding-bottom:88px">
   <div class="text-center" style="margin-bottom:52px">
     <div class="section-label">Lab Testing</div>
@@ -1406,7 +1406,7 @@ footer{background:#0e1520;padding:60px 0 32px}
   </div>
   <div class="footer-col">
     <h4>Platform</h4>
-    <a href="#lab-testing">Lab Testing</a>
+    <a href="#lab-testing" onclick="showLabTesting();return false;">Lab Testing</a>
     <a href="#how">How It Works</a>
     <a href="#why" onclick="showAbout();return false;">About</a>
     <a href="/intake">Get Started</a>
@@ -1539,6 +1539,11 @@ function updateEstimator(){
   document.getElementById('lossVal').textContent=Math.round(w*0.15);
 }
 
+function showLabTesting() {
+  const sec = document.getElementById('lab-testing');
+  sec.style.display = 'block';
+  setTimeout(() => sec.scrollIntoView({behavior:'smooth', block:'start'}), 50);
+}
 function showAbout() {
   const why = document.getElementById('why');
   const team = document.getElementById('team');
