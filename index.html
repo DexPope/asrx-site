@@ -4,6 +4,30 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>ASRX — Your Health. Your Terms. Clinically Guided.</title>
+<meta name="description" content="ASRX is a self-directed healthcare access platform. Explore GLP-1, peptide therapy, and longevity protocols. Connect with a board-certified provider in 48 hours. No referral. No insurance. No waiting room."/>
+<meta name="keywords" content="peptide therapy, semaglutide, tirzepatide, GLP-1, BPC-157, TB-500, NAD+, telehealth, weight loss, anti-aging, personalized medicine, longevity, AccessRx"/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://asrx.health"/>
+
+<!-- Open Graph -->
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://asrx.health"/>
+<meta property="og:title" content="ASRX — Your Health. Your Terms. Clinically Guided."/>
+<meta property="og:description" content="Self-directed telehealth. 25+ protocols. Board-certified providers matched in 48hrs. No referral needed."/>
+<meta property="og:image" content="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1200&h=630&fit=crop&crop=center"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta property="og:site_name" content="ASRX by AccessRx"/>
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="ASRX — Personalized Medicine, Provider-Reviewed"/>
+<meta name="twitter:description" content="GLP-1, peptides, longevity protocols. Board-certified providers. 48hr match. No referral required."/>
+<meta name="twitter:image" content="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1200&h=630&fit=crop&crop=center"/>
+
+<!-- Favicon placeholder -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%230d9488'/><circle cx='50' cy='50' r='18' fill='white'/></svg>"/>
+
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -300,6 +324,56 @@ nav{position:sticky;top:0;z-index:100;background:rgba(250,250,248,.95);backdrop-
 .faq-a{font-size:14px;color:var(--slate);line-height:1.7;max-height:0;overflow:hidden;transition:max-height .35s ease,padding .35s ease}
 .faq-item.open .faq-a{max-height:200px;padding-top:12px}
 
+/* ── NEWSLETTER ── */
+.newsletter{padding:88px 0;background:var(--text);position:relative;overflow:hidden}
+.newsletter::before{content:'';position:absolute;top:-80px;right:-80px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(13,148,136,.15),transparent 70%)}
+.newsletter::after{content:'';position:absolute;bottom:-60px;left:-60px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(13,148,136,.1),transparent 70%)}
+.newsletter-inner{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;position:relative;z-index:1}
+.nl-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(13,148,136,.2);border:1px solid rgba(13,148,136,.3);color:var(--teal);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;padding:6px 14px;border-radius:var(--pill);margin-bottom:20px}
+.nl-title{font-family:'Playfair Display',serif;font-size:38px;font-weight:700;color:#fff;line-height:1.2;margin-bottom:14px}
+.nl-title em{color:var(--teal);font-style:italic}
+.nl-sub{font-size:15px;color:rgba(255,255,255,.6);line-height:1.7;margin-bottom:28px}
+.nl-perks{display:flex;flex-direction:column;gap:10px}
+.nl-perk{display:flex;align-items:center;gap:10px;font-size:14px;color:rgba(255,255,255,.7)}
+.nl-perk-dot{width:6px;height:6px;border-radius:50%;background:var(--teal);flex-shrink:0}
+.nl-form-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:28px;padding:36px}
+.nl-form-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#fff;margin-bottom:6px}
+.nl-form-sub{font-size:13px;color:rgba(255,255,255,.5);margin-bottom:24px}
+.nl-input-wrap{display:flex;flex-direction:column;gap:12px}
+.nl-input{width:100%;padding:14px 18px;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.15);border-radius:12px;color:#fff;font-family:'Inter',sans-serif;font-size:15px;outline:none;transition:border-color .2s}
+.nl-input:focus{border-color:var(--teal)}
+.nl-input::placeholder{color:rgba(255,255,255,.3)}
+.nl-submit{width:100%;background:var(--teal);color:#fff;padding:14px;border-radius:var(--pill);font-size:15px;font-weight:700;border:none;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s}
+.nl-submit:hover{background:var(--teal-dark)}
+.nl-legal{font-size:11px;color:rgba(255,255,255,.3);text-align:center;margin-top:12px;line-height:1.6}
+.nl-success{display:none;text-align:center;padding:20px}
+.nl-success h4{font-family:'Playfair Display',serif;font-size:22px;color:#fff;margin-bottom:8px}
+.nl-success p{font-size:14px;color:rgba(255,255,255,.6)}
+.nl-avatars{display:flex;margin-bottom:20px}
+.nl-avatars img{width:32px;height:32px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,.2);margin-right:-8px}
+.nl-avatars-label{font-size:13px;color:rgba(255,255,255,.5);margin-left:16px;align-self:center}
+
+/* ── BLOG TEASER ── */
+.blog{padding:88px 0;background:var(--bg)}
+.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.blog-card{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);transition:transform .25s}
+.blog-card:hover{transform:translateY(-4px)}
+.blog-img{height:180px;overflow:hidden}
+.blog-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.blog-card:hover .blog-img img{transform:scale(1.04)}
+.blog-body{padding:22px}
+.blog-tag{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--teal);margin-bottom:8px}
+.blog-card h3{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--text);margin-bottom:8px;line-height:1.4}
+.blog-card p{font-size:13px;color:var(--slate);line-height:1.6;margin-bottom:14px}
+.blog-meta{font-size:11px;color:var(--slate);display:flex;align-items:center;gap:8px}
+.blog-dot{width:3px;height:3px;border-radius:50%;background:var(--slate)}
+
+/* ── COOKIE NOTICE ── */
+.cookie-bar{position:fixed;bottom:0;left:0;right:0;z-index:500;background:var(--text);color:rgba(255,255,255,.85);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:20px;font-size:13px;flex-wrap:wrap;transform:translateY(0);transition:transform .3s}
+.cookie-bar.hidden{transform:translateY(100%)}
+.cookie-bar a{color:var(--teal);font-weight:600}
+.cookie-accept{background:var(--teal);color:#fff;border:none;padding:9px 22px;border-radius:var(--pill);font-size:13px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;white-space:nowrap;flex-shrink:0}
+
 /* ── LIVE CHAT FLOAT ── */
 .chat-float{position:fixed;bottom:28px;right:28px;z-index:200}
 .chat-btn{width:58px;height:58px;border-radius:50%;background:var(--teal);color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:24px;box-shadow:0 8px 28px rgba(13,148,136,.4);transition:all .2s;font-family:'Inter',sans-serif}
@@ -365,9 +439,10 @@ footer{background:#0e1520;padding:60px 0 32px}
   .footer-top{grid-template-columns:1fr}
   .trust-inner{gap:16px}
   .steps{grid-template-columns:1fr}
-  .switch-cards,.team-grid,.faq-grid{grid-template-columns:1fr}
+  .switch-cards,.team-grid,.faq-grid,.blog-grid{grid-template-columns:1fr}
   .quiz-options{grid-template-columns:1fr!important}
   .stat-grid{grid-template-columns:1fr 1fr}
+  .newsletter-inner{grid-template-columns:1fr}
   .chat-float{bottom:16px;right:16px}
 }
 </style>
@@ -444,10 +519,10 @@ footer{background:#0e1520;padding:60px 0 32px}
     <!-- Social proof avatar cluster -->
     <div style="display:flex;align-items:center;gap:14px;margin-bottom:36px;flex-wrap:wrap">
       <div style="display:flex">
-        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=60&h=60&fit=crop&crop=face" style="width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid #fff;margin-right:-10px"/>
-        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=60&h=60&fit=crop&crop=face" style="width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid #fff;margin-right:-10px"/>
-        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=60&h=60&fit=crop&crop=face" style="width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid #fff;margin-right:-10px"/>
-        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=60&h=60&fit=crop&crop=face" style="width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid #fff"/>
+        <img loading="lazy" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=60&h=60&fit=crop&crop=face" style="width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid #fff;margin-right:-10px"/>
+        <img loading="lazy" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=60&h=60&fit=crop&crop=face" style="width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid #fff;margin-right:-10px"/>
+        <img loading="lazy" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=60&h=60&fit=crop&crop=face" style="width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid #fff;margin-right:-10px"/>
+        <img loading="lazy" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=60&h=60&fit=crop&crop=face" style="width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid #fff"/>
       </div>
       <div>
         <div style="font-size:14px;font-weight:700;color:var(--text)">4,200+ active members</div>
@@ -810,21 +885,21 @@ footer{background:#0e1520;padding:60px 0 32px}
 </div>
 <div class="team-grid">
   <div class="team-card">
-    <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=160&h=160&fit=crop&crop=face" alt="Provider" style="width:80px;height:80px;border-radius:50%;object-fit:cover;margin:0 auto 18px;display:block;border:3px solid var(--teal-light)"/>
+    <img loading="lazy" src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=160&h=160&fit=crop&crop=face" alt="Provider" style="width:80px;height:80px;border-radius:50%;object-fit:cover;margin:0 auto 18px;display:block;border:3px solid var(--teal-light)"/>
     <h3>Metabolic Medicine</h3>
     <div class="credentials">MD · Board Certified</div>
     <p>Specialists in GLP-1 therapy, insulin resistance, and body composition. Experienced in prescribing and monitoring weight management protocols for complex patients.</p>
     <div class="team-badge">⚡ GLP-1 · Metabolic Health</div>
   </div>
   <div class="team-card">
-    <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=160&h=160&fit=crop&crop=face" alt="Provider" style="width:80px;height:80px;border-radius:50%;object-fit:cover;margin:0 auto 18px;display:block;border:3px solid var(--teal-light)"/>
+    <img loading="lazy" src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=160&h=160&fit=crop&crop=face" alt="Provider" style="width:80px;height:80px;border-radius:50%;object-fit:cover;margin:0 auto 18px;display:block;border:3px solid var(--teal-light)"/>
     <h3>Endocrinology & Hormones</h3>
     <div class="credentials">MD · Fellowship Trained</div>
     <p>Deep expertise in hormone optimization — testosterone, estrogen, thyroid, and adrenal function. Designing protocols for men and women seeking hormonal balance.</p>
     <div class="team-badge">🔬 Hormones · Anti-Aging</div>
   </div>
   <div class="team-card">
-    <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=160&h=160&fit=crop&crop=face" alt="Provider" style="width:80px;height:80px;border-radius:50%;object-fit:cover;margin:0 auto 18px;display:block;border:3px solid var(--teal-light)"/>
+    <img loading="lazy" src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=160&h=160&fit=crop&crop=face" alt="Provider" style="width:80px;height:80px;border-radius:50%;object-fit:cover;margin:0 auto 18px;display:block;border:3px solid var(--teal-light)"/>
     <h3>Regenerative Medicine</h3>
     <div class="credentials">DO · Longevity Specialist</div>
     <p>Experts in peptide therapy, cellular repair, and performance optimization. Trained in the latest research on BPC-157, growth hormone secretagogues, and NAD+ protocols.</p>
@@ -963,7 +1038,7 @@ footer{background:#0e1520;padding:60px 0 32px}
 
 <!-- SWITCH SECTION -->
 <section class="switch-section" style="position:relative;overflow:hidden">
-<img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1400&h=600&fit=crop&crop=center" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.08;pointer-events:none"/>
+<img loading="lazy" src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1400&h=600&fit=crop&crop=center" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.08;pointer-events:none"/>
 <div class="container" style="position:relative;z-index:1">
 <div class="switch-inner">
   <div class="section-label" style="color:var(--teal-dark)">Already on a Protocol?</div>
@@ -1002,7 +1077,7 @@ footer{background:#0e1520;padding:60px 0 32px}
 <div class="testimonial-grid">
   <div class="testimonial-card">
     <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px">
-      <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&h=80&fit=crop&crop=face" alt="" style="width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid var(--teal-light)"/>
+      <img loading="lazy" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&h=80&fit=crop&crop=face" alt="" style="width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid var(--teal-light)"/>
       <div>
         <div style="font-weight:700;font-size:15px;color:var(--text)">Marcus T.</div>
         <div style="font-size:12px;color:var(--slate)">Austin, TX · Semaglutide</div>
@@ -1013,7 +1088,7 @@ footer{background:#0e1520;padding:60px 0 32px}
   </div>
   <div class="testimonial-card">
     <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px">
-      <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&h=80&fit=crop&crop=face" alt="" style="width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid var(--teal-light)"/>
+      <img loading="lazy" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&h=80&fit=crop&crop=face" alt="" style="width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid var(--teal-light)"/>
       <div>
         <div style="font-weight:700;font-size:15px;color:var(--text)">Jamie R.</div>
         <div style="font-size:12px;color:var(--slate)">Miami, FL · Tirzepatide</div>
@@ -1024,7 +1099,7 @@ footer{background:#0e1520;padding:60px 0 32px}
   </div>
   <div class="testimonial-card">
     <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px">
-      <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&crop=face" alt="" style="width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid var(--teal-light)"/>
+      <img loading="lazy" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&crop=face" alt="" style="width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid var(--teal-light)"/>
       <div>
         <div style="font-weight:700;font-size:15px;color:var(--text)">Derek K.</div>
         <div style="font-size:12px;color:var(--slate)">San Diego, CA · BPC-157 + TB-500</div>
@@ -1035,7 +1110,7 @@ footer{background:#0e1520;padding:60px 0 32px}
   </div>
   <div class="testimonial-card">
     <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px">
-      <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=80&h=80&fit=crop&crop=face" alt="" style="width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid var(--teal-light)"/>
+      <img loading="lazy" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=80&h=80&fit=crop&crop=face" alt="" style="width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid var(--teal-light)"/>
       <div>
         <div style="font-weight:700;font-size:15px;color:var(--text)">Alicia M.</div>
         <div style="font-size:12px;color:var(--slate)">Chicago, IL · CJC-1295 / Ipamorelin</div>
@@ -1046,7 +1121,7 @@ footer{background:#0e1520;padding:60px 0 32px}
   </div>
   <div class="testimonial-card">
     <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px">
-      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=face" alt="" style="width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid var(--teal-light)"/>
+      <img loading="lazy" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=face" alt="" style="width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid var(--teal-light)"/>
       <div>
         <div style="font-weight:700;font-size:15px;color:var(--text)">Ryan P.</div>
         <div style="font-size:12px;color:var(--slate)">Nashville, TN · NAD+ Protocol</div>
@@ -1057,7 +1132,7 @@ footer{background:#0e1520;padding:60px 0 32px}
   </div>
   <div class="testimonial-card">
     <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px">
-      <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&h=80&fit=crop&crop=face" alt="" style="width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid var(--teal-light)"/>
+      <img loading="lazy" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&h=80&fit=crop&crop=face" alt="" style="width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid var(--teal-light)"/>
       <div>
         <div style="font-weight:700;font-size:15px;color:var(--text)">Sofia L.</div>
         <div style="font-size:12px;color:var(--slate)">Atlanta, GA · Semax / Cognitive</div>
@@ -1191,6 +1266,97 @@ footer{background:#0e1520;padding:60px 0 32px}
 </div>
 </section>
 
+<!-- BLOG TEASER -->
+<section class="blog">
+<div class="container">
+<div class="text-center" style="margin-bottom:52px">
+  <div class="section-label">The Peptide Insider</div>
+  <h2 class="section-title">Stay Ahead of the Science</h2>
+  <p class="section-sub">Research-backed insights on peptide therapy, longevity, hormones, and personalized medicine — written for people who take their health seriously.</p>
+</div>
+<div class="blog-grid">
+  <div class="blog-card">
+    <div class="blog-img"><img loading="lazy" src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&h=360&fit=crop&crop=center" alt="Semaglutide Research"/></div>
+    <div class="blog-body">
+      <div class="blog-tag">GLP-1 · Weight Loss</div>
+      <h3>Semaglutide vs. Tirzepatide: Which Protocol Wins for Long-Term Fat Loss?</h3>
+      <p>A breakdown of the latest head-to-head clinical data — and how to determine which GLP-1 is right for your metabolic profile.</p>
+      <div class="blog-meta"><span>March 12, 2026</span><div class="blog-dot"></div><span>6 min read</span></div>
+    </div>
+  </div>
+  <div class="blog-card">
+    <div class="blog-img"><img loading="lazy" src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=360&fit=crop&crop=center" alt="BPC-157 Research"/></div>
+    <div class="blog-body">
+      <div class="blog-tag">Peptides · Recovery</div>
+      <h3>BPC-157: The Recovery Peptide Every Athlete Should Know About</h3>
+      <p>How Body Protection Compound accelerates healing in joints, tendons, and gut lining — and what the clinical literature actually says.</p>
+      <div class="blog-meta"><span>March 8, 2026</span><div class="blog-dot"></div><span>8 min read</span></div>
+    </div>
+  </div>
+  <div class="blog-card">
+    <div class="blog-img"><img loading="lazy" src="https://images.unsplash.com/photo-1559757175-5700dde675bc?w=600&h=360&fit=crop&crop=center" alt="NAD+ Longevity"/></div>
+    <div class="blog-body">
+      <div class="blog-tag">Longevity · Anti-Aging</div>
+      <h3>NAD+ and the Science of Cellular Aging: What Your Doctor Isn't Telling You</h3>
+      <p>Why NAD+ levels decline with age, what that means for your metabolism and cognition, and how supplementation changes the equation.</p>
+      <div class="blog-meta"><span>March 5, 2026</span><div class="blog-dot"></div><span>7 min read</span></div>
+    </div>
+  </div>
+</div>
+<div class="text-center" style="margin-top:40px">
+  <a href="#newsletter" class="btn-primary">Subscribe to The Peptide Insider →</a>
+</div>
+</div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter" id="newsletter">
+<div class="container">
+<div class="newsletter-inner">
+  <div>
+    <div class="nl-badge">📬 Free Weekly Newsletter</div>
+    <h2 class="nl-title">The <em>Peptide Insider</em></h2>
+    <p class="nl-sub">Join 4,200+ members getting weekly drops on the science of personalized medicine — peptide research, protocol updates, biomarker education, and member spotlights.</p>
+    <div class="nl-perks">
+      <div class="nl-perk"><div class="nl-perk-dot"></div>Weekly peptide research summaries in plain language</div>
+      <div class="nl-perk"><div class="nl-perk-dot"></div>New protocol spotlights and clinical data breakdowns</div>
+      <div class="nl-perk"><div class="nl-perk-dot"></div>GLP-1 and hormone optimization updates</div>
+      <div class="nl-perk"><div class="nl-perk-dot"></div>Early access to new ASRX protocols and member benefits</div>
+      <div class="nl-perk"><div class="nl-perk-dot"></div>No spam. Unsubscribe anytime.</div>
+    </div>
+    <div style="display:flex;align-items:center;margin-top:32px">
+      <div class="nl-avatars">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=64&h=64&fit=crop&crop=face" alt=""/>
+        <img loading="lazy" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=64&h=64&fit=crop&crop=face" alt=""/>
+        <img loading="lazy" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=64&h=64&fit=crop&crop=face" alt=""/>
+        <img loading="lazy" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=64&h=64&fit=crop&crop=face" alt=""/>
+      </div>
+      <span class="nl-avatars-label">Join 4,200+ subscribers</span>
+    </div>
+  </div>
+  <div>
+    <div class="nl-form-card">
+      <div id="nlForm">
+        <div class="nl-form-title">Get Your First Issue Free</div>
+        <div class="nl-form-sub">Drop your email — your first Peptide Insider lands this week.</div>
+        <div class="nl-input-wrap">
+          <input type="text" class="nl-input" id="nlName" placeholder="First name"/>
+          <input type="email" class="nl-input" id="nlEmail" placeholder="your@email.com"/>
+          <button class="nl-submit" onclick="subscribeNewsletter()">Subscribe to The Peptide Insider →</button>
+        </div>
+        <div class="nl-legal">By subscribing you agree to our <a href="#" style="color:rgba(255,255,255,.4)">Privacy Policy</a>. We never share your data. Unsubscribe anytime.</div>
+      </div>
+      <div class="nl-success" id="nlSuccess">
+        <div style="font-size:48px;margin-bottom:16px">🎉</div>
+        <h4>You're in!</h4>
+        <p>Your first issue of <strong style="color:var(--teal)">The Peptide Insider</strong> is on its way. Check your inbox.</p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</section>
+
 <!-- CTA BANNER -->
 <section class="cta-banner">
 <div class="container">
@@ -1259,6 +1425,12 @@ footer{background:#0e1520;padding:60px 0 32px}
 </div>
 </footer>
 
+<!-- COOKIE NOTICE -->
+<div class="cookie-bar" id="cookieBar">
+  <span>🔒 We use cookies to personalize your experience and comply with HIPAA. <a href="#">Privacy Policy</a> · <a href="#">Terms of Service</a></span>
+  <button class="cookie-accept" onclick="acceptCookies()">Accept & Continue</button>
+</div>
+
 <!-- FLOATING CHAT -->
 <div class="chat-float">
   <div class="chat-bubble" id="chatBubble">
@@ -1321,6 +1493,33 @@ function toggleFaq(el) {
   var isOpen = item.classList.contains('open');
   document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));
   if(!isOpen) item.classList.add('open');
+}
+
+// Newsletter
+async function subscribeNewsletter() {
+  var name = document.getElementById('nlName').value.trim();
+  var email = document.getElementById('nlEmail').value.trim();
+  if(!email || !email.includes('@')){alert('Please enter a valid email address.');return;}
+  var btn = document.querySelector('.nl-submit');
+  btn.textContent='Subscribing...';btn.disabled=true;
+  try {
+    await fetch('https://rbyluaxucsgnwxhukjfe.supabase.co/rest/v1/newsletter_subscribers',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','apikey':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJieWx1YXh1Y3Nnbnd4aHVramZlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM0MTgzMTUsImV4cCI6MjA4ODk5NDMxNX0.placeholder','Prefer':'return=minimal'},
+      body:JSON.stringify({name:name,email:email,source:'asrx-website'})
+    });
+  } catch(e){}
+  document.getElementById('nlForm').style.display='none';
+  document.getElementById('nlSuccess').style.display='block';
+}
+
+// Cookie
+function acceptCookies(){
+  localStorage.setItem('asrx_cookies','1');
+  document.getElementById('cookieBar').classList.add('hidden');
+}
+if(localStorage.getItem('asrx_cookies')){
+  document.getElementById('cookieBar').classList.add('hidden');
 }
 
 // Chat float
