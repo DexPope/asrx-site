@@ -477,7 +477,7 @@ footer{background:#0e1520;padding:60px 0 32px}
     </span>
   </a>
   <ul class="nav-links">
-    <li><a href="#treatments">Treatments</a></li>
+    <li><a href="#treatments" onclick="showTreatments();return false;">Treatments</a></li>
     <li><a href="#lab-testing">Lab Testing</a></li>
     <li><a href="#how">How It Works</a></li>
     <li><a href="#why">About</a></li>
@@ -490,7 +490,7 @@ footer{background:#0e1520;padding:60px 0 32px}
 </div>
 </div>
 <div class="mobile-menu">
-  <a href="#treatments">Treatments</a>
+  <a href="#treatments" onclick="showTreatments();return false;">Treatments</a>
   <a href="#lab-testing">Lab Testing</a>
   <a href="#how">How It Works</a>
   <a href="#why">About</a>
@@ -731,7 +731,7 @@ footer{background:#0e1520;padding:60px 0 32px}
 </section>
 
 <!-- TREATMENT AREAS -->
-<section class="treatments" id="treatments">
+<section class="treatments" id="treatments" style="display:none">
 <div class="container" style="padding-top:88px;padding-bottom:88px">
   <div class="text-center" style="margin-bottom:48px">
     <div class="section-label">Self-Directed Care</div>
@@ -1398,11 +1398,11 @@ footer{background:#0e1520;padding:60px 0 32px}
   </div>
   <div class="footer-col">
     <h4>Care Areas</h4>
-    <a href="#treatments">Weight Loss</a>
-    <a href="#treatments">Recovery</a>
-    <a href="#treatments">Anti-Aging</a>
-    <a href="#treatments">Performance</a>
-    <a href="#treatments">Sexual Health</a>
+    <a href="#treatments" onclick="showTreatments();return false;">Weight Loss</a>
+    <a href="#treatments" onclick="showTreatments();return false;">Recovery</a>
+    <a href="#treatments" onclick="showTreatments();return false;">Anti-Aging</a>
+    <a href="#treatments" onclick="showTreatments();return false;">Performance</a>
+    <a href="#treatments" onclick="showTreatments();return false;">Sexual Health</a>
   </div>
   <div class="footer-col">
     <h4>Platform</h4>
@@ -1539,6 +1539,11 @@ function updateEstimator(){
   document.getElementById('lossVal').textContent=Math.round(w*0.15);
 }
 
+function showTreatments() {
+  const sec = document.getElementById('treatments');
+  sec.style.display = 'block';
+  setTimeout(() => sec.scrollIntoView({behavior:'smooth', block:'start'}), 50);
+}
 function openCategory(cat, title) {
   document.getElementById('categoryGrid').style.display = 'none';
   document.getElementById('productView').style.display = 'block';
@@ -1546,6 +1551,7 @@ function openCategory(cat, title) {
   document.querySelectorAll('#productGrid .product-card').forEach(card => {
     card.style.display = card.dataset.cat === cat ? 'flex' : 'none';
   });
+  showTreatments();
   document.getElementById('treatments').scrollIntoView({behavior:'smooth', block:'start'});
 }
 function closeCategory() {
