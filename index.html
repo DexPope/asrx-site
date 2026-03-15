@@ -1505,7 +1505,7 @@ async function subscribeNewsletter() {
   try {
     await fetch('https://rbyluaxucsgnwxhukjfe.supabase.co/rest/v1/newsletter_subscribers',{
       method:'POST',
-      headers:{'Content-Type':'application/json','apikey':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJieWx1YXh1Y3Nnbnd4aHVramZlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM0MTgzMTUsImV4cCI6MjA4ODk5NDMxNX0.placeholder','Prefer':'return=minimal'},
+      headers:{'Content-Type':'application/json','apikey':'sb_publishable_AZNCNOETITMDuStQlsx6kQ_dwUadCev','Prefer':'return=minimal'},
       body:JSON.stringify({name:name,email:email,source:'asrx-website'})
     });
   } catch(e){}
